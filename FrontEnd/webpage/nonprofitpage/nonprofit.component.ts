@@ -10,7 +10,9 @@ import {NonProfitProfile} from './nonprofitprofile.service';
 })    
 
 export class NonProfitPage{
-    profie: NonProfitProfile;
+    profile: NonProfitProfile;
+    events: any[];
+    volunteers: any[];
 
     constructor()
     {
@@ -18,10 +20,12 @@ export class NonProfitPage{
     	console.log(this.profile.orgName);
     }
 
+/*
     constructor(profile: NonProfitProfile)
     {
     	this.profile = profile || new NonProfitProfile();
     }
+*/
 
     addEvent(event: any)
     {

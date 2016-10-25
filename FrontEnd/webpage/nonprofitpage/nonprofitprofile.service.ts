@@ -30,6 +30,7 @@ export class NonProfitProfile {
                 +"Donec tempus tempor mi tempor malesuada.";
     }
 
+/*
     constructor(name: string, id: number, userPicture: string, splashPicture: string)
     {
         console.log("New constructed NonProfitProfile");
@@ -38,4 +39,5 @@ export class NonProfitProfile {
         this.userPictureSrc = userPicture;
         this.splashPictureSrc = splashPicture;
     }
+*/
 }

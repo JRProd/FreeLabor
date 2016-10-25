@@ -15,6 +15,12 @@ let NonProfitPage = class NonProfitPage {
         this.profile = new nonprofitprofile_service_1.NonProfitProfile();
         console.log(this.profile.orgName);
     }
+    /*
+        constructor(profile: NonProfitProfile)
+        {
+            this.profile = profile || new NonProfitProfile();
+        }
+    */
     addEvent(event) {
         this.events.push(event);
     }
