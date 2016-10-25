@@ -1,5 +1,5 @@
 {
-  "name": "FreeLabor",
+  "name": "FrontEnd",
   "scripts": {
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
     "lite": "lite-server",
