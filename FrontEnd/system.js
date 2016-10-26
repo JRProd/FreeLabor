@@ -34,6 +34,6 @@
 
   // Load config, import dependencies
   System.config(config);
-  System.import('app').catch(function(err){ console.error(err); });
+  System.import('webpage').catch(function(err){ console.error(err); });
 
 })();

@@ -6,26 +6,16 @@ import {NonProfitProfile} from './nonprofitprofile.service';
 	selector: 'nonprofitpage',
     templateUrl: './webpage/nonprofitpage/nonprofit.html',    
 	styleUrls: [ './webpage/nonprofitpage/nonprofit.css' ],
-	providers: [NonProfitProfile]  
+	providers: [ NonProfitProfile ]  
 })    
 
 export class NonProfitPage{
-    profile: NonProfitProfile;
-    events: any[];
-    volunteers: any[];
+    profie: NonProfitProfile;
 
-    constructor()
-    {
-    	this.profile = new NonProfitProfile();
-    	console.log(this.profile.orgName);
-    }
-
-/*
     constructor(profile: NonProfitProfile)
     {
     	this.profile = profile || new NonProfitProfile();
     }
-*/
 
     addEvent(event: any)
     {

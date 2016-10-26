@@ -2,20 +2,23 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class NonProfitProfile {
-    orgName: string;
+    name: string;
     id: number;
-    userPictureSrc: string;
-    splashPictureSrc: string;
+    imageURL: string;
 
     missionStatement: string;
     otherInfo: string;
 
+    condensedEvents: any[];
+    condensedVolunteers: any[];
+
+
     constructor()
     {
         console.log("New default NonProfitProfile");
-        this.orgName = "Default Org";
+        this.name = "Default Org";
         this.id = 1;
-        this.userPictureSrc = ".http://placehold.it/250";
+        this.userPictureSrc = "http://placehold.it/250";
         this.splashPictureSrc = "http://placehold.it/350x65";
 
         this.missionStatement = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nisi est, condimentum sed sapien in, dapibus commodo ex. Nullam a massa blandit nibh consequat convallis.";
@@ -29,15 +32,4 @@ export class NonProfitProfile {
                 + "Donec sit amet libero enim. Aliquam vulputate fringilla ante, eget sodales turpis rutrum id. Morbi et tortor id risus suscipit pretium a vitae dolor. Nulla ultricies dictum neque sed condimentum. "
                 +"Donec tempus tempor mi tempor malesuada.";
     }
-
-/*
-    constructor(name: string, id: number, userPicture: string, splashPicture: string)
-    {
-        console.log("New constructed NonProfitProfile");
-        this.orgName = name;
-        this.id = id;
-        this.userPictureSrc = userPicture;
-        this.splashPictureSrc = splashPicture;
-    }
-*/
 }
