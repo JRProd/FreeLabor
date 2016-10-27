@@ -5,7 +5,7 @@
       'npm:': 'node_modules/'
     },
     map: {
-      app: 'app',
+      app: 'webpage',
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
       '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
@@ -34,6 +34,6 @@
 
   // Load config, import dependencies
   System.config(config);
-  System.import('app').catch(function(err){ console.error(err); });
+  System.import('webpage').catch(function(err){ console.error(err); });
 
 })();
