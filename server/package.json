@@ -1,0 +1,28 @@
+{
+  "name": "FreeLabor",
+  "version": "0.0.1",
+  "description": "The REST API as part of our DB/GUI project",
+  "contributors": [
+    {
+      "name": "Luke"
+    },
+    {
+      "name": "AJ"
+    }
+  ],
+  "scripts": {
+    "start": "node index.js"
+  },
+  "main": "app/app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lazysp333/FreeLabor.git"
+  },
+  "dependencies": {
+    "async": "~0.8.0",
+    "express": "4.2.x",
+    "sequelize": "~3.24.6",
+    "body-parser": "~1.15.2"
+  },
+  "license": "MIT"
+}
