@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class NonProfitProfile {
+
+    private nonProfitURL = 'https://private-3d0cf-artisanapi.apiary-mock.com/orgs/username'
+
     name: string;
     id: number;
     imageURL: string;
@@ -18,8 +21,6 @@ export class NonProfitProfile {
         console.log("New default NonProfitProfile");
         this.name = "Default Org";
         this.id = 1;
-        this.userPictureSrc = "http://placehold.it/250";
-        this.splashPictureSrc = "http://placehold.it/350x65";
 
         this.missionStatement = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nisi est, condimentum sed sapien in, dapibus commodo ex. Nullam a massa blandit nibh consequat convallis.";
 
