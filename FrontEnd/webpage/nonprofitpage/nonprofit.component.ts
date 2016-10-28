@@ -1,32 +1,68 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 
-import {NonProfitProfile} from './nonprofitprofile.service';
-    
-@Component({    
-	selector: 'nonprofitpage',
-    templateUrl: './webpage/nonprofitpage/nonprofit.html',    
-	styleUrls: [ './webpage/nonprofitpage/nonprofit.css' ],
-	providers: [ NonProfitProfile ]  
-})    
+import { NonProfitService } from './nonprofit.service';
 
-export class NonProfitPage{
-    profile: NonProfitProfile;
+import 'rxjs/add/operator/map'
 
-    events: any[];
-    volunteers: any[];
+@Component({
+    selector: 'non-profit',
+    templateUrl: '/webpage/nonprofitpage/nonprofit.html',
+    styleUrls: ['/webpage/nonprofitpage/nonprofit.css' ],
+    providers: [ NonProfitService ]
+})
 
-    constructor(profile: NonProfitProfile)
+export class NonProfit implements OnInit
+{
+    name: string;
+    username: string;
+
+    missionStatement: string;
+    otherInfo: string;
+
+    imageUrl: string;
+
+    condensedEvents: Array<Object>;
+    condensedVolunteers: Array<Object>;
+
+    result: Object;
+    errorMessage: string;
+
+    constructor(private nonProfitService: NonProfitService) { }
+
+    ngOnInit()
     {
-    	this.profile = profile || new NonProfitProfile();
+        this.getNonProfit();
     }
 
-    addEvent(event: any)
+    getNonProfit()
     {
-    	this.events.push(event);
+        this.nonProfitService.getNonProfit()
+                             .subscribe( res => this.result=res,
+                                         error =>  console.log(error),
+                                         () => this.defineProfile());   
     }
 
-    addVolunteers(volunteer: any)
+    defineProfile()
     {
-    	this.volunteers.push(volunteer);
+        this.name = this.result.name;
+        this.username = this.result.username;
+        
+        this.missionStatement = this.result.missionStatement;
+        this.otherInfo = this.result.otherInfo;
+
+        this.imageUrl = this.result.imageUrl;
+
+        this.condensedEvents = this.result.condensedEvents;
+        this.condensedVolunteers = this.result.condensedColunteers;
+    }
+
+    addEvent()
+    {
+
+    }
+
+    addVolunteer()
+    {
+
     }
 }

@@ -1,12 +1,14 @@
 import { NgModule }      from '@angular/core';
 import  { BrowserModule } from '@angular/platform-browser';
 
-import { NonProfitPage } from './nonprofitpage/nonprofit.component';
+import { NonProfit } from './nonprofitpage/nonprofit.component';
+
+import { HttpModule } from '@angular/http';
 
 @NgModule({    
-	imports:      [ BrowserModule ],    
-    declarations:  [ NonProfitPage],    
-    bootstrap: [ NonProfitPage]
+	imports:      [ BrowserModule , HttpModule],    
+    declarations:  [ NonProfit ],    
+    bootstrap: [ NonProfit ]
 })    
 
 export class AppModule {   
