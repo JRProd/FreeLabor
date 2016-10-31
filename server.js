@@ -10,9 +10,11 @@ var port = process.env.PORT || 8080;
 var router = express.Router();
 
 //Test route for homepage
-router.get('/', function(req, res) {
-  res.json({ message:" You are accessing a REST API" });   
-});
+app.use(express.static(__dirname+'/FrontEnd'))
+app.use(require('./routes/orgs'));
+//app.use(require('./routes/events'));
+//app.use(require('./routes/users'));
+
 
 //put more routes here
 
