@@ -37,6 +37,9 @@ node_modules
 typings
 jspm_packages
 
+# User Prefrences
+.vscode
+
 # Optional npm cache directory
 .npm
 
