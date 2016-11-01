@@ -1,0 +1,43 @@
+.profilePage {
+	margin: 35px;
+    margin-top: 100px;
+    max-width: 1000px;
+    min-width: 930px;
+}
+
+.orgNameBox {
+	border: black;
+    border-width: 2px;
+    padding: 20px 15px;
+    border-style: solid;
+    width: 155px;
+    z-index: 10;
+    position: absolute;
+    background: burlywood;
+    text-align: center;
+}
+
+.orgSplashScreenBoxImage {
+	z-index: 1;
+    margin: 25px 25px 0px 25px;
+	width: 100%;
+}
+
+.info {
+    margin: 25px;
+    width: 100%;
+}
+
+.tab-content {
+	   border: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.tab-pane {
+	margin: 25px;
+}
+
+.missionStatementImage {
+	display: flex;
+}

@@ -1,2 +1,2 @@
-del /q /s app\*.js
-del /q /s app\*js.map
+del /q /s webpage\*.js
+del /q /s webpage\*js.map
