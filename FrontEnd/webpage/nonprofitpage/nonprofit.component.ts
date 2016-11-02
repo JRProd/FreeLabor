@@ -6,8 +6,8 @@ import 'rxjs/add/operator/map'
 
 @Component({
     selector: 'non-profit',
-    templateUrl: '/webpage/nonprofitpage/nonprofit.html',
-    styleUrls: ['/webpage/nonprofitpage/nonprofit.css' ],
+    templateUrl: './webpage/nonprofitpage/nonprofit.html',
+    styleUrls: ['./webpage/nonprofitpage/nonprofit.css' ],
     providers: [ NonProfitService ]
 })
 
@@ -24,7 +24,7 @@ export class NonProfit implements OnInit
     condensedEvents: Array<Object>;
     condensedVolunteers: Array<Object>;
 
-    result: Object;
+    result: NonProfit;
     errorMessage: string;
 
     constructor(private nonProfitService: NonProfitService) { }
@@ -53,7 +53,7 @@ export class NonProfit implements OnInit
         this.imageUrl = this.result.imageUrl;
 
         this.condensedEvents = this.result.condensedEvents;
-        this.condensedVolunteers = this.result.condensedColunteers;
+        this.condensedVolunteers = this.result.condensedVolunteers;
     }
 
     addEvent()
