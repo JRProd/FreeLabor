@@ -11,6 +11,7 @@ var app        = expxress();
 var router = express.Router();
 var port = process.env.PORT || 8080;
 
+//options for sessions, need to change user/password for the database
 var options = {
     host: 'localhost',
     port: 3306,
@@ -31,7 +32,8 @@ var options = {
     }
 };
 
-var sessionStore = new MySQLStore(options);
+//using express-mysql-session for storing sessions
+var sessionStore = new MySQLServerStore(options);
 
 var connection = mysql.createConnection({
   host     : 'localhost',
