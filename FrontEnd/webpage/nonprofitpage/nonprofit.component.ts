@@ -24,7 +24,7 @@ export class NonProfit implements OnInit
     condensedEvents: Array<Object>;
     condensedVolunteers: Array<Object>;
 
-    result: Object;
+    result: NonProfit;
     errorMessage: string;
 
     constructor(private nonProfitService: NonProfitService) { }
