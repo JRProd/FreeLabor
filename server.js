@@ -15,9 +15,9 @@ var port = process.env.PORT || 8080;
 var options = {
     host: 'localhost',
     port: 3306,
-    user: 'session_user',
-    password: 'password',// Password for the above database user. 
-    database: 'session_test',// Database name. 
+    user: config.mysql_local.user_name,
+    password: config.mysql_local.password,
+    database: 'freelabor',// Database name. 
     checkExpirationInterval: 900000,// How frequently expired sessions will be cleared; milliseconds. 
     expiration: 86400000,// The maximum age of a valid session; milliseconds. 
     createDatabaseTable: true,// Whether or not to create the sessions database table, if one does not already exist. 
