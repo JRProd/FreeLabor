@@ -3,10 +3,35 @@ var mysql      = require('mysql');
 var bodyParser = require('body-parser');
 var path       = require('path');
 var config     = require('./config.js'); //prod sql auth will go here
+//requires for sessions
+var session = require('express-session');
+var MySQLServerStore = require('express-mysql-session')(session);
+//end of session-specific requires
 var app        = expxress();
 var router = express.Router();
 var port = process.env.PORT || 8080;
 
+var options = {
+    host: 'localhost',
+    port: 3306,
+    user: 'session_user',
+    password: 'password',// Password for the above database user. 
+    database: 'session_test',// Database name. 
+    checkExpirationInterval: 900000,// How frequently expired sessions will be cleared; milliseconds. 
+    expiration: 86400000,// The maximum age of a valid session; milliseconds. 
+    createDatabaseTable: true,// Whether or not to create the sessions database table, if one does not already exist. 
+    connectionLimit: 1,// Number of connections when creating a connection pool 
+    schema: {
+        tableName: 'sessions',
+        columnNames: {
+            session_id: 'session_id',
+            expires: 'expires',
+            data: 'userID'
+        }
+    }
+};
+
+var sessionStore = new MySQLStore(options);
 
 var connection = mysql.createConnection({
   host     : 'localhost',
