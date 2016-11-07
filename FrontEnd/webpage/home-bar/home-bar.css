@@ -1,15 +1,8 @@
-* {
-	max-width: 1000px;
-}
-
-.notFooter {
-	display: flex;
-}
-
 .header {
 	background: burlywood;
+    width: 60%;
+    min-width: 900px;
 	height: 75px;
-	width: 100%;
 	position: fixed;
 	display: flex;
 	z-index: 20;
@@ -45,13 +38,4 @@
 
 .userNameText {
 	margin-top: 25px;
-}
-
-.footer {
-	background: burlywood;
-
-	margin-top: auto;
-	height: 75px;
-	width: 100%;
-	z-index: 20;
 }
