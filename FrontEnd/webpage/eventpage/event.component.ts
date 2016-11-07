@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { EventProfile } from './eventprofile.service';
 
 @Component({
-  selector: 'webpage',
+  selector: 'event',
   templateUrl: './webpage/eventpage/event.html',
   styleUrls: [ './webpage/eventpage/event.css' ],
   providers: [ EventProfile ]

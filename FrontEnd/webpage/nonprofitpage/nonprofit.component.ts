@@ -1,13 +1,15 @@
 import { Component , OnInit} from '@angular/core';
 
 import { NonProfitService } from './nonprofit.service';
+import { EventProfile } from '../eventpage/eventprofile.service;
+import { EventList } from '../eventlist/eventlist.component';
 
 import 'rxjs/add/operator/map'
 
 @Component({
     selector: 'non-profit',
     templateUrl: '/webpage/nonprofitpage/nonprofit.html',
-    styleUrls: ['/webpage/nonprofitpage/nonprofit.css' ],
+    styleUrls: ['./webpage/nonprofitpage/nonprofit.css' ],
     providers: [ NonProfitService ]
 })
 
@@ -21,7 +23,7 @@ export class NonProfit implements OnInit
 
     imageUrl: string;
 
-    condensedEvents: Array<Object>;
+    condensedEvents: EventList;
     condensedVolunteers: Array<Object>;
 
     result: NonProfit;
@@ -53,12 +55,12 @@ export class NonProfit implements OnInit
         this.imageUrl = this.result.imageUrl;
 
         this.condensedEvents = this.result.condensedEvents;
-        this.condensedVolunteers = this.result.condensedColunteers;
+        this.condensedVolunteers = this.result.condensedVolunteers;
     }
 
-    addEvent()
+    addEvent(event: EventProfile)
     {
-
+        this.condensedEvents.addEvent()
     }
 
     addVolunteer()
