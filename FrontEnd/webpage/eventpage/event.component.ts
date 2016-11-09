@@ -1,24 +1,62 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 
-import { EventProfile } from './eventprofile.service';
+import { EventService } from './event.service';
+
+import 'rxjs/add/operator/map'
+
 
 @Component({
-  selector: 'webpage',
+  selector: 'event',
   templateUrl: './webpage/eventpage/event.html',
   styleUrls: [ './webpage/eventpage/event.css' ],
-  providers: [ EventProfile ]
+  providers: [ EventService ]
 })
 
-export class EventPageComponent{
-    profile: EventProfile;
+export class Event{
+    profile: EventService;
 
-    constructor()
+    title: string;
+    location: string;
+    date: string;
+    description: string;
+    imageUrl: string;
+    orgName: string;
+    maxAttendees: number;
+
+    attendees: Array<Object>;
+
+    result: Event;
+    errorMessage: string;
+
+    constructor(private eventService: EventService) { }
+
+    ngOnInit()
     {
-    	this.profile = new EventProfile();
+        this.getEvent();
     }
 
-    addVolunteers(volunteer: any)
+    getEvent()
     {
-    	this.profile.volunteers.push(volunteer);
+        this.eventService.getEvent()
+                             .subscribe( res => this.result=res,
+                                         error =>  console.log(error),
+                                         () => this.defineProfile());   
+    }
+
+    defineProfile()
+    {
+        this.title = this.result.title;
+        this.location = this.result.location;
+        this.date = this.result.date;
+        this.description = this.result.description;
+        this.imageUrl = this.result.imageUrl;
+        this.orgName = this.result.orgName;
+        this.attendees = this.result.attendees;
+        this.maxAttendees = this.result.maxAttendees;
+    }
+
+    addVolunteer()
+    {
+
     }
 }

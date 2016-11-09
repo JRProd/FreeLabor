@@ -1,16 +1,16 @@
 <div class="profilePage">
     <div class ="orgName">
-	    <div id="orgName" class="btn btn-success btn-lg">
-		    {{profile.orgName}}
+        <div id="orgName" class="btn btn-success btn-lg">
+            {{profile.orgName}}
 	    </div>
     </div>
 
     <div class="eventImage">
-		<img src = {{profile.image}} alt="placeholder 960" class="img-responsive"/>
-	</div>
+	    <img src = {{profile.imageUrl}} alt="placeholder 960" class="img-responsive"/>
+    </div>
 
     <div class="eventTitle">
-        <h1>{{profile.name}}</h1>
+        <h1>{{profile.title}}</h1>
     </div>
     
 	<div class="eventDetails">
@@ -21,21 +21,15 @@
 
         <div class="dateTimeBox">
             <h3>{{profile.location}}</h3>
-            <h4>{{profile.date +" "+ profile.time}}</h4>
-            <button type="button" class="btn btn-primary btn-block">Attending</button>
+            <h4>{{profile.date}}</h4>
+            <button type="button" class="btn btn-primary btn-block" (click)="addVolunteers()">Attending</button>
         </div>
 	</div>
 
     <br style="clear:both" />
 
     <div class="volunteers">
-        <h3>Attending Volunteers</h3>
-        <div class="volunteerList" *ngFor="let volunteer of profile.volunteers">
-            <div class="person">
-                <img src={{volunteer.img}} class="img-circle">
-                <h5>{{volunteer.name}}</h5>
-            </div>
-        </div>
-    </div>
+        <h3>Attending Volunteers (MAX Volunteers + {{profile.maxAttendees}} +)</h3>
 
+    </div>
 </div>
