@@ -2,11 +2,10 @@ var express = require('express');
 var router = express.Router();
 var responses = require('./responses.js');
 var bcrypt = require('bcrypt');
-const saltRounds = 10;
+var saltRounds = 10;
 
 router.post('/org', function(req,res){
-		console.log("watch works!!");
-	//INPUT SANITATION
+	//TODO: INPUT SANITATION
 	var createOrg = 'INSERT INTO Org(nameOrg,usernameOrg,emailOrg,phoneOrg,hashOrg) VALUES(?,?,?,?,?)';
 	var hash = bcrypt.hashSync(req.body.password, saltRounds);
 	var params = [req.body.name,req.body.username,req.body.email,req.body.phone,hash];
@@ -29,8 +28,7 @@ router.post('/org', function(req,res){
 });
 
 router.get('/org/:username', function(req,res){
-
-	//INPUT SANITATION
+	//TODO: INPUT SANITATION
 	var sql = 'SELECT nameOrg,usernameOrg,emailOrg,phoneOrg FROM Org WHERE usernameOrg=?';
 	var params = [req.params.username];
 

@@ -50,14 +50,14 @@ connection.connect(function(err) {
   console.log('connected as id ' + connection.threadId);
 });
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.all('*', function(request, response, next){
   request.db = connection;
 	request.ss = sessionStore;
   next();
 });
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 //Test route for homepage
 app.use(express.static(path.join(__dirname,'FrontEnd'))); //FrontEnd/public
