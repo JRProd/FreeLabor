@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    width: 100%;
+    margin: 2px;
+}
+
+.event-node-container {
+    width: 400px;
+    margin: 5px;
+}
+
+.event-node {
+    height: 150px;
+    display: flex;
+    border-width: 2px;
+    border: 2px;
+    border-color: #000;
+    border-style: solid;
+    margin: 2px;
+    margin-right: 8px;
+}
+
+.event-node > img {
+    max-height: 100px;
+    max-width: 100px;
+    padding: 10px;
+}
+
+.event-info {
+    display: block;
+}
+
+.event-status {
+    display: block;
+}

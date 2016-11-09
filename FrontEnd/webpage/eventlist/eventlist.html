@@ -1,3 +1,17 @@
-<div>
-    This is an event List
+<div class="container">
+    <div *ngFor="let event of eventListService.eventList">
+        <div class="event-node-container">
+            <div class="event-node">
+                <img src="{{event.imageURL}}" alt="Event Picture">
+                <div class="event-info">
+                    <h3 class="event-title">{{event.title}}</h3>
+                    <p class="event-data">{{event.description}}</p>
+                </div>
+                <div class="event-status">
+                    <span class="badge event-badge">{{event.attendees}}/{{event.maxAttendees}}</span>
+                    <p class="event-date">{{event.date}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
