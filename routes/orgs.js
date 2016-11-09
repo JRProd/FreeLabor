@@ -1,21 +1,66 @@
 var express = require('express');
 var router = express.Router();
 var responses = require('./responses.js');
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
 
-router.get('/orgs/:username', function(req,res){
-  //server logic to fetch "all" info about 
-  var speaker = req.params.usernameOrg;
-  res.setHeader('Content-Type', 'application/json');
+router.post('/org', function(req,res){
+		console.log("watch works!!");
+	//INPUT SANITATION
+	var createOrg = 'INSERT INTO Org(nameOrg,usernameOrg,emailOrg,phoneOrg,hashOrg) VALUES(?,?,?,?,?)';
+	var hash = bcrypt.hashSync(req.body.password, saltRounds);
+	var params = [req.body.name,req.body.username,req.body.email,req.body.phone,hash];
 
-  res.send(JSON.stringify({'param':speaker,'response':responses.getOrg}));
-
+	function performQuery(query,data,callback) {
+		req.db.query(query, data, function(err, rows, fields) {
+			if (err) {
+				callback(err, null);
+			} else
+				callback(null, rows);
+	  });
+	}
+	performQuery(createOrg,params, function(err, rows, fields) {
+		if (err) {
+			res.json({success:false,message:err});
+		} else {
+			res.json({success:true,message:rows,url:'http://localhost/org/'+req.body.username});
+		}
+	});
 });
 
-router.post('/orgs', function(request,response){
-  //v
-  res.send("Default response");
-  //Server logic to create a user in the database
+router.get('/org/:username', function(req,res){
+
+	//INPUT SANITATION
+	var sql = 'SELECT nameOrg,usernameOrg,emailOrg,phoneOrg FROM Org WHERE usernameOrg=?';
+	var params = [req.params.username];
+
+	function performQuery(query,data,callback) {
+		req.db.query(query, data, function(err, rows, fields) {
+			if (err) {
+				callback(err, null);
+			} else
+				callback(null, rows, fields);
+	  });
+	}
+	performQuery(sql, params, function(err, rows, fields) {
+		if (err) {
+			res.json({success:false,message:err});
+		} else {
+			var responseObj = responses.getOrg;
+			var toAdd = {
+				success:true,
+				url:'http://localhost/user/'+req.params.username,
+				username:rows[0].usernameOrg,
+				firstName:rows[0].nameOrg,
+				lastName:rows[0].phoneOrg,
+				email:rows[0].emailOrg
+			};
+			responseObj = Object.assign(responseObj,toAdd);
+			res.json(responseObj);
+		}
+	});
 });
+
 
 
 module.exports = router;

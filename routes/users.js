@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var responses = require('./responses.js');
 var bcrypt = require('bcrypt');
-const saltRounds = 10;
+var saltRounds = 10;
 
 
 router.get('/users/create', function(req,res){
@@ -31,9 +31,9 @@ router.post('/user', function(req,res){
 	var queryResult;
 	performQuery(createUser,params, function(err, content) {
 		if (err) {
-			res.json({success:false,message:err})
+			res.json({success:false,message:err});
 		} else {
-			res.json({success:true,message:content,url:'http://localhost/user/'+req.body.username})
+			res.json({success:true,message:content,url:'http://localhost/user/'+req.body.username});
 		}
 	});
 });

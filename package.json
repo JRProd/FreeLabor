@@ -26,6 +26,7 @@
     "express": "4.2.x",
     "express-mysql-session": "^1.2.0",
     "express-session": "^1.14.2",
+    "jshint": "^2.9.4",
     "mysql": "^2.11.1"
   },
   "license": "MIT"

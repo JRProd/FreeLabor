@@ -62,7 +62,7 @@ app.use(bodyParser.json());
 //Test route for homepage
 app.use(express.static(path.join(__dirname,'FrontEnd'))); //FrontEnd/public
 app.use(require('./routes/users'));
-//app.use(require('./routes/orgs'));
+app.use(require('./routes/orgs'));
 //app.use(require('./routes/events'));
 
 app.use('/',function(req,res){
