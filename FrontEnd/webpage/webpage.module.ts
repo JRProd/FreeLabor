@@ -6,7 +6,7 @@ import { WebPageComponent } from './webpage.component';
 import { EventList } from './eventlist/eventlist.component';
 import { EventPageComponent } from './eventpage/event.component';
 import { NonProfit } from './nonprofitpage/nonprofit.component';
-
+import { VolunteerComponent } from './volunteer/volunteer.component';
 import { HttpModule } from '@angular/http';
 
 
@@ -16,6 +16,7 @@ import { HttpModule } from '@angular/http';
         HttpModule, 
         RouterModule.forRoot([
             { path: 'np', component: NonProfit },
+            {path: 'volunteer', component: VolunteerComponent},
             { path: '', component: WebPageComponent },
             ])
     ],    
@@ -23,7 +24,8 @@ import { HttpModule } from '@angular/http';
         WebPageComponent, 
         NonProfit, 
         EventPageComponent,
-        EventList
+        EventList,
+        VolunteerComponent
     ],    
     bootstrap: [ WebPageComponent]
 })    
