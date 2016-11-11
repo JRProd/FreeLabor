@@ -13,7 +13,6 @@ import { HttpModule } from '@angular/http';
 
 
 @NgModule({    
-<<<<<<< HEAD
 	imports: [ 
         BrowserModule , 
         HttpModule, 
@@ -30,11 +29,6 @@ import { HttpModule } from '@angular/http';
         EventList
     ],    
     bootstrap: [ WebPageComponent]
-=======
-	imports:      [ BrowserModule , HttpModule],    
-    declarations:  [ NonProfit, EventPageComponent, HomeBar, Footer ],    
-    bootstrap: [ NonProfit, EventPageComponent ]
->>>>>>> b78f5553595184295a70e0cfbe704213e6003775
 })    
 
 export class AppModule {   
