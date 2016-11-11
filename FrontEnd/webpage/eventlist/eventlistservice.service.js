@@ -20,12 +20,11 @@ let EventListService = class EventListService {
             event.orgName = newEvent.orgName || "Default Org";
             event.title = newEvent.title || "New Event";
             event.id = newEvent.id;
-            event.imageURL = newEvent.imageURL || "http://placehold.it/100x100";
-            console.log(newEvent.imageURL);
+            event.imageUrl = newEvent.imageUrl || "http://placehold.it/100x100";
+            console.log(newEvent.imageUrl);
             event.description = newEvent.description || "Here is a description";
             event.location = newEvent.location || "Undetermined";
             event.date = newEvent.date || "Undetermined";
-            event.time = newEvent.time || "TBA";
             event.attendees = newEvent.attendees || 0;
             event.maxAttendees = newEvent.maxAttendees || 9999;
             this.eventList.push(event);

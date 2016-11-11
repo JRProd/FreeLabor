@@ -9,24 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-const eventlistservice_service_1 = require('./eventlistservice.service');
-const event_service_1 = require('../eventpage/event.service');
-let EventList = class EventList {
-    constructor() {
+const nonprofit_service_1 = require('./nonprofit.service');
+require('rxjs/add/operator/map');
+let NonProfit = class NonProfit {
+    constructor(nonProfitService) {
+        this.nonProfitService = nonProfitService;
+        nonProfitService.ngOnInit();
     }
 };
-__decorate([
-    core_1.Input(), 
-    __metadata('design:type', eventlistservice_service_1.EventListService)
-], EventList.prototype, "eventListService", void 0);
-EventList = __decorate([
+NonProfit = __decorate([
     core_1.Component({
-        selector: 'event-list',
-        templateUrl: './webpage/eventlist/eventlist.html',
-        styleUrls: ['./webpage/eventlist/eventlist.css'],
-        providers: [event_service_1.EventService, eventlistservice_service_1.EventListService]
+        selector: 'non-profit',
+        templateUrl: './webpage/nonprofitpage/nonprofit.html',
+        styleUrls: ['./webpage/nonprofitpage/nonprofit.css'],
+        providers: [nonprofit_service_1.NonProfitService]
     }), 
-    __metadata('design:paramtypes', [])
-], EventList);
-exports.EventList = EventList;
-//# sourceMappingURL=eventlist.component.js.map
+    __metadata('design:paramtypes', [nonprofit_service_1.NonProfitService])
+], NonProfit);
+exports.NonProfit = NonProfit;
+//# sourceMappingURL=nonprofit.component.js.map

@@ -16,7 +16,7 @@ export class EventService implements OnInit
     id: number;
     imageUrl: string;
     date: string;
-    address: string;
+    location: string;
     description: string;
     attendees: number;
     maxAttendees: number;
@@ -37,7 +37,7 @@ export class EventService implements OnInit
                     //Create a function to set local variables to
                     res => {this.title = res.title;
                             this.date = res.dateStart + ' - ' + res.dateEnd;
-                            this.address = res.address + ' ' + res.city + ', ' + res.state + ' ' + res.zip;
+                            this.location = res.address + ' ' + res.city + ', ' + res.state + ' ' + res.zip;
                             this.description = res.description;
                             this.imageUrl = res.imageUrl;
                             this.maxAttendees = res.maxAttendees;

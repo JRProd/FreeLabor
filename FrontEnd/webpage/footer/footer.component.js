@@ -9,24 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-const eventlistservice_service_1 = require('./eventlistservice.service');
-const event_service_1 = require('../eventpage/event.service');
-let EventList = class EventList {
-    constructor() {
-    }
+let Footer = class Footer {
 };
-__decorate([
-    core_1.Input(), 
-    __metadata('design:type', eventlistservice_service_1.EventListService)
-], EventList.prototype, "eventListService", void 0);
-EventList = __decorate([
+Footer = __decorate([
     core_1.Component({
-        selector: 'event-list',
-        templateUrl: './webpage/eventlist/eventlist.html',
-        styleUrls: ['./webpage/eventlist/eventlist.css'],
-        providers: [event_service_1.EventService, eventlistservice_service_1.EventListService]
+        selector: 'footer',
+        templateUrl: './webpage/footer/footer.html',
+        styleUrls: ['./webpage/footer/footer.css'],
     }), 
     __metadata('design:paramtypes', [])
-], EventList);
-exports.EventList = EventList;
-//# sourceMappingURL=eventlist.component.js.map
+], Footer);
+exports.Footer = Footer;
+//# sourceMappingURL=footer.component.js.map

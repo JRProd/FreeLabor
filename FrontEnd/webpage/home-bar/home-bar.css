@@ -1,0 +1,41 @@
+.header {
+	background: burlywood;
+    width: 60%;
+    min-width: 900px;
+	height: 75px;
+	position: fixed;
+	display: flex;
+	z-index: 20;
+}
+
+.logo {
+	width: 50px;
+	height: 50px;
+	margin: 10px;
+}
+.websiteName {
+	font-size: 30px;
+	margin-top: 20px;
+}
+
+.searchBar {
+	margin-top: 30px;
+	margin-left: 150px;
+}
+
+.userArea {
+	float: right;
+    margin-left: 150px;
+    display: flex;
+    width: 250px;
+}
+
+.userImage {
+	margin: 10px;
+	width: 50px;
+	height: 50px;
+}
+
+.userNameText {
+	margin-top: 25px;
+}

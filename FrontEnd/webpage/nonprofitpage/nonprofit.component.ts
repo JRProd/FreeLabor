@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map'
 
 @Component({
     selector: 'non-profit',
-    templateUrl: '/webpage/nonprofitpage/nonprofit.html',
+    templateUrl: './webpage/nonprofitpage/nonprofit.html',
     styleUrls: ['./webpage/nonprofitpage/nonprofit.css' ],
     providers: [ NonProfitService ]
 })

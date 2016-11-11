@@ -9,24 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-const eventlistservice_service_1 = require('./eventlistservice.service');
-const event_service_1 = require('../eventpage/event.service');
-let EventList = class EventList {
+let HomeBar = class HomeBar {
     constructor() {
     }
 };
-__decorate([
-    core_1.Input(), 
-    __metadata('design:type', eventlistservice_service_1.EventListService)
-], EventList.prototype, "eventListService", void 0);
-EventList = __decorate([
+HomeBar = __decorate([
     core_1.Component({
-        selector: 'event-list',
-        templateUrl: './webpage/eventlist/eventlist.html',
-        styleUrls: ['./webpage/eventlist/eventlist.css'],
-        providers: [event_service_1.EventService, eventlistservice_service_1.EventListService]
+        selector: 'home-bar',
+        templateUrl: './webpage/home-bar/home-bar.html',
+        styleUrls: ['./webpage/home-bar/home-bar.css'],
     }), 
     __metadata('design:paramtypes', [])
-], EventList);
-exports.EventList = EventList;
-//# sourceMappingURL=eventlist.component.js.map
+], HomeBar);
+exports.HomeBar = HomeBar;
+//# sourceMappingURL=home-bar.component.js.map
