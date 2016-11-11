@@ -14,7 +14,7 @@ export class EventService implements OnInit
     orgName: string;    
     title: string;
     id: number;
-    imageUrl: string;
+    imageURL: string;
     date: string;
     location: string;
     description: string;
@@ -39,7 +39,7 @@ export class EventService implements OnInit
                             this.date = res.dateStart + ' - ' + res.dateEnd;
                             this.location = res.address + ' ' + res.city + ', ' + res.state + ' ' + res.zip;
                             this.description = res.description;
-                            this.imageUrl = res.imageUrl;
+                            this.imageURL = res.imageURL;
                             this.maxAttendees = res.maxAttendees;
                             this.orgName = res.orgName;
                             console.log(res);

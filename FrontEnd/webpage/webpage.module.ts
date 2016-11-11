@@ -26,7 +26,9 @@ import { HttpModule } from '@angular/http';
         WebPageComponent, 
         NonProfit, 
         Event,
-        EventList
+        EventList,
+        HomeBar,
+        Footer
     ],    
     bootstrap: [ WebPageComponent]
 })    
