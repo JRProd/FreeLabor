@@ -1,8 +1,7 @@
-.profilePage {
+.container-fluid {
 	margin: 35px;
     margin-top: 100px;
-    max-width: 1000px;
-    min-width: 930px;
+    background: #fff;
 }
 
 .orgNameBox {
@@ -10,7 +9,6 @@
     border-width: 2px;
     padding: 20px 15px;
     border-style: solid;
-    width: 155px;
     z-index: 10;
     position: absolute;
     background: burlywood;
@@ -19,17 +17,29 @@
 
 .orgSplashScreenBoxImage {
 	z-index: 1;
-    margin: 25px 25px 0px 25px;
+    margin: 25px;
 	width: 100%;
+    max-height: 300px;
+    min-height: 100px;
+    
 }
 
-.info {
+.profileBody > .panel-default {
     margin: 25px;
-    width: 100%;
+}
+
+.nav-tabs {
+    border-style: unset;
+}
+
+.nav-tabs > li > * {
+    text-align: center;
+    background: burlywood;
+    border-radius: 15px;
 }
 
 .tab-content {
-	   border: black;
+	border: burlywood;
     border-width: 2px;
     border-style: solid;
 }
@@ -38,6 +48,3 @@
 	margin: 25px;
 }
 
-.missionStatementImage {
-	display: flex;
-}
