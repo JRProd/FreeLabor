@@ -28,6 +28,10 @@
     margin: 25px;
 }
 
+.nav-tabs {
+    border-style: unset;
+}
+
 .nav-tabs > li > * {
     text-align: center;
     background: burlywood;

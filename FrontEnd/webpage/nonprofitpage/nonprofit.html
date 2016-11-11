@@ -19,8 +19,7 @@
             </div>
             <div class="panel-body">
                 <div class="tab-content">
-					<div role="tabpanel" class="tab-pane active col-md-10" id="About">
-
+					<div role="tabpanel" class="tab-pane active" id="About">
 						<div class="missionStatementArea">
 							<div class="col-md-6 missionStatement">
 								<h3>Mission Statement</h3>
@@ -37,11 +36,9 @@
 							</div>
 						</div>
 					</div>
-
 					<div role="tabpanel" class="tab-pane" id="Events">
-						<p>Upcoming Events</p>
-							<event-list [eventListService]="nonProfitService.eventList"></event-list>
-						</div>
+						<event-list [eventListService]="nonProfitService.eventList"></event-list>
+					</div>
 
 					<div role="tabpanel" class="tab-pane" id="Volunteers">
 						<p>Volunteers that have donated!</p>
