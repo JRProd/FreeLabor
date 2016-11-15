@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'home-bar',
-    templateUrl: './webpage/home-bar/home-bar.html',
-    styleUrls: ['./webpage/home-bar/home-bar.css' ],
+    templateUrl: './webpage/homebar/homebar.html',
+    styleUrls: ['./webpage/homebar/homebar.css' ],
 })
 
 export class HomeBar

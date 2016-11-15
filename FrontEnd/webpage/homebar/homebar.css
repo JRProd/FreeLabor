@@ -1,11 +1,6 @@
 .header {
 	background: burlywood;
-    width: 60%;
-    min-width: 900px;
-	height: 75px;
-	position: fixed;
-	display: flex;
-	z-index: 20;
+
 }
 
 .logo {
