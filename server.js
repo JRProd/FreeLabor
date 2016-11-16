@@ -74,6 +74,7 @@ app.use(express.static(path.join(__dirname,'FrontEnd')));
 app.use(require('./routes/users'));
 app.use(require('./routes/orgs'));
 app.use(require('./routes/events'));
+app.use(require('./routes/admin'));
 
 app.use('/',function(req,res){
   res.sendfile('index.html');
