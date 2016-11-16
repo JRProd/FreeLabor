@@ -6,7 +6,7 @@ var saltRounds = 10;
 
 router.get('/admin/configuredb', function(req,res){
   //Check to make sure user is allowed access to
-  var file = fs.readFileSync("./configuredb.sql", "utf8");
+  var file = fs.readFileSync("./dbdump.sql", "utf8");
   console.log(file);
 
   function performQuery(query,data,callback) {
