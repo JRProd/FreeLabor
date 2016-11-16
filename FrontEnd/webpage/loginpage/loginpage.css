@@ -29,3 +29,30 @@
     margin: 25px;
     float: right;
 }
+
+.modal-body {
+    width: 50%;
+    margin: auto;
+}
+
+.modalLoginImg > img {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+}
+
+.modalForm > input {
+    margin: 5px 0px 5px 0px;
+}
+
+.loginButton {
+    margin: 5px;
+}
+
+.loginButton {
+    width: 100%;
+}
+
+.centerFooter {
+    text-align: center;
+}

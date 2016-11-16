@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
 
 export class HomeBar
 {
+    private websiteTitle = "Volunteer.io";
     logo: string;
 
     constructor()
