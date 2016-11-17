@@ -4,50 +4,67 @@ var responses = require('./responses.js');
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
 function checkInput(title,addr,city,state,zip,dateStart,dateEnd,desc,maxAtten){
-	var errorBuffer;
+	var errorBuffer = "";
+	var errorThrown = false;
 	//Make sure each parameter is not undefined and not null, while being the correct data type
 	if((typeof(title) === 'string') && (title !== null)){
-		
+		continue;
 	}else{
-		//concat errorBuffer, invalid title object
+		errorBuffer += "Invalid title object, ";
+		errorThrown = true;
 	}
 	if((typeof(addr) === 'string') && (addr != null)){
 		
 	}else{
-		//concat errorBuffer, invalid address object
+		errorBuffer += "Invalid address object, ";
+		errorThrown = true;
 	}
 	if((typeof(city) === 'string') && (city != null)){
-	
+		continue;
 	}else{
-		//concat errorBuffer, invalid city object
+		errorBuffer += "Invalid city object, ";
+		errorThrown = true;
 	}
 	if((typeof(state) === 'string') && (state != null)){
-	
+		continue;
 	}else{
-		//concat errorBuffer, invalid state object
+		errorBuffer += "Invalid state object, ";
+		errorThrown = true;
 	}
 	if((typeof(zip) === 'number') && (zip != null)){
-
+		continue;
 	}else{
-		//concat errorBuffer, invalid zip object
+		errorBuffer  += "Invalid zip object, ";
+		errorThrown = true;
 	}
 	if((typeof(dateStart) === 'string') && (dateStart != null)){
 		//Check if it is ISO standard
 	}else{
-		//concat errorBuffer, invalid dateStart object
+		errorBuffer += "Invalid dateStart object, ";
+		errorThrown = true;
 	}
 	if((typeof(dateEnd) === 'string') && (dateEnd != null)){
 		//Check if it is ISO standard
 	}else{
-		//concat errorBuffer, invalid dateEnd object
+		errorBuffer += "Invalid dateEnd object, ";
+		errorThrown = true;
 	}
 	if((typeof(desc) === 'string') && (desc != null)){
+		continue;
 	}else{
-		//concat errorBuffer, invalid dateStart object
+		errorBuffer +="Invalid dateStart object, ";
+		errorThrown = true;
 	}
 	if((typeof(maxAtten) === 'number') && (maxAtten != null)){
+		continue;
 	}else{
-		//concat errorBuffer, invalid dateStart object
+		errorBuffer += "Invalid dateStart object";
+		errorThrown = true;
+	}
+	if(errorThrown){
+		return errorBuffer;	
+	}else{
+		return "T";
 	}
 }
 
@@ -55,23 +72,29 @@ function checkInput(title,addr,city,state,zip,dateStart,dateEnd,desc,maxAtten){
 router.post('/event', function(req,res){
 	var createEvent = 'INSERT INTO Event (title,address,city,state,zip,dateStart,dateEnd,description,maxAttendees) VALUES(?,?,?,?,?,?,?,?,?)';
 	//Get paramaterized query ready
-	var params = [req.body.title,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.dateStart,req.body.dateEnd,req.body.description,req.body.maxAttendees];
-	function performQuery(query,data,callback) {
-		req.db.query(query, data, function(err, rows, fields) {
-			if (err) {
-				callback(err, null);
-			} else
-				callback(null, rows);
-	  });
-	}
-	performQuery(createEvent,params, function(err, rows, fields) {
-		if (err) {
-			res.json({success:false,message:err});
-		} else {
-			//Right now I have no way to get the org's name
-			res.json({success:true,message:rows,url:'http://localhost/org/'+req.body.orgName + '/events/' + req.body.title});
+	//check input
+	var errorMsg = checkInput(req.body.title,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.dateStart,req.body.dateEnd,req.body.description,req.body.maxAttendees);
+	if(errorMsg != "T"){
+		res.json({success:false,message:errorMsg});
+	}else{
+		var params = [req.body.title,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.dateStart,req.body.dateEnd,req.body.description,req.body.maxAttendees];
+		function performQuery(query,data,callback) {
+			req.db.query(query, data, function(err, rows, fields) {
+				if (err) {
+					callback(err, null);
+				} else
+					callback(null, rows);
+	  	});
 		}
-	});
+		performQuery(createEvent,params, function(err, rows, fields) {
+			if (err) {
+				res.json({success:false,message:err});
+			} else {
+				//Right now I have no way to get the org's name
+				res.json({success:true,message:rows,url:'http://localhost/org/'+req.body.orgName + '/events/' + req.body.title});
+			}
+		});
+	}
 });
 
 //Copy and paste code from orgs.js for reference
