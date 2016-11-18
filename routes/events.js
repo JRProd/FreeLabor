@@ -70,22 +70,23 @@ function checkInput(title,addr,city,state,zip,dateStart,dateEnd,desc,maxAtten){
 
 //Copy and paste code from orgs.js for reference
 router.post('/event', function(req,res){
-	var createEvent = 'INSERT INTO Event (title,address,city,state,zip,dateStart,dateEnd,description,maxAttendees) VALUES(?,?,?,?,?,?,?,?,?)';
 	//Get paramaterized query ready
-	//check input
+	var createEvent = 'INSERT INTO Event (title,address,city,state,zip,dateStart,dateEnd,description,maxAttendees) VALUES(?,?,?,?,?,?,?,?,?)';
+	//check inputs
 	var errorMsg = checkInput(req.body.title,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.dateStart,req.body.dateEnd,req.body.description,req.body.maxAttendees);
 	if(errorMsg != "T"){
 		res.json({success:false,message:errorMsg});
 	}else{
 		var params = [req.body.title,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.dateStart,req.body.dateEnd,req.body.description,req.body.maxAttendees];
+		//Preform query
 		function performQuery(query,data,callback) {
 			req.db.query(query, data, function(err, rows, fields) {
 				if (err) {
 					callback(err, null);
-				} else
+				} else {
 					callback(null, rows);
-	  	});
-		}
+	  			}
+		});
 		performQuery(createEvent,params, function(err, rows, fields) {
 			if (err) {
 				res.json({success:false,message:err});
