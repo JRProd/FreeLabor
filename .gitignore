@@ -1,8 +1,4 @@
 
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/master
 # Logs
 logs
 *.log
@@ -50,8 +46,5 @@ jspm_packages
 .node_repl_history
 
 # Output of 'npm pack'
-<<<<<<< HEAD
 *.tgz
-=======
-*.tgz
->>>>>>> refs/remotes/origin/master
+.DS_Store
