@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="login-page col-md-10">
+        <div class="row">
+            <div class="title col-md-8 col-md-offset-2">
+                <h1>Volunteer.IO</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="pageImg col-md-6 col-md-offset-3">
+                <img class="img-circle" src="http://placehold.it/350x350" alt="Main Page Image">
+            </div>
+        </div>
+        <div class="row">
+            <div class="login-buttons col-md-6 col-md-offset-3">
+                <button class="btn btn-primary col-md-3 btn-login" data-toggle="modal" data-target="#loginModal">
+                    Log In
+                </button>
+                <button class="btn btn-success col-md-3 btn-signin" data-toggle="modal" data-target="#signinModal">
+                    Sign In
+                </button>
+            </div>
+        </div>
+
+        <!-- Login Modal -->
+        <div id="loginModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Login to Volunteer.IO</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="modalLoginImg">
+                                <img class="img-circle" src="http://placehold.it/350x350" alt="Logo">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <form class="modalForm">
+                                <input type="text" class="form-control" id="usernameInput" placeholder="Username">
+                                <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+                                <input type="checkbox" id="rememberMe">
+                                <small>Remember me -</small>
+                                <a href="#">Forgot password?</a>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <button class="btn btn-primary loginButton" data-dismiss="modal">Log In</button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="centerFooter">
+                            <small>Don't have an account?</small>
+                            <a href="#">Sing up >></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Modal -->
+        <div id="signinModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Sign In</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
