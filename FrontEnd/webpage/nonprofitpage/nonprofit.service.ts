@@ -1,3 +1,4 @@
+import { EventList } from '../eventlist/eventlist.component';
 import { EventListService } from '../eventlist/eventlistservice.service';
 import { Injectable , OnInit } from '@angular/core';
 
@@ -48,6 +49,7 @@ export class NonProfitService implements OnInit
                             this.splashImageURL = res.splashImageURL;
                             this.imageURL = res.imageURL;
                             this.eventList.importList(res.condensedEvents);
+                            console.log(EventList);
                             },
                     //Set function to catch error
                     error =>  console.log(error)

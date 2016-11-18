@@ -10,15 +10,7 @@ import { VolunteerService } from './volunteer.service';
 
 export class VolunteerComponent { 
 
-	volunteer: any[];
-  bio: string;
-  stats: string;
-  orgsFollowing: any[];
-  eventsAttending: any[];
-  name: string;
-
-	constructor(volunteerService : VolunteerService) {
-		this.volunteer = volunteerService.getVolunteer(1); //add id parameter
-    console.log(this.volunteer);
+	constructor(private volunteerService : VolunteerService) {
+    this.volunteerService.ngOnIinit();
 	}
 }

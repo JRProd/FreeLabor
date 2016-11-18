@@ -1,13 +1,12 @@
-<head><title>{{volunteer.name}}'s Profile</title></head>
+<head><title>{{volunteerService.firstName}}'s Profile</title></head>
 <div class="container">
-    
     <div class="panel panel-default top">
         <div class="panel-body">
 
             <div class="wrapper-volunteer col-md-7">
                 <div class="panel panel-default volunteer">
                     <div class="panel-heading">
-                        <h2 class="panel-title">Volunteer Name Goes Here {{volunteer.name}}</h2>
+                        <h2 class="panel-title">{{volunteerService.firstName}} {{volunteerService.lastName}}'s Profile</h2>
                     </div>
                     <div class="panel-body">
                         <div class="media">
@@ -17,7 +16,7 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">Bio: {{volunteer.bio}} </h4>
+                                <h4 class="media-heading">Bio: {{volunteerService.bio}} </h4>
                             </div>
                         </div>
                     </div>
@@ -30,7 +29,7 @@
                         <h3 class="panel-title">[Volunteer Name] Stats</h3>
                     </div>
                     <div class="panel-body">
-                        <strong>Stats: {{volunteer.stats}}</strong> 
+                        <strong>Stats: {{volunteerService.stats}}</strong> 
                     </div>
                 </div>
             </div>
@@ -42,9 +41,7 @@
                     </div>
                     
                     <div class="panel-body events-body">
-                        <img class="img-circle events" src="http://placehold.it/150x150"
-                            *ngFor="let img of [0, 1, 2, 3];" 
-                        > <!--let event of eventsAttending-->
+                        <event-list [eventListService]="volunteerService.eventList"></event-list>
                     </div>
                 </div>
             </div>
