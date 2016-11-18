@@ -1,24 +1,21 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 
-import { EventProfile } from './eventprofile.service';
+import { EventService } from './event.service';
+
+import 'rxjs/add/operator/map'
+
 
 @Component({
   selector: 'event',
   templateUrl: './webpage/eventpage/event.html',
   styleUrls: [ './webpage/eventpage/event.css' ],
-  providers: [ EventProfile ]
+  providers: [ EventService ]
 })
 
-export class EventPageComponent{
-    profile: EventProfile;
-
-    constructor()
-    {
-    	this.profile = new EventProfile();
-    }
-
-    addVolunteers(volunteer: any)
-    {
-    	this.profile.volunteers.push(volunteer);
+export class Event
+{
+    constructor(private eventService: EventService) 
+    { 
+        eventService.ngOnInit();
     }
 }

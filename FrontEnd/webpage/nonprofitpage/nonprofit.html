@@ -1,46 +1,52 @@
-<div class="profilePage">
-	<div class="container">
-		<div class="orgNameBox col-md-2">
-			{{nonProfitService.name}}
-		</div>
-		<div class="orgSplashScreenBox col-md-8">
-			<img class="orgSplashScreenBoxImage" src="{{nonProfitService.splashImageURL}}"/>
-		</div>
-	</div>
-	<div class="info">
-		<ul class="nav nav-tabs" role="tablist">
-			<li role="presentation" class="active"><a href="#About" aria-controls="About" role="tab" data-toggle="tab">About</a></li>
-			<li role="presentation"><a href="#Events" aria-controls="Events" role="tab" data-toggle="tab">Events</a></li>
-			<li role="presentation"><a href="#Volunteers" aria-controls="Volunteers" role="tab" data-toggle="tab">Volunteers</a></li>
-		</ul>
-
-		<div class="tab-content">
-			<div role="tabpanel" class="tab-pane active" id="About">
-
-				<div class="missionStatementArea">
-					<div class="missionStatement">
-						<h3>Mission Statement</h3>
-						<p>{{nonProfitService.missionStatement}}</p>
+<!-->Max Column Size is 10<!-->
+<div class="container-fluid">
+    <div class="row profileHeader">
+        <div class="col-md-2 orgNameBox">
+            {{nonProfitService.name}}
+        </div>
+        <div class="col-md-10 orgSplashScreenBox">
+            <img class="orgSplashScreenBoxImage" src="{{nonProfitService.splashImageURL}}"/>
+        </div>
+    </div>
+    <div class="row profileBody">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active col-md-2"><a href="#About" aria-controls="About" role="tab" data-toggle="tab">About</a></li>
+                        <li role="presentation" class="col-md-2"><a href="#Events" aria-controls="Events" role="tab" data-toggle="tab">Events</a></li>
+                        <li role="presentation" class="col-md-2"><a href="#Volunteers" aria-controls="Volunteers" role="tab" data-toggle="tab">Volunteers</a></li>
+                    </ul>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+					
+					<div role="tabpanel" class="tab-pane active" id="About">
+						<div class="missionStatementArea">
+							<div class="col-md-6 missionStatement">
+								<h3>Mission Statement</h3>
+								<p>{{nonProfitService.missionStatement}}</p>
+							</div>
+							<div class="col-md-6 missionStatementImage">
+								<img src="{{nonProfitService.imageURL}}">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 otherInfo">
+								<h3>Other Info</h3>
+								<p>{{nonProfitService.otherInfo}}</p>
+							</div>
+						</div>
 					</div>
-					<div class="missionStatementImage">
-						<img src="{{nonProfitService.imageURL}}">
+
+					<div role="tabpanel" class="tab-pane" id="Events">
+						<event-list [eventListService]="nonProfitService.eventList"></event-list>
+					</div>
+
+					<div role="tabpanel" class="tab-pane" id="Volunteers">
+						<p>Volunteers that have donated!</p>
 					</div>
 				</div>
-				<div class="otherInfo">
-					<h3>Other Info</h3>
-					<p>{{nonProfitService.otherInfo}}</p>
-				</div>
-			</div>
-
-			<div role="tabpanel" class="tab-pane" id="Events">
-				<p>Upcoming Events</p>
-					<event-list [eventListService]="nonProfitService.eventList"></event-list>
-				</div>
-
-			<div role="tabpanel" class="tab-pane" id="Volunteers">
-				<p>Volunteers that have donated!</p>
-			</div>
-
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 </div>
