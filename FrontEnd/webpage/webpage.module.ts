@@ -7,11 +7,11 @@ import { Login } from './loginpage/loginpage.component';
 import { EventList } from './eventlist/eventlist.component';
 import { Event } from './eventpage/event.component';
 import { NonProfit } from './nonprofitpage/nonprofit.component';
+import { VolunteerComponent } from './volunteer/volunteer.component';
 import { HomeBar } from './homebar/homebar.component';
 import { Footer } from './footer/footer.component';
 
 import { HttpModule } from '@angular/http';
-
 
 @NgModule({    
 	imports: [ 
@@ -19,13 +19,16 @@ import { HttpModule } from '@angular/http';
         HttpModule, 
         RouterModule.forRoot([
             { path: 'np', component: NonProfit },
+            {path: 'v', component: VolunteerComponent},
             { path: '', component: Login },
             { path: 'e', component: Event }
             ]) 
     ],    
     declarations:  [
         WebPageComponent, 
-        NonProfit, 
+        NonProfit,
+        EventList,
+        VolunteerComponent,
         Event,
         EventList,
         HomeBar,

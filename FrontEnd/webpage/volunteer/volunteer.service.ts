@@ -1,40 +1,32 @@
-import { EventList } from '../eventlist/eventlist.component';
 import { EventListService } from '../eventlist/eventlistservice.service';
 import { Injectable , OnInit } from '@angular/core';
 
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
-import { NonProfit } from './nonprofit.component';
-
 @Injectable()
-export class NonProfitService implements OnInit
-{
-    private nonProfitUrl = 'https://private-3d0cf-artisanapi.apiary-mock.com/org/99'
-    private obser : Observable<NonProfitService>;
+export class VolunteerService {
 
-    name: string;
-    username: string;
+	private volunteerURL = "https:/private-3d0cf-artisanapi.apiary-mock.com/user";
 
-    missionStatement: string;
-    otherInfo: string;
+	imageURL: string;
+	firstName: string;
+	lastName: string;
+	username: string;
 
-    splashImageURL: string
-    imageURL: string;
+	bio: string;
 
-    eventList: EventListService;
+	organizations: any[];
+	eventList: EventListService;
 
-    errorMessage: string;
+	constructor(private http: Http) {
+		this.eventList = new EventListService;
+	}
 
-    constructor(private http: Http) 
-    {
-        this.eventList = new EventListService;
-    }
-
-    ngOnInit()
-    {
-        //Request GET from URL
-        this.http.get(this.nonProfitUrl)
+	ngOnIinit()
+	{
+		//Request GET from URL
+        this.http.get(this.volunteerURL)
                     //Map Response to JSON
                     .map(this.extractData)
                     //Catch error if ocurred
@@ -42,22 +34,22 @@ export class NonProfitService implements OnInit
         //Subscribe to the observable when Request is recieved (Still part of method chain)
         .subscribe(
                     //Create a function to set local variables to
-                    res => {this.name = res.name;
+                    res => {this.firstName = res.firstName;
+							this.lastName = res.lastName;
                             this.username = res.username;
-                            this.missionStatement = res.missionStatement;
-                            this.otherInfo = res.otherInfo;
-                            this.splashImageURL = res.splashImageURL;
+                            this.bio = res.bio;
+                            this.organizations = res.organizations;
                             this.imageURL = res.imageURL;
                             this.eventList.importList(res.condensedEvents);
-                            console.log(EventList);
+							console.log(this.firstName + " " + this.lastName)
                             },
                     //Set function to catch error
                     error =>  console.log(error)
         );
         //Data will be updated after request is finished
-    }
+	}
 
-    private extractData(res: Response)
+	private extractData(res: Response)
     {
         let body = res.json()
         return body || { };

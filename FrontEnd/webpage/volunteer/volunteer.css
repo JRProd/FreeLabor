@@ -1,0 +1,27 @@
+h1 {
+    color: forestgreen;
+}
+
+.container {
+    padding-top: 10%;
+}
+
+.panel-heading {
+    background-color: indianred;
+    color: white;
+}
+
+.wrapper-events {
+    float: left;
+    width: 100%;
+}
+
+.wrapper-orgs {
+    padding-top: 10%;
+    float: left;
+    width: 100%;
+}
+
+.events {
+    padding: 5%;
+}
