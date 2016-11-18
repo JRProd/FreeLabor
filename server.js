@@ -66,7 +66,7 @@ app.use(bodyParser.json());
 app.all('*', function(request, response, next){
   request.db = connection;
   request.ss = sessionStore;
-  request.cc = coudinary;
+  request.cc = cloudinary;
   next();
 });
 // chould point to FrontEnd/public
@@ -74,6 +74,7 @@ app.use(express.static(path.join(__dirname,'FrontEnd')));
 app.use(require('./routes/users'));
 app.use(require('./routes/orgs'));
 app.use(require('./routes/events'));
+app.use(require('./routes/admin'));
 
 app.use('/',function(req,res){
   res.sendfile('index.html');

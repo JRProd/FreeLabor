@@ -3,11 +3,12 @@ var express = require('express');
 var router = express.Router();
 var responses = require('./responses.js');
 var saltRounds = 10;
+var mysql      = require('mysql');
 
 router.get('/admin/configuredb', function(req,res){
   //Check to make sure user is allowed access to
-  var file = fs.readFileSync("./configuredb.sql", "utf8");
-  console.log(file);
+  var file = fs.readFileSync("./routes/dbdump.sql", "utf8");
+  //console.log(file);
 
   function performQuery(query,data,callback) {
     req.db.query(query, data, function(err, rows, fields) {
@@ -18,7 +19,6 @@ router.get('/admin/configuredb', function(req,res){
       }
     });
   }
-
   performQuery(file, function(err, rows, fields) {
     if (err) {
       res.json({success:false,message:err});
