@@ -83,10 +83,10 @@ router.post('/event', function(req,res){
 			req.db.query(query, data, function(err, rows, fields) {
 				if (err) {
 					callback(err, null);
-				} else
+				} else {
 					callback(null, rows);
-	  	});
-		}
+	  			}
+		});
 		performQuery(createEvent,params, function(err, rows, fields) {
 			if (err) {
 				res.json({success:false,message:err});
