@@ -8,55 +8,49 @@ function checkInput(title,addr,city,state,zip,dateStart,dateEnd,desc,maxAtten){
 	var errorThrown = false;
 	//Make sure each parameter is not undefined and not null, while being the correct data type
 	if((typeof(title) === 'string') && (title !== null)){
-		continue;
 	}else{
 		errorBuffer += "Invalid title object, ";
 		errorThrown = true;
 	}
-	if((typeof(addr) === 'string') && (addr != null)){
+	if((typeof(addr) === 'string') && (addr !== null)){
 		
 	}else{
 		errorBuffer += "Invalid address object, ";
 		errorThrown = true;
 	}
-	if((typeof(city) === 'string') && (city != null)){
-		continue;
+	if((typeof(city) === 'string') && (city !== null)){
 	}else{
 		errorBuffer += "Invalid city object, ";
 		errorThrown = true;
 	}
-	if((typeof(state) === 'string') && (state != null)){
-		continue;
+	if((typeof(state) === 'string') && (state !== null)){
 	}else{
 		errorBuffer += "Invalid state object, ";
 		errorThrown = true;
 	}
-	if((typeof(zip) === 'number') && (zip != null)){
-		continue;
+	if((typeof(zip) === 'number') && (zip !== null)){
 	}else{
 		errorBuffer  += "Invalid zip object, ";
 		errorThrown = true;
 	}
-	if((typeof(dateStart) === 'string') && (dateStart != null)){
+	if((typeof(dateStart) === 'string') && (dateStart !== null)){
 		//Check if it is ISO standard
 	}else{
 		errorBuffer += "Invalid dateStart object, ";
 		errorThrown = true;
 	}
-	if((typeof(dateEnd) === 'string') && (dateEnd != null)){
+	if((typeof(dateEnd) === 'string') && (dateEnd !== null)){
 		//Check if it is ISO standard
 	}else{
 		errorBuffer += "Invalid dateEnd object, ";
 		errorThrown = true;
 	}
-	if((typeof(desc) === 'string') && (desc != null)){
-		continue;
+	if((typeof(desc) === 'string') && (desc !== null)){
 	}else{
 		errorBuffer +="Invalid dateStart object, ";
 		errorThrown = true;
 	}
-	if((typeof(maxAtten) === 'number') && (maxAtten != null)){
-		continue;
+	if((typeof(maxAtten) === 'number') && (maxAtten !== null)){
 	}else{
 		errorBuffer += "Invalid dateStart object";
 		errorThrown = true;
