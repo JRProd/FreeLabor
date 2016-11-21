@@ -22,11 +22,15 @@
     "async": "~0.8.0",
     "bcrypt": "~0.8.7",
     "body-parser": "~1.15.2",
+    "cloudinary": "^1.4.4",
     "cookie-parser": "^1.4.3",
     "express": "4.2.x",
     "express-mysql-session": "^1.2.0",
     "express-session": "^1.14.2",
+    "formidable": "^1.0.17",
     "jshint": "^2.9.4",
+    "morgan": "^1.7.0",
+    "multer": "^1.2.0",
     "mysql": "^2.11.1"
   },
   "license": "MIT"
