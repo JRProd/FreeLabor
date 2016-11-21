@@ -85,9 +85,40 @@ router.post('/pic', function (req, res, next) {
 //     tags: ['special', 'for_homepage']
 //   }
 // );
-
-
 });
+
+router.post('/user/login', function(req,res){
+
+  var selectUser = 'SELECT hashUser FROM User WHERE usernameUser=?';
+  var params = [req.body.username];
+  function performQuery(query,data,callback) {
+    req.db.query(query, data, function(err, rows, fields) {
+      if (err) {
+        callback(err, null,null);
+      } else{
+        callback(null, rows, fields);
+      }
+    });
+  }
+
+  performQuery(selectUser,params, function(err, rows, fields) {
+    if (err) {
+      res.json({success:false,message:err});
+    } else {
+      var result;
+      console.log(rows[0].hashUser);
+      if(bcrypt.compareSync(req.body.password,rows[0].hashUser)){
+        res.json({success:true,url:'http://localhost/user/'+req.body.username});
+      } else {
+        res.json({success:false,message:err});
+      }
+
+    }
+  });
+});
+
+
+
 
 
 
