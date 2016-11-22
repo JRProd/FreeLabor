@@ -1,2 +1,2 @@
-del /q /s public\webpage\**.js
-del /q /s public\webpage\**js.map
+del /q /s webpage\**.js
+del /q /s webpage\**js.map

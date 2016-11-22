@@ -1,0 +1,65 @@
+.eventContainer {
+    border-color: burlywood;
+    border-style: solid;
+    border-radius: 5px;
+    min-height: 150px;
+}
+
+.eventTitle {
+	border: black;
+    border-width: 2px;
+    padding: 20px 15px;
+    border-style: solid;
+    z-index: 10;
+    position: absolute;
+    background: burlywood;
+    text-align: center;
+    margin: 5px;
+}
+
+.eventBody {
+    display: flex;
+}
+
+.eventImage {
+    z-index: 1;
+}
+
+.eventData {
+    display: block;
+    width: 100%;
+}
+
+.eventContainer > div > img {
+    max-height: 250px;
+    max-width: 250px;
+    padding: 10px;
+}
+
+.eventStatus {
+    display: flex;
+}
+
+.eventStatus > div {
+    margin-left: 10px;
+    width: 100%;
+}
+
+.eventStatus > span {
+    margin: 5px;
+    margin-right: 20px;
+    float: right;
+}
+
+.eventInfo {
+    display: block;
+    margin: 10px;
+}
+
+.eventInfo > * {
+    margin: 5px;
+}
+
+.eventInfo > p {s
+    margin: 10px;
+}

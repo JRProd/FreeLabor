@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "outDir": "./public/webpage/",
     "target": "es2015",
     "module": "commonjs",
     "moduleResolution": "node",
