@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `freelabor` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `freelabor`;
 -- MySQL dump 10.13  Distrib 5.7.12, for osx10.9 (x86_64)
 --
 -- Host: localhost    Database: freelabor
