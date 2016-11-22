@@ -37,6 +37,15 @@ CREATE TABLE `Attendance` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `Attendance`
+--
+
+LOCK TABLES `Attendance` WRITE;
+/*!40000 ALTER TABLE `Attendance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Attendance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Event`
 --
 
@@ -61,6 +70,15 @@ CREATE TABLE `Event` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `Event`
+--
+
+LOCK TABLES `Event` WRITE;
+/*!40000 ALTER TABLE `Event` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Event` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Membership`
 --
 
@@ -79,6 +97,15 @@ CREATE TABLE `Membership` (
   CONSTRAINT `fk_user-membership` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Membership`
+--
+
+LOCK TABLES `Membership` WRITE;
+/*!40000 ALTER TABLE `Membership` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Membership` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `Org`
@@ -107,6 +134,15 @@ CREATE TABLE `Org` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `Org`
+--
+
+LOCK TABLES `Org` WRITE;
+/*!40000 ALTER TABLE `Org` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Org` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `User`
 --
 
@@ -128,6 +164,15 @@ CREATE TABLE `User` (
   UNIQUE KEY `usernameUser_UNIQUE` (`usernameUser`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `User`
+--
+
+LOCK TABLES `User` WRITE;
+/*!40000 ALTER TABLE `User` DISABLE KEYS */;
+/*!40000 ALTER TABLE `User` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -138,4 +183,4 @@ CREATE TABLE `User` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-21 23:38:10
+-- Dump completed on 2016-11-22  2:40:58
