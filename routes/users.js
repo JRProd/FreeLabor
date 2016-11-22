@@ -105,8 +105,6 @@ router.post('/user/login', function(req,res){
     if (err) {
       res.json({success:false,message:err});
     } else {
-      var result;
-      console.log(rows[0].hashUser);
       if(bcrypt.compareSync(req.body.password,rows[0].hashUser)){
         res.json({success:true,url:'http://localhost/user/'+req.body.username});
       } else {
