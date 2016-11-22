@@ -28,7 +28,7 @@ router.post('/org', function(req,res){
   });
 });
 
-router.get('/org/:username', function(req,res){
+router.get('/org/:username/events/:eventid', function(req,res){
   //TODO: INPUT SANITATION
   var sql = 'SELECT nameOrg,usernameOrg,emailOrg,phoneOrg FROM Org WHERE usernameOrg=?';
   var params = [req.params.username];
@@ -81,7 +81,7 @@ router.post('/org/login', function(req,res){
     } else {
       var result;
       if(bcrypt.compareSync(req.body.password,rows[0].hashOrg)){
-        res.json({success:true,url:'http://localhost/org/'+req.body.username});
+        res.json({success:true,url:'http://localhost/orgs/'+req.body.username});
       } else {
         res.json({success:false,message:err});
       }
