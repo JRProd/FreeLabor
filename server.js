@@ -30,7 +30,7 @@ var sessionDBConf = {
     columnNames: {
       session_id: 'idSession',
       expires: 'expiresSession',
-      data: 'idUser'//Datatype is currently TEXT, should be varchar?
+      data: 'username'//Datatype is currently TEXT, should be varchar?
     }
   }
 };
