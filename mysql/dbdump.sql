@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `freelabor` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `freelabor`;
 -- MySQL dump 10.13  Distrib 5.7.12, for osx10.9 (x86_64)
 --
 -- Host: localhost    Database: freelabor
@@ -26,14 +28,24 @@ CREATE TABLE `Attendance` (
   `idAttendance` int(11) NOT NULL AUTO_INCREMENT,
   `idUser` int(11) NOT NULL,
   `idEvent` int(11) NOT NULL,
-  `dateJoinedAttendance` varchar(25) CHARACTER SET latin1 NOT NULL COMMENT 'Should be in Full UTC Format (25 Characters), business logic will handle this',
+  `dateJoinedAttendance` varchar(25) COLLATE latin1_general_ci DEFAULT NULL COMMENT 'Should be in Full UTC Format (25 Characters), business logic will handle this',
   PRIMARY KEY (`idAttendance`),
+  UNIQUE KEY `idAttendance_UNIQUE` (`idAttendance`),
   KEY `fk_idUser_idx` (`idUser`),
   KEY `fk_event_idx` (`idEvent`),
   CONSTRAINT `fk_event` FOREIGN KEY (`idEvent`) REFERENCES `Event` (`idEvent`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_user` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Attendance`
+--
+
+LOCK TABLES `Attendance` WRITE;
+/*!40000 ALTER TABLE `Attendance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Attendance` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `Event`
@@ -60,6 +72,15 @@ CREATE TABLE `Event` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `Event`
+--
+
+LOCK TABLES `Event` WRITE;
+/*!40000 ALTER TABLE `Event` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Event` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Membership`
 --
 
@@ -70,7 +91,7 @@ CREATE TABLE `Membership` (
   `idMembership` int(11) NOT NULL AUTO_INCREMENT,
   `idUser` int(11) NOT NULL,
   `idOrg` int(11) NOT NULL,
-  `dateJoinedMembership` varchar(25) COLLATE latin1_general_ci NOT NULL COMMENT 'Should be in Full UTC Format (25 Characters), business logic will handle this',
+  `dateJoinedMembership` varchar(25) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Should be in Full UTC Format (25 Characters), business logic will handle this',
   PRIMARY KEY (`idMembership`),
   KEY `fk_user_idx` (`idUser`),
   KEY `fk_org_idx` (`idOrg`),
@@ -78,6 +99,15 @@ CREATE TABLE `Membership` (
   CONSTRAINT `fk_user-membership` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Membership`
+--
+
+LOCK TABLES `Membership` WRITE;
+/*!40000 ALTER TABLE `Membership` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Membership` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `Org`
@@ -93,28 +123,26 @@ CREATE TABLE `Org` (
   `emailOrg` varchar(254) COLLATE latin1_general_ci NOT NULL,
   `phoneOrg` varchar(13) COLLATE latin1_general_ci NOT NULL,
   `hashOrg` char(60) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `splashImageURLOrg` varchar(254) COLLATE latin1_general_ci DEFAULT NULL,
+  `imageURLOrg` varchar(45) COLLATE latin1_general_ci DEFAULT NULL,
+  `missionStatementOrg` varchar(254) COLLATE latin1_general_ci DEFAULT NULL,
+  `otherInfo` text COLLATE latin1_general_ci,
   PRIMARY KEY (`idOrg`),
   UNIQUE KEY `idOrg_UNIQUE` (`idOrg`),
   UNIQUE KEY `usernameOrg_UNIQUE` (`usernameOrg`),
   UNIQUE KEY `emailOrg_UNIQUE` (`emailOrg`),
   UNIQUE KEY `phoneOrg_UNIQUE` (`phoneOrg`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `Session`
+-- Dumping data for table `Org`
 --
 
-DROP TABLE IF EXISTS `Session`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Session` (
-  `idSession` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `expiresSession` int(11) unsigned NOT NULL,
-  `idUser` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
-  PRIMARY KEY (`idSession`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `Org` WRITE;
+/*!40000 ALTER TABLE `Org` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Org` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `User`
@@ -130,12 +158,23 @@ CREATE TABLE `User` (
   `emailUser` varchar(254) NOT NULL,
   `usernameUser` varchar(35) NOT NULL,
   `hashUser` char(60) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `bioUser` text,
+  `imageURLUser` varchar(254) DEFAULT NULL,
   PRIMARY KEY (`idUser`),
   UNIQUE KEY `idUser_UNIQUE` (`idUser`),
   UNIQUE KEY `emailUser_UNIQUE` (`emailUser`),
   UNIQUE KEY `usernameUser_UNIQUE` (`usernameUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `User`
+--
+
+LOCK TABLES `User` WRITE;
+/*!40000 ALTER TABLE `User` DISABLE KEYS */;
+/*!40000 ALTER TABLE `User` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -146,4 +185,4 @@ CREATE TABLE `User` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-21 17:16:13
+-- Dump completed on 2016-11-22  2:40:58
