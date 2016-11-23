@@ -65,27 +65,29 @@ router.get('/user/:username', function(req,res){
   });
 });
 
-router.post('/pic', function (req, res, next) {
-  console.log("enterredxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-  // req.body will hold the text fields, if there were any
+function storeCloudinary(result,req,res){
+  console.log(result);
+}
+
+router.post('/user/:username/picture', function (req, res, next) {
+  var ccon = {
+    public_id: 'put user id or username here',
+    crop: 'limit',
+    width: 2000,
+    height: 2000,
+    eager: [
+      { width: 200, height: 200, crop: 'thumb', gravity: 'face',
+        radius: 20, effect: 'sepia' },
+      { width: 100, height: 150, crop: 'fit', format: 'png' }
+    ],
+    tags: ['special', 'for_homepage']
+  };
+
   console.log(req.files);
 
-//   cloudinary.uploader.upload(req.file.path,
-//   function(result) { console.log(result); },
-//   {
-//     public_id: 'user_ID',
-//     crop: 'limit',
-//     width: 2000,
-//     height: 2000,
-//     eager: [
-//       { width: 200, height: 200, crop: 'thumb', gravity: 'face',
-//         radius: 20, effect: 'sepia' },
-//       { width: 100, height: 150, crop: 'fit', format: 'png' }
-//     ],
-//     tags: ['special', 'for_homepage']
-//   }
-// );
+  cloudinary.uploader.upload(req.files[0].path,function(result){ storeCloudinary(result,req,res);}, ccon);
 });
+
 
 router.post('/user/login', function(req,res){
 

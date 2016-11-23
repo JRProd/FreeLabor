@@ -28,7 +28,7 @@ router.post('/org', function(req,res){
   });
 });
 
-router.get('/org/:username/events/:eventid', function(req,res){
+router.get('/org/:username', function(req,res){
   //TODO: INPUT SANITATION
   var sql = 'SELECT nameOrg,usernameOrg,emailOrg,phoneOrg FROM Org WHERE usernameOrg=?';
   var params = [req.params.username];
