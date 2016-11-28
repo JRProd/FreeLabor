@@ -54,6 +54,7 @@ router.patch('/user/:username', function(req,res){
   var params = [updates,req.params.username];
   console.log(mysql.format(patchUser,params));
 
+  if(req.session.username == req.params.username){
   function performQuery(query,data,callback) {
     req.db.query(query, data, function(err, rows, fields) {
       if (err) {
@@ -71,6 +72,8 @@ router.patch('/user/:username', function(req,res){
       res.json({success:true,message:content,url:'http://localhost/user/'+req.params.username});
     }
   });
+}else{
+  console.log("User tried to modify someone not logged in.");
 });
 
 router.get('/user/:username', function(req,res){
