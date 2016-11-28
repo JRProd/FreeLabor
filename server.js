@@ -35,6 +35,13 @@ var sessionDBConf = {
   }
 };
 var sessionStore = new SessionDB(sessionDBConf);
+app.use(session({
+    key: 'session',
+    secret: 'session_cookie_secret',
+    store: sessionStore,
+    resave: true,
+    saveUninitialized: true
+}));
 
 /***********************MySQL Connection***********************/
 var connection = mysql.createConnection({
@@ -60,8 +67,8 @@ cloudinary.config({
 });
 
 /***********************Input Handlers***********************/
-//app.use(bodyParser.urlencoded({ extended: false })); //TODO
-//app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false })); //TODO
+app.use(bodyParser.json());
 app.use(multer({ dest:__dirname+'/tmp/'}).any());
 
 /***************************Routes***************************/

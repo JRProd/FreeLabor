@@ -61,6 +61,35 @@ router.get('/org/:username', function(req,res){
   });
 });
 
+router.post('/org/login', function(req,res){
+
+  var selectUser = 'SELECT hashOrg FROM Org WHERE usernameOrg=?';
+  var params = [req.body.username];
+  function performQuery(query,data,callback) {
+    req.db.query(query, data, function(err, rows, fields) {
+      if (err) {
+        callback(err, null,null);
+      } else{
+        callback(null, rows, fields);
+      }
+    });
+  }
+
+  performQuery(selectUser,params, function(err, rows, fields) {
+    if (err) {
+      res.json({success:false,message:err});
+    } else {
+      var result;
+      if(bcrypt.compareSync(req.body.password,rows[0].hashOrg)){
+        res.json({success:true,url:'http://localhost/orgs/'+req.body.username});
+      } else {
+        res.json({success:false,message:err});
+      }
+
+    }
+  });
+});
+
 
 
 module.exports = router;
