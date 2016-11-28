@@ -4,6 +4,7 @@ var responses = require('./responses.js');
 var bcrypt = require('bcrypt');
 var multer  = require('multer');
 var cloudinary = require('cloudinary');
+var mysql = require('mysql');
 
 
 var saltRounds = 10;
@@ -33,9 +34,46 @@ router.post('/user', function(req,res){
   });
 });
 
+router.patch('/user/:username', function(req,res){
+  //TODO: INPUT SANITATION
+  var patchUser = 'UPDATE User SET ? WHERE usernameUser=?';
+  //{firstNameUser:req.body.firstName,lastNameUser:req.body.lastName,emailUser:req.body.email}
+  var updates = {};
+  if(req.body.firstName)
+    updates.firstNameUser = req.body.firstName;
+  if(req.body.lastName)
+    updates.lastNameUser = req.body.lastName;
+  if(req.body.email)
+    updates.emailUser = req.body.email;
+  if(req.body.password)
+    updates.hashUser = bcrypt.hashSync(req.body.password, saltRounds);
+  if(req.body.bio)
+    updates.bioUser = req.body.bio;
+  var params = [updates,req.params.username];
+  console.log(mysql.format(patchUser,params));
+
+  function performQuery(query,data,callback) {
+    req.db.query(query, data, function(err, rows, fields) {
+      if (err) {
+        callback(err, null);
+      } else{
+        callback(null, rows);
+      }
+    });
+  }
+  var queryResult;
+  performQuery(patchUser,params, function(err, content) {
+    if (err) {
+      res.json({success:false,message:err});
+    } else {
+      res.json({success:true,message:content,url:'http://localhost/user/'+req.params.username});
+    }
+  });
+});
+
 router.get('/user/:username', function(req,res){
   //TODO: INPUT SANITATION
-  var sql = 'SELECT usernameUser,firstNameUser,lastNameUser FROM User WHERE usernameUser=?';
+  var sql = 'SELECT * FROM User WHERE usernameUser=?';
   var params = [req.params.username];
 
   function performQuery(query,data,callback) {
@@ -52,23 +90,56 @@ router.get('/user/:username', function(req,res){
     if (err) {
       res.json({success:false,message:err});
     } else {
-      res.json({
+      var json = {
         success:true,
         url:'http://localhost/user/'+req.params.username,
         username:rows[0].usernameUser,
         firstName:rows[0].firstNameUser,
         lastName:rows[0].lastNameUser,
-        bio:'This feature has yet to be implemented on the backend. Please injoy this message as sample data, let me know if you want me to create a longer bio.',
-        imageURL: 'http://lorempixel.com/output/cats-q-c-640-480-4.jpg'
-      });
+      };
+      if(rows[0].imageURLUser===null){
+        json.imageURLUser='http://store.mdcgate.com/market/assets/image/icon_user_default.png';
+      } else {
+        json.imageURL=rows[0].imageURLUser;
+      }
+
+      if(rows[0].bioUser===null){
+        json.bioUser='My Bio would appear here. IF I HAD ONE.';
+      } else {
+        json.bioUser=rows[0].bioUser;
+      }
+
+      res.json(json);
     }
   });
 });
 
 function storeCloudinary(result,req,res){
-  console.log(result);
-}
+  //TODO: INPUT SANITATION
+  var sql = 'UPDATE User SET imageURLUser=? WHERE usernameUser=?';
+  var params = [result.url,req.params.username];
 
+  function performQuery(query,data,callback) {
+    req.db.query(query, data, function(err, rows, fields) {
+      if (err) {
+        callback(err, null,null);
+      } else{
+        callback(null, rows, fields);
+      }
+    });
+  }
+  performQuery(sql, params, function(err, rows, fields) {
+    if (err) {
+      res.json({success:false,message:err});
+    } else {
+      res.json({
+        success:true,
+        url:'http://localhost/user/'+req.params.username,
+        imageURL:result.url
+      });
+    }
+  });
+}
 router.post('/user/:username/picture', function (req, res, next) {
   var ccon = {
     public_id: 'put user id or username here',
@@ -116,11 +187,6 @@ router.post('/user/login', function(req,res){
     }
   });
 });
-
-
-
-
-
 
 
 module.exports = router;
