@@ -29,6 +29,8 @@ router.post('/user', function(req,res){
     if (err) {
       res.json({success:false,message:err});
     } else {
+      req.session.username = req.body.username;
+      req.session.type = "User";
       res.json({success:true,message:content,url:'http://localhost/user/'+req.body.username});
     }
   });
@@ -179,6 +181,8 @@ router.post('/user/login', function(req,res){
       res.json({success:false,message:err});
     } else {
       if(bcrypt.compareSync(req.body.password,rows[0].hashUser)){
+	req.session.username = req.body.username;
+        req.session.type = "User";
         res.json({success:true,url:'http://localhost/user/'+req.body.username});
       } else {
         res.json({success:false,message:err});
