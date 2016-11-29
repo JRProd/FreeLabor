@@ -1,44 +1,55 @@
 var express    = require('express');
 var mysql      = require('mysql');
 var bodyParser = require('body-parser');
+var formidable = require('formidable');
+var cloudinary = require('cloudinary');
+var multer     = require('multer');
+var morgan     = require('morgan');
+var session    = require('express-session');
 var path       = require('path');
 var config     = require('./config.js'); //prod sql auth will go here
-//requires for sessions
-var session = require('express-session');
-var MySQLServerStore = require('express-mysql-session')(session);
-//end of session-specific requires
-var app        = expxress();
+var SessionDB  = require('express-mysql-session')(session);
+
+var app        = express();
 var router = express.Router();
 var port = process.env.PORT || 8080;
 
-//options for sessions, need to change user/password for the database
-var options = {
-    host: 'localhost',
-    port: 3306,
-    user: config.mysql_local.user_name,
-    password: config.mysql_local.password,
-    database: 'freelabor',// Database name. 
-    checkExpirationInterval: 900000,// How frequently expired sessions will be cleared; milliseconds. 
-    expiration: 86400000,// The maximum age of a valid session; milliseconds. 
-    createDatabaseTable: true,// Whether or not to create the sessions database table, if one does not already exist. 
-    connectionLimit: 1,// Number of connections when creating a connection pool 
-    schema: {
-        tableName: 'sessions',
-        columnNames: {
-            session_id: 'session_id',
-            expires: 'expires',
-            data: 'userID'
-        }
+/*****************MySQL Connection for Sessions****************/
+var sessionDBConf = {
+  host: 'localhost',
+  port: 3306,
+  user: config.mysql_local.user_name,
+  password: config.mysql_local.password,
+  database: 'freelabor',// database/schema name
+  checkExpirationInterval: 900000,//Interval to clear expired sessions (ms).
+  expiration: 86400000,// maximum age of a valid session (ms)
+  createDatabaseTable: true,
+  connectionLimit: 1,// Num connections when creating a connection pool
+  schema: {
+    tableName: 'Session',
+    columnNames: {
+      session_id: 'idSession',
+      expires: 'expiresSession',
+      data: 'username'//Datatype is currently TEXT, should be varchar?
     }
+  }
 };
+var sessionStore = new SessionDB(sessionDBConf);
+app.use(session({
+    key: 'session',
+    secret: 'session_cookie_secret',
+    store: sessionStore,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {maxAge:6000000}
+}));
 
-//using express-mysql-session for storing sessions
-var sessionStore = new MySQLServerStore(options);
-
+/***********************MySQL Connection***********************/
 var connection = mysql.createConnection({
-  host     : 'localhost',
+  host     : config.mysql_local.host,
   user     : config.mysql_local.user_name,
-  password : config.mysql_local.password
+  password : config.mysql_local.password,
+  database : config.mysql_local.schema
 });
 
 connection.connect(function(err) {
@@ -49,25 +60,36 @@ connection.connect(function(err) {
   console.log('connected as id ' + connection.threadId);
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+/***********************Cloudinary Config***********************/
+cloudinary.config({
+  cloud_name: config.cloudinary.cloud_name,
+  api_key: config.cloudinary.key,
+  api_secret: config.cloudinary.secret
+});
 
-//Test route for homepage
-app.use(express.static(path.join(__dirname,'FrontEnd'))); //FrontEnd/public
+/***********************Input Handlers***********************/
+app.use(bodyParser.urlencoded({ extended: false })); //TODO
+app.use(bodyParser.json());
+app.use(multer({ dest:__dirname+'/tmp/'}).any());
+
+/***************************Routes***************************/
+app.all('*', function(request, response, next){
+  request.db = connection;
+  request.ss = sessionStore;
+  request.cc = cloudinary;
+  next();
+});
+// chould point to FrontEnd/public
+app.use(express.static(path.join(__dirname,'FrontEnd')));
+app.use(require('./routes/users'));
+app.use(require('./routes/orgs'));
+app.use(require('./routes/events'));
+app.use(require('./routes/admin'));
 
 app.use('/',function(req,res){
-  res.sendFile('index.html');
+  res.sendfile('index.html');
 });
-//app.use(require('./routes/orgs'));
-//app.use(require('./routes/events'));
-//app.use(require('./routes/users'));
 
-
-//put more routes here
-
-//Register Routes
-//app.use(express.static(__dirname + '/FrontEnd'));
-//app.use('/', router);
-
+/***************************Startup***************************/
 app.listen(port);
 console.log('FreeLabor API Serving on port ' + port);

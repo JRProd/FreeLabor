@@ -1,7 +1,8 @@
 var responses = {};
 
 var getOrg = '{\
-            "imageURL": "http://site.xyz/img/users/username/profile.jpg",\
+            "splashImageURL":"http://media.nbcdfw.com/images/653*367/ARC+Logo+2015b.jpg",\
+            "imageURL": "https://pbs.twimg.com/profile_images/681113912595464193/mnEs5a6u.jpg",\
             "name":"Dallas Red Cross",\
             "username":"username",\
             "missionStatement":"we will eventually add more fields",\
