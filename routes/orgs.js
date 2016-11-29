@@ -125,7 +125,7 @@ router.post('/org/login', function(req,res){
         req.session.regenerate(function(err) {
 	  req.session.username = req.body.username;
           req.session.type = "Org";
-	})
+	});
         res.json({success:true,url:'http://localhost/orgs/'+req.body.username});
       } else {
         res.json({success:false,message:err});
@@ -133,7 +133,7 @@ router.post('/org/login', function(req,res){
 
     }
   });
-})
+});
 });
 
 
