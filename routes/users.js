@@ -5,9 +5,17 @@ var bcrypt = require('bcrypt');
 var multer  = require('multer');
 var cloudinary = require('cloudinary');
 var mysql = require('mysql');
-
-
 var saltRounds = 10;
+
+function performQuery(req,query,data,callback) {
+  req.db.query(query, data, function(err, rows, fields) {
+    if (err) {
+      callback(err, null);
+    } else{
+      callback(null, rows);
+    }
+  });
+}
 
 router.post('/user', function(req,res){
   //TODO: INPUT SANITATION
@@ -15,17 +23,9 @@ router.post('/user', function(req,res){
   var hash = bcrypt.hashSync(req.body.password, saltRounds);
   var params = [req.body.firstName,req.body.lastName,req.body.email,req.body.username,hash];
 
-  function performQuery(query,data,callback) {
-    req.db.query(query, data, function(err, rows, fields) {
-      if (err) {
-        callback(err, null);
-      } else{
-        callback(null, rows);
-      }
-    });
-  }
+
   var queryResult;
-  performQuery(createUser,params, function(err, content) {
+  performQuery(req,createUser,params, function(err, content) {
     if (err) {
       res.json({success:false,message:err});
     } else {
@@ -52,17 +52,7 @@ router.patch('/user/:username', function(req,res){
   var params = [updates,req.params.username];
   console.log(mysql.format(patchUser,params));
 
-  function performQuery(query,data,callback) {
-    req.db.query(query, data, function(err, rows, fields) {
-      if (err) {
-        callback(err, null);
-      } else{
-        callback(null, rows);
-      }
-    });
-  }
-  var queryResult;
-  performQuery(patchUser,params, function(err, content) {
+  performQuery(req,patchUser,params, function(err, content) {
     if (err) {
       res.json({success:false,message:err});
     } else {
@@ -76,17 +66,8 @@ router.get('/user/:username', function(req,res){
   var sql = 'SELECT * FROM User WHERE usernameUser=?';
   var params = [req.params.username];
 
-  function performQuery(query,data,callback) {
-    req.db.query(query, data, function(err, rows, fields) {
-      if (err) {
-        callback(err, null);
-      } else{
-        callback(null, rows, fields);
-      }
-    });
-  }
   var queryResult;
-  performQuery(sql, params, function(err, rows, fields) {
+  performQuery(req,sql, params, function(err, rows, fields) {
     if (err) {
       res.json({success:false,message:err});
     } else {
@@ -119,16 +100,7 @@ function storeCloudinary(result,req,res){
   var sql = 'UPDATE User SET imageURLUser=? WHERE usernameUser=?';
   var params = [result.url,req.params.username];
 
-  function performQuery(query,data,callback) {
-    req.db.query(query, data, function(err, rows, fields) {
-      if (err) {
-        callback(err, null,null);
-      } else{
-        callback(null, rows, fields);
-      }
-    });
-  }
-  performQuery(sql, params, function(err, rows, fields) {
+  performQuery(req,sql, params, function(err, rows, fields) {
     if (err) {
       res.json({success:false,message:err});
     } else {
@@ -164,17 +136,17 @@ router.post('/user/login', function(req,res){
 
   var selectUser = 'SELECT hashUser FROM User WHERE usernameUser=?';
   var params = [req.body.username];
-  function performQuery(query,data,callback) {
+  function performQuery(req,query,data,callback) {
     req.db.query(query, data, function(err, rows, fields) {
       if (err) {
-        callback(err, null,null);
+        callback(err, null);
       } else{
-        callback(null, rows, fields);
+        callback(null, rows);
       }
     });
   }
 
-  performQuery(selectUser,params, function(err, rows, fields) {
+  performQuery(req,selectUser,params, function(err, rows, fields) {
     if (err) {
       res.json({success:false,message:err});
     } else {
