@@ -3,6 +3,18 @@ var router = express.Router();
 var responses = require('./responses.js');
 var bcrypt = require('bcrypt');
 var saltRounds = 10;
+
+function performQuery(query,data,callback) {
+	req.db.query(query, data, function(err, rows, fields) {
+		if (err) {
+			callback(err, null);
+		} else {
+			callback(null, rows);
+		}
+
+	});
+}
+
 function checkInput(title,addr,city,state,zip,dateStart,dateEnd,desc,maxAtten){
 	var errorBuffer = "";
 	var errorThrown = false;
@@ -78,25 +90,18 @@ router.post('/event', function(req,res){
 	}else{
 		var params = [req.body.title,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.dateStart,req.body.dateEnd,req.body.description,req.body.maxAttendees];
 		//Preform query
-		function performQuery(query,data,callback) {
-			req.db.query(query, data, function(err, rows, fields) {
-				if (err) {
-					callback(err, null);
-				} else {
-					callback(null, rows);
-	  			}
-		});
+
 		performQuery(createEvent,params, function(err, rows, fields) {
 			if (err) {
 				res.json({success:false,message:err});
 			} else {
 				//Right now I have no way to get the org's name
-				res.json({success:true,message:rows,url:'http://localhost/org/'+req.body.orgName + '/events/' + req.body.title});
+				res.json({success:true,message:rows,url:'http://localhost/org/'+req.body.username + '/events/' + req.body.title});
 			}
 		});
-		}
 	}
 });
+
 
 //Copy and paste code from orgs.js for reference
 router.get('/event/:usernameOrg/:idEvent', function(req,res){
