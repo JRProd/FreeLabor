@@ -57,7 +57,7 @@ router.patch('/user/:username', function(req,res){
   if(req.session.username == req.params.username){
   function performQuery(query,data,callback) {
     req.db.query(query, data, function(err, rows, fields) {
-      if (err) {
+     if (err) {
         callback(err, null);
       } else{
         callback(null, rows);
@@ -74,6 +74,7 @@ router.patch('/user/:username', function(req,res){
   });
 }else{
   console.log("User tried to modify someone not logged in.");
+}
 });
 
 router.get('/user/:username', function(req,res){
@@ -123,7 +124,6 @@ function storeCloudinary(result,req,res){
   //TODO: INPUT SANITATION
   var sql = 'UPDATE User SET imageURLUser=? WHERE usernameUser=?';
   var params = [result.url,req.params.username];
-
   function performQuery(query,data,callback) {
     req.db.query(query, data, function(err, rows, fields) {
       if (err) {

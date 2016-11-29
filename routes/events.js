@@ -71,9 +71,9 @@ function checkInput(title,addr,city,state,zip,dateStart,dateEnd,desc,maxAtten){
 router.post('/event', function(req,res){
 	//Get paramaterized query ready
 	var createEvent = 'INSERT INTO Event (title,address,city,state,zip,dateStart,dateEnd,description,maxAttendees) VALUES(?,?,?,?,?,?,?,?,?)';
-	//If the first letter is a u then the logged in user is a volunteer, if it is an o then the logged in user is an organization
+	//If the type is User they can not create an event
 	var param = req.session.username;
-	if(param.charAt(0) == 'u'){
+	if(req.session.type == 'User'){
 		res.json({success:false,message:'Volunteers cannot create Events, please log into an Org Account to create one.'});
 	}else{
 		//check inputs
@@ -95,8 +95,9 @@ router.post('/event', function(req,res){
 				if (err) {
 					res.json({success:false,message:err});
 				} else {
-					//what is sent back to the frontend
-					res.json({success:true,message:rows,url:'http://localhost/org/'+ req.session.username + '/events/' + <EVENTID>});
+					//this is a nasty hack, should be paramaterized
+					var eventID = req.db.query('SELECT eventID FROM Event WHERE title = ' . req.body.title . 'AND description = ' . req.body.description);
+					res.json({success:true,message:rows,url:'http://localhost/org/'+ req.session.username + '/events/' + eventID});
 				}
 			});
 			}
