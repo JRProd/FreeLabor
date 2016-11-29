@@ -140,32 +140,35 @@ router.post('/user/:username/picture', function (req, res, next) {
 
 
 router.post('/user/login', function(req,res){
+  req.session.regenerate(function(err){
+    var selectUser = 'SELECT hashUser FROM User WHERE usernameUser=?';
+    var params = [req.body.username];
+    function performQuery(req,query,data,callback) {
+      req.db.query(query, data, function(err, rows, fields) {
+        if (err) {
+          callback(err, null);
+        } else{
+          callback(null, rows);
+        }
+      });
+    }
 
-  var selectUser = 'SELECT hashUser FROM User WHERE usernameUser=?';
-  var params = [req.body.username];
-  function performQuery(req,query,data,callback) {
-    req.db.query(query, data, function(err, rows, fields) {
+    performQuery(req,selectUser,params, function(err, rows, fields) {
       if (err) {
-        callback(err, null);
-      } else{
-        callback(null, rows);
+        res.json({success:false,message:err});
+      } else {
+        if(bcrypt.compareSync(req.body.password,rows[0].hashUser)){
+  	      req.session.username = req.body.username;
+          req.session.type = "User";
+          
+          console.log(req.session);
+          res.json({success:true,url:'http://localhost/user/'+req.body.username});
+        } else {
+          res.json({success:false,message:err});
+        }
+
       }
     });
-  }
-
-  performQuery(req,selectUser,params, function(err, rows, fields) {
-    if (err) {
-      res.json({success:false,message:err});
-    } else {
-      if(bcrypt.compareSync(req.body.password,rows[0].hashUser)){
-	req.session.username = req.body.username;
-        req.session.type = "User";
-        res.json({success:true,url:'http://localhost/user/'+req.body.username});
-      } else {
-        res.json({success:false,message:err});
-      }
-
-    }
   });
 });
 

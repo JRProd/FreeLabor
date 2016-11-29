@@ -40,7 +40,8 @@ app.use(session({
     secret: 'session_cookie_secret',
     store: sessionStore,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {maxAge:6000000}
 }));
 
 /***********************MySQL Connection***********************/
