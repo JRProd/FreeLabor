@@ -74,7 +74,7 @@ router.patch('/user/:username', function(req,res){
   });
 }else{
   console.log("User tried to modify someone not logged in.");
-  res.json({success:false,"You tried to modify someone other than yourself"});
+  res.json({success:false,err:"You tried to modify someone other than yourself"});
 }
 });
 
