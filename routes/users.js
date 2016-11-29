@@ -29,6 +29,8 @@ router.post('/user', function(req,res){
     if (err) {
       res.json({success:false,message:err});
     } else {
+      req.session.username = req.body.username;
+      req.session.type = "User";
       res.json({success:true,message:content,url:'http://localhost/user/'+req.body.username});
     }
   });
@@ -52,6 +54,7 @@ router.patch('/user/:username', function(req,res){
   var params = [updates,req.params.username];
   console.log(mysql.format(patchUser,params));
 
+if(req.session.username == req.params.username){
   performQuery(req,patchUser,params, function(err, content) {
     if (err) {
       res.json({success:false,message:err});
@@ -59,6 +62,10 @@ router.patch('/user/:username', function(req,res){
       res.json({success:true,message:content,url:'http://localhost/user/'+req.params.username});
     }
   });
+}else{
+  console.log("User tried to modify someone not logged in.");
+  res.json({success:false,err:"You tried to modify someone other than yourself"});
+}
 });
 
 router.get('/user/:username', function(req,res){
@@ -151,6 +158,8 @@ router.post('/user/login', function(req,res){
       res.json({success:false,message:err});
     } else {
       if(bcrypt.compareSync(req.body.password,rows[0].hashUser)){
+	req.session.username = req.body.username;
+        req.session.type = "User";
         res.json({success:true,url:'http://localhost/user/'+req.body.username});
       } else {
         res.json({success:false,message:err});

@@ -20,19 +20,26 @@ function performQuery(req,query,data,callback) {
 router.post('/event', function(req,res){
 	//Get paramaterized query ready
 	var createEvent = 'INSERT INTO Event (idOrg,titleEvent,locationEvent,addressEvent,cityEvent,stateCodeEvent,postCodeEvent,dateStartEvent,dateEndEvent,descriptionEvent,maxAttendeesEvent) VALUES ((SELECT idOrg FROM Org WHERE usernameOrg=?),?,?,?,?,?,?,?,?,?,?)';
-	//check inputs
 
-	var params = [req.body.username,req.body.title,req.body.location,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.dateStart,req.body.dateEnd,req.body.description,req.body.maxAttendees];
-	//Preform query
-	console.log(mysql.format(createEvent,params));
-	performQuery(req,createEvent,params, function(err, rows, fields) {
-		if (err) {
-			res.json({success:false,message:err});
-		} else {
-			//Right now I have no way to get the org's name
-			res.json({success:true,message:rows,url:'http://localhost/org/'+req.body.username + '/events/' + rows.insertId});
-		}
-	});
+	//If the user isn't logged in as an Org they can't create events.
+	if(req.session.type == 'User'){
+		res.json({success:false,message:'Volunteers cannot create Events, please log into an Org Account to create one.'});
+	}else{
+		//check inputs
+		var params = [req.session.username,req.body.title,req.body.location,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.dateStart,req.body.dateEnd,req.body.description,req.body.maxAttendees];
+		//Preform query
+		console.log(mysql.format(createEvent,params));
+		performQuery(req,createEvent,params, function(err, rows, fields) {
+			if (err) {
+				res.json({success:false,message:err});
+			} else {
+				//this is a nasty hack, should be paramaterized
+				var eventID = req.db.query('SELECT eventID FROM Event WHERE title = ' + req.body.title + 'AND description = ' + req.body.description);
+				res.json({success:true,message:rows,url:'http://localhost/org/'+ req.session.username + '/events/' + eventID});
+			}
+		});
+	}
+
 
 });
 

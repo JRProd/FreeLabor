@@ -25,6 +25,8 @@ router.post('/org', function(req,res){
     if (err) {
       res.json({success:false,message:err});
     } else {
+      req.session.username = req.body.username;
+      req.session.type = "Org";
       res.json({success:true,message:rows,url:'http://localhost/org/'+req.body.username});
     }
   });
@@ -109,7 +111,8 @@ router.get('/org/:username', function(req,res){
 });
 
 router.post('/org/login', function(req,res){
-
+  //destroy current session, if one exists
+  req.session.destroy(function(err){
   var selectUser = 'SELECT hashOrg FROM Org WHERE usernameOrg=?';
   var params = [req.body.username];
 
@@ -119,6 +122,10 @@ router.post('/org/login', function(req,res){
     } else {
       var result;
       if(bcrypt.compareSync(req.body.password,rows[0].hashOrg)){
+        req.session.regenerate(function(err) {
+	  req.session.username = req.body.username;
+          req.session.type = "Org";
+	});
         res.json({success:true,url:'http://localhost/orgs/'+req.body.username});
       } else {
         res.json({success:false,message:err});
@@ -126,6 +133,7 @@ router.post('/org/login', function(req,res){
 
     }
   });
+});
 });
 
 
