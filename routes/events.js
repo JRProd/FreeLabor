@@ -96,7 +96,7 @@ router.post('/event', function(req,res){
 					res.json({success:false,message:err});
 				} else {
 					//this is a nasty hack, should be paramaterized
-					var eventID = req.db.query('SELECT eventID FROM Event WHERE title = ' . req.body.title . 'AND description = ' . req.body.description);
+					var eventID = req.db.query('SELECT eventID FROM Event WHERE title = ' + req.body.title + 'AND description = ' + req.body.description);
 					res.json({success:true,message:rows,url:'http://localhost/org/'+ req.session.username + '/events/' + eventID});
 				}
 			});
