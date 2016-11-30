@@ -1,5 +1,4 @@
 import { Component , OnInit} from '@angular/core';
-
 import { NonProfitService } from './nonprofit.service';
 import { EventList } from '../eventlist/eventlist.component';
 import { VolunteerList } from '../volunteerlist/volunteerlist.component';

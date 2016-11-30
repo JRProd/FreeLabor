@@ -2,18 +2,17 @@ h1 {
     color: forestgreen;
 }
 
-.container {
-    padding-top: 10%;
+.panel panel-default panel-volunteer {
+    width: 100%;
 }
 
 .panel-heading {
-    background-color: indianred;
+    background-color: seagreen;
     color: white;
 }
 
 .wrapper-events {
-    float: left;
-    width: 100%;
+    margin: 3%;
 }
 
 .wrapper-orgs {

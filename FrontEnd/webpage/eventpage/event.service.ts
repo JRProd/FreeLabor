@@ -1,10 +1,8 @@
 import { VolunteerList } from '../volunteerlist/volunteerlist.component';
 import { VolunteerListService } from '../volunteerlist/volunteerlistservice.service';
 import { Injectable , OnInit } from '@angular/core';
-
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-
 import { Event } from './event.component';
 
 @Injectable()
