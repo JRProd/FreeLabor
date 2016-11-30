@@ -51,10 +51,8 @@
                     <div class="panel-heading orgs-heading">
                         <h3 class="panel-title orgs-title">Organizations Following</h3>
                     </div>
-                    <div class="panel-body orgs-body">
-                        <img class="img-circle events" src="http://placehold.it/150x150"
-                            *ngFor="let img of [0, 1, 2, 3];"
-                        > <!--let org or orgsFollowing-->
+                    <div class="panel-body events-body">
+                        <nonprofit-list [nonProfitListService]="volunteerService.nonProfitList"></nonprofit-list>
                     </div>
                 </div>
             </div>

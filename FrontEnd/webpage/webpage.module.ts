@@ -6,6 +6,7 @@ import { WebPageComponent } from './webpage.component';
 import { Login } from './loginpage/loginpage.component';
 import { EventList } from './eventlist/eventlist.component';
 import { Event } from './eventpage/event.component';
+import { NonProfitList } from './nonprofitlist/nonprofitlist.component';
 import { NonProfit } from './nonprofitpage/nonprofit.component';
 import { Volunteer } from './volunteerpage/volunteer.component';
 import { HomeBar } from './homebar/homebar.component';
@@ -18,16 +19,16 @@ import { HttpModule } from '@angular/http';
         BrowserModule , 
         HttpModule, 
         RouterModule.forRoot([
-            { path: 'np', component: NonProfit },
-            {path: 'v', component: Volunteer},
+            { path: 'nonprofit', component: NonProfit },
+            {path: 'volunteer', component: Volunteer},
             { path: '', component: Login },
-            { path: 'e', component: Event }
+            { path: 'event', component: Event }
             ]) 
     ],    
     declarations:  [
         WebPageComponent, 
         NonProfit,
-        EventList,
+        NonProfitList,
         Volunteer,
         Event,
         EventList,

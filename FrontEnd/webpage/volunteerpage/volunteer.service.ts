@@ -1,13 +1,16 @@
 import { EventListService } from '../eventlist/eventlistservice.service';
+import { NonProfitList } from '../nonprofitlist/nonprofitlist.component';
+import { NonProfitListService } from '../nonprofitlist/nonprofitlistservice.service';
 import { Injectable , OnInit } from '@angular/core';
 
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
-export class VolunteerService {
+export class VolunteerService{
 
 	private volunteerURL = "https:/private-3d0cf-artisanapi.apiary-mock.com/user";
+    private obser : Observable<VolunteerService>;
 
 	imageURL: string;
 	firstName: string;
@@ -16,11 +19,12 @@ export class VolunteerService {
 
 	bio: string;
 
-	organizations: any[];
 	eventList: EventListService;
+    nonProfitList: NonProfitListService;
 
 	constructor(private http: Http) {
 		this.eventList = new EventListService;
+        this.nonProfitList = new NonProfitListService;
 	}
 
 	ngOnIinit()
@@ -38,10 +42,11 @@ export class VolunteerService {
 							this.lastName = res.lastName;
                             this.username = res.username;
                             this.bio = res.bio;
-                            this.organizations = res.organizations;
                             this.imageURL = res.imageURL;
                             this.eventList.importList(res.condensedEvents);
+                            this.nonProfitList.importList(res.organizations);
 							console.log(this.firstName + " " + this.lastName)
+
                             },
                     //Set function to catch error
                     error =>  console.log(error)

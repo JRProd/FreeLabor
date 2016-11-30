@@ -1,11 +1,11 @@
-.eventContainer {
+.nonProfitContainer {
     border-color: burlywood;
     border-style: solid;
     border-radius: 5px;
     min-height: 150px;
 }
 
-.eventTitle {
+.nonProfitName {
 	border: black;
     border-width: 2px;
     padding: 20px 15px;
@@ -17,49 +17,49 @@
     margin: 5px;
 }
 
-.eventBody {
+.nonProfitBody {
     display: flex;
 }
 
-.eventImage {
+.nonProfitImage {
     z-index: 1;
 }
 
-.eventData {
+.nonProfitData {
     display: block;
     width: 100%;
 }
 
-.eventContainer > div > img {
+.nonProfitContainer > div > img {
     max-height: 250px;
     max-width: 250px;
     padding: 10px;
 }
 
-.eventStatus {
+.nonProfitStatus {
     display: flex;
 }
 
-.eventStatus > div {
+.nonProfitStatus > div {
     margin-left: 10px;
     width: 100%;
 }
 
-.eventStatus > span {
+.nonProfitStatus > span {
     margin: 5px;
     margin-right: 20px;
     float: right;
 }
 
-.eventInfo {
+.nonProfitInfo {
     display: block;
     margin: 10px;
 }
 
-.eventInfo > * {
+.nonProfitInfo > * {
     margin: 5px;
 }
 
-.eventInfo > p {
+.nonProfitInfo > p {
     margin: 10px;
 }
