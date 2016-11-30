@@ -13,7 +13,7 @@ import { NonProfit } from './nonprofit.component';
 @Injectable()
 export class NonProfitService implements OnInit
 {
-    private nonProfitUrl = 'https://private-3d0cf-artisanapi.apiary-mock.com/org/'
+    private nonProfitUrl = 'https://private-3d0cf-artisanapi.apiary-mock.com/org'
     private obser : Observable<NonProfitService>;
 
     name: string;
