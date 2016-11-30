@@ -1,6 +1,13 @@
 .footer {
-    background: burlywood;
-    
+    background: steelblue;    
+}
+
+.footer {
+    color: white;
+}
+
+a {
+    color: white;
 }
 
 .navigation > *, .info > *, .settings > *{
