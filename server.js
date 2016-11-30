@@ -90,6 +90,11 @@ app.use('/',function(req,res){
   res.sendfile('index.html');
 });
 
+app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
 /***************************Startup***************************/
 app.listen(port);
 console.log('FreeLabor API Serving on port ' + port);

@@ -21,6 +21,11 @@ router.post('/org', function(req,res){
   var hash = bcrypt.hashSync(req.body.password, saltRounds);
   var params = [req.body.name,req.body.username,req.body.email,req.body.phone,hash];
 
+  if(req.body.email.indexOf("@")==-1){
+    res.json({success:false,message:"invalid email"});
+    return;
+  }
+
   performQuery(req,createOrg,params, function(err, rows, fields) {
     if (err) {
       res.json({success:false,message:err});
@@ -182,12 +187,23 @@ router.post('/org/login', function(req,res){
         res.json({success:true,url:'http://localhost/orgs/'+req.body.username});
       } else {
 
-        res.json({success:false,message:err});
+        res.json({success:false,message:"access denied"});
       }
 
     }
   });
 });
+});
+
+router.post('/org/logout', function(req,res){
+
+  req.session.regenerate(function(err){
+    if (err) {
+      res.json({success:false,message:err});
+    } else {
+      res.json({success:true,url:'http://localhost:8080/'});
+    }
+  });
 });
 
 
