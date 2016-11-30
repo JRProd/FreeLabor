@@ -1,0 +1,50 @@
+<head><title>{{volunteerService.firstName}}'s Profile</title></head>
+<div class="container">
+    <div class="panel panel-default top">
+        <div class="panel-body">
+            <div class="wrapper-volunteer">
+                <div class="panel panel-default volunteer">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">{{volunteerService.firstName}} {{volunteerService.lastName}}'s Profile</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="media">
+                            <div class="media-left">
+                                <a>
+                                    <img class="img-circle" src="/webpage/images/Default_Profile_Picture.png">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Bio: {{volunteerService.bio}} </h4>
+                            </div>
+                        </div>
+                        <div class="wrapper-events">
+                            <div class="panel panel-default events-attending">
+                                <div class="panel-heading events-heading">
+                                    <h3 class="panel-title">Events Attending</h3>
+                                </div>
+                            
+                                <div class="panel-body events-body">
+                                    <event-list [eventListService] ="volunteerService.eventList"></event-list>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wrapper-orgs">
+                <div class="panel panel-default orgs-panel">
+                    <div class="panel-heading orgs-heading">
+                        <h3 class="panel-title orgs-title">Organizations Following</h3>
+                    </div>
+                    <div class="panel-body orgs-body">
+                        <img class="img-circle events" src="http://placehold.it/150x150"
+                            *ngFor="let img of [0, 1, 2, 3];"
+                        > <!--let org or orgsFollowing-->
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+</div>

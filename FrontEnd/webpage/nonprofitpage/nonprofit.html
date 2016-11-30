@@ -1,0 +1,58 @@
+<div class="panel panel-default np-title" >
+  <div class="panel-heading">
+    <h2 class="panel-title">{{nonProfitService.name}}</h2>
+  </div>
+  <div class="eventImage">
+	   <img class="img-responsive" src="{{nonProfitService.splashImageURL}}"/>
+  </div>
+</div>
+	<div class="row profileBody">
+        <div class="panel panel-default">
+			<nav class="navbar navbar-default">
+				 <div class="navbar-header">
+					<p class="navbar-brand">{{nonProfitService.name}}</p>
+				</div>
+				<div class="container-fluid">
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li><a href="#About" aria-controls="About" role="tab" data-toggle="tab">About</a></li>
+							<li><a href="#Events" aria-controls="Events" role="tab" data-toggle="tab">Events</a></li>
+							<li><a href="#Volunteers" aria-controls="Volunteers" role="tab" data-toggle="tab">Volunteers</a></li>
+						</ul>
+					</div>
+				</div><!-- /.container-fluid -->
+			</nav>
+
+            <div class="panel-body">
+                <div class="tab-content">
+					
+					<div role="tabpanel" class="tab-pane active" id="About">
+						<div class="missionStatementArea">
+							<div class="col-md-6 missionStatement">
+								<h3>Mission Statement</h3>
+								<p>{{nonProfitService.missionStatement}}</p>
+							</div>
+							<div class="col-md-6 missionStatementImage">
+								<img src="{{nonProfitService.imageURL}}">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 otherInfo">
+								<h3>Other Info</h3>
+								<p>{{nonProfitService.otherInfo}}</p>
+							</div>
+						</div>
+					</div>
+
+					<div role="tabpanel" class="tab-pane" id="Events">
+						<event-list [eventListService]="nonProfitService.eventList"></event-list>
+					</div>
+
+					<div role="tabpanel" class="tab-pane" id="Volunteers">
+						<p>Volunteers that have donated!</p>
+					</div>
+				</div>
+            </div>
+        </div>
+	</div>

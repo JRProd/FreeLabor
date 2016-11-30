@@ -1,0 +1,30 @@
+.panel-heading {
+    background-color: seagreen;
+    color: white;
+}
+
+.nav-tabs {
+    border-style: unset;
+}
+
+.nav-tabs > li > * {
+     color: white;
+}
+
+.nav-tabs>li>a:hover, .nav>li>a:focus, .nav>li>a:hover {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.navbar-default {
+	background-color: seagreen;
+    color: white;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.navbar .nav > li > a {
+    color: white;
+}

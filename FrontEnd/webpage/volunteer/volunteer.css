@@ -1,0 +1,26 @@
+h1 {
+    color: forestgreen;
+}
+
+.panel panel-default panel-volunteer {
+    width: 100%;
+}
+
+.panel-heading {
+    background-color: seagreen;
+    color: white;
+}
+
+.wrapper-events {
+    margin: 3%;
+}
+
+.wrapper-orgs {
+    padding-top: 10%;
+    float: left;
+    width: 100%;
+}
+
+.events {
+    padding: 5%;
+}
