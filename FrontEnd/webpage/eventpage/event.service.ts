@@ -41,6 +41,7 @@ export class EventService implements OnInit
         .subscribe(
                     //Create a function to set local variables to
                     res => {this.title = res.title;
+                            this.id = res.id;
                             this.date = res.dateStart + ' - ' + res.dateEnd;
                             this.location = res.address + ' ' + res.city + ', ' + res.state + ' ' + res.zip;
                             this.description = res.description;

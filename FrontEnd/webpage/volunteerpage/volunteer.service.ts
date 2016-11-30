@@ -14,8 +14,10 @@ export class VolunteerService{
 
 	imageURL: string;
     firstName: string;
+    lastName: string;
     name: string;
 	username: string;
+    id: number;
 
 	bio: string;
 
@@ -39,12 +41,14 @@ export class VolunteerService{
         .subscribe(
                     //Create a function to set local variables to
                     res => {this.firstName = res.firstName;
+                            this.lastName = res.lastName;
                             this.name = res.firstName + " " + res.lastName;
+                            this.id = res.id;
                             this.bio = res.bio;
                             this.imageURL = res.imageURL;
                             this.eventList.importList(res.condensedEvents);
                             this.nonProfitList.importList(res.organizations);
-							console.log(this.firstName )
+							console.log(this.id )
 
                             },
                     //Set function to catch error

@@ -20,10 +20,10 @@ import { HttpModule } from '@angular/http';
         BrowserModule , 
         HttpModule, 
         RouterModule.forRoot([
-            { path: 'nonprofit', component: NonProfit },
-            {path: 'volunteer', component: Volunteer},
+            { path: 'nonprofit/:id', component: NonProfit },
+            { path: 'volunteer/:id', component: Volunteer },
             { path: '', component: Login },
-            { path: 'event', component: Event }
+            { path: 'event/:id', component: Event }
             ]) 
     ],    
     declarations:  [

@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="" *ngFor="let event of eventListService.eventList">
-            <div class="col-md-6 eventContainer">
+            <div class="col-md-6 eventContainer" routerLink ="/event/{{event.id}}">
                 <div class="row">
                     <div class="eventTitle">
                         <p>{{event.title}}</p>

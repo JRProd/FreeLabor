@@ -1,14 +1,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="" *ngFor="let vol of volunteerListService.volunteerList">
-            <div class="col-md-6 volunteerContainer">
+            <div class="col-md-6 volunteerContainer" routerLink ="/volunteer/{{vol.id}}">
                 <div class="row">
                     <div class="volunteerName">
                         <p>{{vol.name}}</p>
                     </div>
                 </div>
                 <div class="row volunteerBody">
-                    <img class="volunteerImage "src="{{vol.imageURL}}" alt="Volunteer Picture"> 
+                    <img class="volunteerImage "src="{{vol.imageURL}}" alt="Volunteer Picture"  > 
                 </div>
             </div>
         </div>

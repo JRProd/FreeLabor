@@ -1,6 +1,7 @@
 import { NonProfitList } from './nonprofitlist.component';
 import { Injectable } from '@angular/core';
 import { NonProfitService } from '../nonprofitpage/nonprofit.service';
+import { NonProfit } from '../nonprofitpage/nonprofit.component';
 
 @Injectable()
 export class NonProfitListService{
@@ -20,6 +21,7 @@ export class NonProfitListService{
             let nonProfit = { } as NonProfitService;
 
             nonProfit.name = newNonProfit.name || "Name";
+            nonProfit.id = newNonProfit.id;
             nonProfit.imageURL = newNonProfit.imageURL || "http://placehold.it/100x100";
 
             this.nonProfitList.push(nonProfit);

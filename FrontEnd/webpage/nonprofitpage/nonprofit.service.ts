@@ -18,6 +18,7 @@ export class NonProfitService implements OnInit
 
     name: string;
     username: string;
+    id: number;
 
     missionStatement: string;
     otherInfo: string;
@@ -48,6 +49,7 @@ export class NonProfitService implements OnInit
         .subscribe(
                     //Create a function to set local variables to
                     res => {this.name = res.name;
+                            this.id = res.id;
                             this.username = res.username;
                             this.missionStatement = res.missionStatement;
                             this.otherInfo = res.otherInfo;
