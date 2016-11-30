@@ -11,7 +11,7 @@ import { NonProfit } from './nonprofit.component';
 @Injectable()
 export class NonProfitService implements OnInit
 {
-    private nonProfitUrl = 'https://localhost:8080/org'
+    private nonProfitUrl = 'http://localhost:8080/org'
     private obser : Observable<NonProfitService>;
 
     name: string;

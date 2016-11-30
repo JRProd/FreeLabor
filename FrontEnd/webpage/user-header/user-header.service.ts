@@ -7,20 +7,26 @@ export class UserHeader{
 
     public isLogged: boolean;
     public userURL = "http://localhost:8080/user";
+    public orgURL = "http://localhost:8080/org";
+
+    private org: boolean;
 
     private username: string;
 
     private firstName: string;
     private lastName: string;
 
+    private name: string;
+
     constructor(private http: Http)
     {
-
+        this.ngInit();
     }   
 
-    update()
+    ngInit()
     {
-        if(globals.usernameGlobal == "NO_LOG_IN")
+        console.log("User Header initalized!")
+        if(globals.logIn === false)
         {
             this.isLogged = false;
         }
@@ -33,13 +39,23 @@ export class UserHeader{
 
     populateUserHeader()
     {
-        this.http.get(`${this.userURL}/${this.username}`)
-            .map(this.extractData)
-            .catch(this.handleError)
-            .subscribe((res: UserHeader) => {
-                this.firstName = res.firstName;
-                this.lastName = res.lastName;
-            })
+        if(globals.org === false)
+            this.http.get(`${this.userURL}/${this.username}`)
+                .map(this.extractData)
+                .catch(this.handleError)
+                .subscribe((res: UserHeader) => {
+                    this.org = false;
+                    this.firstName = res.firstName;
+                    this.lastName = res.lastName;
+                })
+        else
+            this.http.get(`${this.orgURL}/${this.username}`)
+                .map(this.extractData)
+                .catch(this.handleError)
+                .subscribe((res: UserHeader) => {
+                    this.org = true;
+                    this.name = res.name;
+                })
     }
 
     private extractData(res: Response)

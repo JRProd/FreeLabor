@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
-import globalUsername = require('../globals');
+import globals = require('../globals');
 
 import { Observable } from 'rxjs/Rx';
 
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs/Rx';
 export class Login
 {
     private userURL = "http://localhost:8080/user";
-    private orgURL = "http://localhost:8080/orgs";
+    private orgURL = "http://localhost:8080/org";
 
     constructor(private http: Http, private router: Router) 
     { 
@@ -32,7 +32,9 @@ export class Login
                 .map(this.extractData)
                 .catch(this.handleError)
                 .subscribe(r=>{
-                    globalUsername.usernameGlobal = username;
+                    globals.usernameGlobal = username;
+                    globals.org = false;
+                    globals.logIn = true;
                     this.router.navigate(['/user', username]);
                 });
     }
@@ -41,21 +43,56 @@ export class Login
     {
         let headers = new Headers({'Content-Type': 'application/json' });
         let options = new RequestOptions({headers: headers});
+
+        let loginAttempt = {username, password};
+        console.log(loginAttempt);
+
+        this.http.post(`${this.orgURL}/login`,loginAttempt, options)
+                .map(this.extractData)
+                .catch(this.handleError)
+                .subscribe(r=>{
+                    globals.usernameGlobal = username;
+                    globals.org = true;
+                    globals.logIn = true;
+                    this.router.navigate(['/org', username]);
+                });
     }
 
-    createUser(fName: string, lName: string, email: string, username: string, password: string)
+    createUser(firstName: string, lastName: string, email: string, username: string, password: string)
     {
         let headers = new Headers({'Content-Type': 'application/json' });
         let options = new RequestOptions({headers: headers});
         console.log(options);
 
-        let tempNewUser = new NewUser(fName, lName, email, username, password);
+        let tempNewUser = {firstName, lastName, email, username, password};
         console.log(JSON.stringify(tempNewUser));
         this.http.post(this.userURL, JSON.stringify(tempNewUser), options)
                 .map(this.extractData)
                 .catch(this.handleError)
                 .subscribe(r=>{
+                    globals.usernameGlobal = username;
+                    globals.org = false;
+                    globals.logIn = true;
                     this.router.navigate(['/user', username])
+                });
+    }
+
+    createOrg(name: string, email: string, username: string, password: string, phone: string)
+    {
+        let headers = new Headers({'Content-Type': 'application/json' });
+        let options = new RequestOptions({headers: headers});
+        console.log(options);
+
+        let tempNewUser = {name, email, username, password, phone};
+        console.log(JSON.stringify(tempNewUser));
+        this.http.post(this.orgURL, JSON.stringify(tempNewUser), options)
+                .map(this.extractData)
+                .catch(this.handleError)
+                .subscribe(r=>{
+                    globals.usernameGlobal = username;
+                    globals.org = true;
+                    globals.logIn = true;
+                    this.router.navigate(['/org', username])
                 });
     }
 
@@ -82,16 +119,4 @@ export class Login
         console.error(errMsg);
         return Observable.throw(errMsg);
     }
-}
-
-class NewUser
-{
-    constructor(
-        public firstName: string,
-        public lastName: string,
-        public email: string,
-        public username: string,
-        public password: string
-    )
-    { }
 }

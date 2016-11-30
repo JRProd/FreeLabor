@@ -1,4 +1,5 @@
 <div class="container">
+    <home-bar></home-bar>
     <div class="login-page col-md-10">
         <div class="row">
             <div class="title col-md-8 col-md-offset-2">
@@ -32,23 +33,66 @@
                         <h4 class="modal-title">Login to Volunteer.IO</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="modalLoginImg">
-                                <img class="img-circle" src="http://placehold.it/350x350" alt="Logo">
+                        <div>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#VolunteerLogin" aria-controls="VolunteerLogin" role="tab" data-toggle="tab">
+                                        Volunteers
+                                    </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#OrgLogin" aria-controls="OrgLogin" role="tab" data-toggle="tab">
+                                        Organizations
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="VolunteerLogin">
+                                    <div class="row">
+                                        <div class="modalLoginImg">
+                                            <img class="img-circle" src="http://placehold.it/350x350" alt="Logo">
+                                        </div>
+                                        <h3>Volunteers</h3>
+                                        <div class="row">
+                                            <form class="modalForm">
+                                                <input #vUsernameLogin type="text" class="form-control" id="vUsernameLogin" placeholder="Username">
+                                                <input #vPasswordLogin type="password" class="form-control" id="vPasswordLogin" placeholder="Password">
+                                                <input type="checkbox" id="rememberMe">
+                                                <small>Remember me -</small>
+                                                <a href="#">Forgot password?</a>
+                                            </form>
+                                        </div>
+                                         <div class="row">
+                                            <button class="btn btn-primary loginButton" data-dismiss="modal"
+                                                    (click)="loginUser(vUsernameLogin.value,vPasswordLogin.value)">Log In</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="OrgLogin">
+                                      <div class="row">
+                                        <div class="modalLoginImg">
+                                            <img class="img-circle" src="http://placehold.it/350x350" alt="Logo">
+                                        </div>
+                                        <h3>Organizations</h3>
+                                        <div class="row">
+                                            <form class="modalForm">
+                                                <input #oUsernameLogin type="text" class="form-control" id="oUsernameLogin" placeholder="Username">
+                                                <input #oPasswordLogin type="password" class="form-control" id="oPasswordLogin" placeholder="Password">
+                                                <input type="checkbox" id="rememberMe">
+                                                <small>Remember me -</small>
+                                                <a href="#">Forgot password?</a>
+                                            </form>
+                                        </div>
+                                         <div class="row">
+                                            <button class="btn btn-primary loginButton" data-dismiss="modal"
+                                                    (click)="loginOrg(oUsernameLogin.value,oPasswordLogin.value)">Log In</button>
+                                        </div>
+                                    </div>  
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <form class="modalForm">
-                                <input #usernameLogin type="text" class="form-control" id="usernameInput" placeholder="Username">
-                                <input #passwordLogin type="password" class="form-control" id="passwordInput" placeholder="Password">
-                                <input type="checkbox" id="rememberMe">
-                                <small>Remember me -</small>
-                                <a href="#">Forgot password?</a>
-                            </form>
-                        </div>
-                        <div class="row">
-                            <button class="btn btn-primary loginButton" data-dismiss="modal"
-                                    (click)="loginUser(usernameLogin.value,passwordLogin.value)">Log In</button>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -72,34 +116,87 @@
                         <h4 class="modal-title">Sign In</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <div class="form-name">
-                                <div class="form-group">
-                                    <label for="firstName">First Name</label>
-                                    <input #firstName type="text" class="form-control" id="lastName" required>
+                        
+                        
+                        <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#VolunteerSignin" aria-controls="VolunteerSignin" role="tab" data-toggle="tab">
+                                        Volunteers
+                                    </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#OrgSignin" aria-controls="OrgSignin" role="tab" data-toggle="tab">
+                                        Organizations
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="VolunteerSignin">
+                                    <div>
+                                        <h3>Volunteers</h3>
+                                        <form>
+                                            <div class="form-name">
+                                                <div class="form-group">
+                                                    <label for="vFirstName">First Name</label>
+                                                    <input #vFirstName type="text" class="form-control" id="vFirstName" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="vLastName">Last Name</label>
+                                                    <input #vLastName type="text" class="form-control" id="vLastName" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="vEmail">Email Address</label>
+                                                <input #vEmail type="email" class="form-control" id="vEmail" required>
+                                            </div>
+                                            <div>
+                                                <label for="vUsernameSignIn">Username</label>
+                                                <input #vUsernameSignIn type="text" class="form-control" id="vUsernameSignIn" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="vPasswordSignIn">Password</label>
+                                                <input #vPasswordSignIn type="password" class="form-control" id="vPasswordSignIn" required> 
+                                            </div>
+                                        </form>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                                (click)="createUser(vFirstName.value, vLastName.value, vEmail.value, vUsernameSignIn.value, vPasswordSignIn.value)">Create Account</button>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="lastName">Last Name</label>
-                                    <input #lastName type="text" class="form-control" id="lastName" required>
+                                <div role="tabpanel" class="tab-pane" id="OrgSignin">
+                                    <div>
+                                        <h3>Organizations</h3>
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="oName">First Name</label>
+                                                <input #oName type="text" class="form-control" id="oName" required>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="oEmail">Email Address</label>
+                                                <input #oEmail type="email" class="form-control" id="oEmail" required>
+                                            </div>
+                                            <div>
+                                                <label for="oUsernameSignIn">Username</label>
+                                                <input #oUsernameSignIn type="text" class="form-control" id="oUsernameSignIn" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="oPasswordSignIn">Password</label>
+                                                <input #oPasswordSignIn type="password" class="form-control" id="oPasswordSignIn" required> 
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="oPhone">Phone Number</label>
+                                                <input #oPhone type="tel" class="form-control" id="oPhone" required>
+                                            </div>
+                                        </form>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                                (click)="createOrg(oName.value, oEmail.value, oUsernameSignIn.value, oPasswordSignIn.value, oPhone.value)">Create Account</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input #email type="email" class="form-control" id="email" required>
-                            </div>
-                            <div>
-                                <label for="usernameSignIn">Username</label>
-                                <input #usernameSignIn type="text" class="form-control" id="passwordSignIn" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="passwordSignIn">Password</label>
-                                <input #passwordSignIn type="password" class="form-control" id="passwordSignIn" required> 
-                            </div>
-                        </form>
-                    </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal"
-                                (click)="createUser(firstName.value, lastName.value, email.value, usernameSignIn.value, passwordSignIn.value)">Create Account</button>
                     </div>
                 </div>
             </div>
