@@ -23,6 +23,10 @@ router.post('/user', function(req,res){
   var hash = bcrypt.hashSync(req.body.password, saltRounds);
   var params = [req.body.firstName,req.body.lastName,req.body.email,req.body.username,hash];
 
+  if(req.body.email.indexOf("@")==-1){
+    res.json({success:false,message:"invalid email"});
+    return;
+  }
 
   var queryResult;
   performQuery(req,createUser,params, function(err, content) {
@@ -165,11 +169,22 @@ router.post('/user/login', function(req,res){
           console.log(req.session);
           res.json({success:true,url:'http://localhost/user/'+req.body.username});
         } else {
-          res.json({success:false,message:err});
+          res.json({success:false,message:"access denied"});
         }
 
       }
     });
+  });
+});
+
+router.post('/user/logout', function(req,res){
+
+  req.session.regenerate(function(err){
+    if (err) {
+      res.json({success:false,message:err});
+    } else {
+      res.json({success:true,url:'http://localhost:8080/'});
+    }
   });
 });
 
