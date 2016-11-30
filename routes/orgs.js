@@ -47,7 +47,7 @@ router.patch('/org/:username', function(req,res){
   if(req.body.otherInfo)
     updates.otherInfo = req.body.otherInfo;
   if(req.body.phone)
-    updates.phone = req.body.phone;
+    updates.phoneOrg = req.body.phone;
 
   if(Object.keys(updates).length!==0){
     var patchOrg = 'UPDATE Org SET ? WHERE usernameOrg=?';
@@ -81,13 +81,15 @@ router.patch('/org/:username', function(req,res){
 
 router.get('/org/:username', function(req,res){
   //TODO: INPUT SANITATION
-  var sql = 'SELECT * FROM Org WHERE usernameOrg=?';
+  var sql = "SELECT * FROM Org WHERE usernameOrg=?;";
   var params = [req.params.username];
-
+  //(SELECT idOrg FROM Org WHERE usernameOrg=?);
   performQuery(req,sql, params, function(err, rows, fields) {
     if (err) {
       res.json({success:false,message:err});
     } else {
+      console.log(123);
+      console.log(rows);
       var responseObj = responses.getOrg;
       var toAdd = {
         success:true,
@@ -105,7 +107,58 @@ router.get('/org/:username', function(req,res){
 
       };
       responseObj = Object.assign(responseObj,toAdd);
-      res.json(responseObj);
+      //res.json(responseObj);
+
+      var _req = req;
+      sql = 'SELECT * FROM Event WHERE idOrg=(SELECT idOrg FROM Org WHERE usernameOrg=?);';
+      params = [_req.params.username];
+      performQuery(req,sql, params, function(err, rows, fields) {
+        if (err) {
+          res.json({success:false,message:err});
+        } else {
+          var condensedEvents = [];
+          for(var i=0;i<rows.length;i++){
+            var cur = {
+              id: rows[i].idEvent,
+              title: rows[i].titleEvent,
+              dateStart:rows[i].dateStartEvent,
+              dateEnd:rows[i].dateEndEvent,
+              maxAttendees:rows[i].maxAttendeesEvent
+            };
+            condensedEvents.push(cur);
+          }
+          responseObj.condensedEvents = condensedEvents;
+          console.log(rows);
+
+          //var _req = req;
+          //sql = 'SELECT * FROM Membership WHERE idOrg=(SELECT idOrg FROM Org WHERE usernameOrg=?);';
+          sql = "SELECT firstNameUser,lastNameUser,usernameUser,imageURLUser FROM User as U RIGHT JOIN (SELECT idUser FROM Membership as M WHERE M.idOrg=(SELECT idOrg FROM Org as O WHERE O.usernameOrg=?)) AS T ON U.idUser=T.idUser;";
+          params = [req.params.username];
+
+          console.log(mysql.format(sql,params));
+          performQuery(req,sql, params, function(err, rows, fields) {
+            if (err) {
+              res.json({success:false,message:err});
+            } else {
+              console.log(rows);
+              var condensedVolunteers = [];
+              for(var i=0;i<rows.length;i++){
+                var cur = {
+                    username: rows[i].usernameUser,
+                    imageURL: rows[i].imageURLUser?rows[i].imageURLUser:"http://store.mdcgate.com/market/assets/image/icon_user_default.png",
+                    firstName:rows[i].firstNameUser,
+                    lastName:rows[i].lastNameUser
+                };
+                condensedVolunteers.push(cur);
+              }
+              responseObj.condensedVolunteers = condensedVolunteers;
+              res.json(responseObj);
+            }
+          });
+
+        }
+      });
+
     }
   });
 });
@@ -121,18 +174,14 @@ router.post('/org/login', function(req,res){
     } else {
       var result;
       if(bcrypt.compareSync(req.body.password,rows[0].hashOrg)){
-          if(req.session){
-            req.session.regenerate(function(err) {
-  	           req.session.username = req.body.username;
-               req.session.type = "Org";
-  	        });
-          } else {
             req.session.username = req.body.username;
             req.session.type = "Org";
-          }
+
+        console.log(req.session);
 
         res.json({success:true,url:'http://localhost/orgs/'+req.body.username});
       } else {
+
         res.json({success:false,message:err});
       }
 
