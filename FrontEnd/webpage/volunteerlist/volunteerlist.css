@@ -25,10 +25,6 @@
     z-index: 1;
 }
 
-.volunteerData {
-    display: block;
-    width: 100%;
-}
 
 .volunteerContainer > div > img {
     max-height: 250px;

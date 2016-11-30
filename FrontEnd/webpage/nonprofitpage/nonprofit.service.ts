@@ -1,11 +1,14 @@
 import { EventList } from '../eventlist/eventlist.component';
 import { EventListService } from '../eventlist/eventlistservice.service';
+import { VolunteerList } from '../volunteerlist/volunteerlist.component';
+import { VolunteerListService } from '../volunteerlist/volunteerlistservice.service';
 import { Injectable , OnInit } from '@angular/core';
 
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { NonProfit } from './nonprofit.component';
+
 
 @Injectable()
 export class NonProfitService implements OnInit
@@ -23,12 +26,14 @@ export class NonProfitService implements OnInit
     imageURL: string;
 
     eventList: EventListService;
+    volunteerList: VolunteerListService;
 
     errorMessage: string;
 
     constructor(private http: Http) 
     {
         this.eventList = new EventListService;
+        this.volunteerList = new VolunteerListService;
     }
 
     ngOnInit()
@@ -49,6 +54,7 @@ export class NonProfitService implements OnInit
                             this.splashImageURL = res.splashImageURL;
                             this.imageURL = res.imageURL;
                             this.eventList.importList(res.condensedEvents);
+                            this.volunteerList.importList(res.condensedVolunteers);
                             console.log(EventList);
                             },
                     //Set function to catch error

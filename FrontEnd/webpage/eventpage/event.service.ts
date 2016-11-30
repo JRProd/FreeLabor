@@ -22,6 +22,7 @@ export class EventService implements OnInit
     description: string;
     maxAttendees: number;
     attendees: number;
+
     volunteerList: VolunteerListService;
 
     constructor(private http: Http) {
@@ -47,7 +48,7 @@ export class EventService implements OnInit
                             this.maxAttendees = res.maxAttendees;
                             this.orgName = res.orgName;
                             this.volunteerList.importList(res.condensedVolunteers);
-                            console.log(VolunteerList);
+                            console.log(this.title);
                             },
                     //Set function to catch error
                     error =>  console.log(error)

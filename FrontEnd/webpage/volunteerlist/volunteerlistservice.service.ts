@@ -3,7 +3,7 @@ import { VolunteerList } from './volunteerlist.component';
 import { VolunteerService } from '../volunteerpage/volunteer.service';
 
 @Injectable()
-export class VolunteerListService{
+export class VolunteerListService {
 
     volunteerList: VolunteerService[];
 
@@ -16,11 +16,11 @@ export class VolunteerListService{
     {
         for(let vol of list)
         {
-            let newVolunteer = vol as VolunteerService;
+            let newvolunteer = vol as VolunteerService;
             let volunteer = { } as VolunteerService;
 
-            volunteer.name = newVolunteer.name || "NAME";
-            volunteer.imageURL = newVolunteer.imageURL || "http://placehold.it/100x100";
+            volunteer.name = newvolunteer.firstName || "NAME";
+            volunteer.imageURL = newvolunteer.imageURL || "http://placehold.it/100x100";
 
             this.volunteerList.push(volunteer);
         }
