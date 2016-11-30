@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Router } from '@angular/router';
+import globalUsername = require('../globals');
 
 import { Observable } from 'rxjs/Rx';
 
@@ -11,13 +13,37 @@ import { Observable } from 'rxjs/Rx';
 
 export class Login
 {
-    private accountURL = "http://localhost:8080/user";
+    private userURL = "http://localhost:8080/user";
+    private orgURL = "http://localhost:8080/orgs";
 
-    constructor(private http: Http) 
+    constructor(private http: Http, private router: Router) 
     { 
     }
 
-    createAccount(fName: string, lName: string, email: string, username: string, password: string)
+    loginUser(username: string, password: string)
+    {
+        let headers = new Headers({'Content-Type': 'application/json' });
+        let options = new RequestOptions({headers: headers});
+
+        let loginAttempt = {username, password};
+        console.log(loginAttempt);
+
+        this.http.post(`${this.userURL}/login`,loginAttempt, options)
+                .map(this.extractData)
+                .catch(this.handleError)
+                .subscribe(r=>{
+                    globalUsername.usernameGlobal = username;
+                    this.router.navigate(['/user', username]);
+                });
+    }
+
+    loginOrg(username: string, password: string)
+    {
+        let headers = new Headers({'Content-Type': 'application/json' });
+        let options = new RequestOptions({headers: headers});
+    }
+
+    createUser(fName: string, lName: string, email: string, username: string, password: string)
     {
         let headers = new Headers({'Content-Type': 'application/json' });
         let options = new RequestOptions({headers: headers});
@@ -25,10 +51,12 @@ export class Login
 
         let tempNewUser = new NewUser(fName, lName, email, username, password);
         console.log(JSON.stringify(tempNewUser));
-        this.http.post(this.accountURL, JSON.stringify(tempNewUser), options)
+        this.http.post(this.userURL, JSON.stringify(tempNewUser), options)
                 .map(this.extractData)
                 .catch(this.handleError)
-                .subscribe(r=>{});
+                .subscribe(r=>{
+                    this.router.navigate(['/user', username])
+                });
     }
 
     private extractData(res: Response)

@@ -39,15 +39,16 @@
                         </div>
                         <div class="row">
                             <form class="modalForm">
-                                <input type="text" class="form-control" id="usernameInput" placeholder="Username">
-                                <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+                                <input #usernameLogin type="text" class="form-control" id="usernameInput" placeholder="Username">
+                                <input #passwordLogin type="password" class="form-control" id="passwordInput" placeholder="Password">
                                 <input type="checkbox" id="rememberMe">
                                 <small>Remember me -</small>
                                 <a href="#">Forgot password?</a>
                             </form>
                         </div>
                         <div class="row">
-                            <button class="btn btn-primary loginButton" data-dismiss="modal">Log In</button>
+                            <button class="btn btn-primary loginButton" data-dismiss="modal"
+                                    (click)="loginUser(usernameLogin.value,passwordLogin.value)">Log In</button>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -98,12 +99,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal"
-                                (click)="createAccount(firstName.value, lastName.value, email.value, usernameSignIn.value, passwordSignIn.value)">Create Account</button>
+                                (click)="createUser(firstName.value, lastName.value, email.value, usernameSignIn.value, passwordSignIn.value)">Create Account</button>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-

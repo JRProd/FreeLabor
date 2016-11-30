@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
     selector: 'webpage',
     templateUrl: './webpage/webpage.html',
 })
+
 export class WebPageComponent{
 
 }

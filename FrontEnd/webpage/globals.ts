@@ -1,0 +1,1 @@
+export var usernameGlobal = "NO_LOG_IN";

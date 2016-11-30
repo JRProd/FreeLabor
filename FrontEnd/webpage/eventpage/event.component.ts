@@ -18,7 +18,7 @@ export class Event
     constructor(private eventService: EventService, private route: ActivatedRoute) 
     { 
         this.route.params.forEach((param: Params) => {
-            eventService.id = +param['id'];
+            eventService.id = +param['eventId'];
         })
         eventService.ngOnInit();
     }
