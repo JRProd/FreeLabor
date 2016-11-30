@@ -10,6 +10,7 @@ import { NonProfit } from './nonprofitpage/nonprofit.component';
 import { Volunteer } from './volunteerpage/volunteer.component';
 import { HomeBar } from './homebar/homebar.component';
 import { Footer } from './footer/footer.component';
+import { UserHeaderComponet } from './user-header/user-header.component';
 
 import { HttpModule } from '@angular/http';
 
@@ -33,7 +34,8 @@ import { HttpModule } from '@angular/http';
         EventList,
         HomeBar,
         Footer,
-        Login
+        Login,
+        UserHeaderComponet
     ],    
     bootstrap: [ WebPageComponent]
 })    

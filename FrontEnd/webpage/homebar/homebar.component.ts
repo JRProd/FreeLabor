@@ -11,8 +11,6 @@ export class HomeBar
 {
     private websiteTitle = "Volunteer.io";
     logo: string;
-    
-    public username: string;
 
     constructor()
     {
