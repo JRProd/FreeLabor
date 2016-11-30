@@ -18,10 +18,10 @@ import { HttpModule } from '@angular/http';
         BrowserModule , 
         HttpModule, 
         RouterModule.forRoot([
-            { path: 'np', component: NonProfit },
-            {path: 'v', component: Volunteer},
+            { path: 'np/:username', component: NonProfit },
+            {path: 'v/:username', component: Volunteer},
             { path: '', component: Login },
-            { path: 'e', component: Event }
+            { path: 'e/:eventId', component: Event }
             ]) 
     ],    
     declarations:  [

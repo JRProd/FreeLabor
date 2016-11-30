@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class VolunteerService {
 
-	private volunteerURL = "https:/private-3d0cf-artisanapi.apiary-mock.com/user";
+	private volunteerURL = "http://localhost:8080/user/jqpublic";
 
 	imageURL: string;
 	firstName: string;
@@ -37,7 +37,7 @@ export class VolunteerService {
                     res => {this.firstName = res.firstName;
 							this.lastName = res.lastName;
                             this.username = res.username;
-                            this.bio = res.bio;
+                            this.bio = res.bio || "You need to create a bio!";
                             this.organizations = res.organizations;
                             this.imageURL = res.imageURL;
                             this.eventList.importList(res.condensedEvents);
