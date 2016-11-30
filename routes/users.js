@@ -53,7 +53,7 @@ router.patch('/user/:username', function(req,res){
     updates.bioUser = req.body.bio;
   var params = [updates,req.params.username];
   console.log(mysql.format(patchUser,params));
-
+console.log(req.session);
 if(req.session.username == req.params.username){
   performQuery(req,patchUser,params, function(err, content) {
     if (err) {
@@ -63,6 +63,7 @@ if(req.session.username == req.params.username){
     }
   });
 }else{
+
   console.log("User tried to modify someone not logged in.");
   res.json({success:false,err:"You tried to modify someone other than yourself"});
 }
@@ -160,7 +161,7 @@ router.post('/user/login', function(req,res){
         if(bcrypt.compareSync(req.body.password,rows[0].hashUser)){
   	      req.session.username = req.body.username;
           req.session.type = "User";
-          
+
           console.log(req.session);
           res.json({success:true,url:'http://localhost/user/'+req.body.username});
         } else {

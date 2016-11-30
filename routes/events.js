@@ -19,13 +19,15 @@ function performQuery(req,query,data,callback) {
 //Copy and paste code from orgs.js for reference
 router.post('/event', function(req,res){
 	//Get paramaterized query ready
-	var createEvent = 'INSERT INTO Event (idOrg,titleEvent,locationEvent,addressEvent,cityEvent,stateCodeEvent,postCodeEvent,dateStartEvent,dateEndEvent,descriptionEvent,maxAttendeesEvent) VALUES ((SELECT idOrg FROM Org WHERE usernameOrg=?),?,?,?,?,?,?,?,?,?,?)';
+
 
 	//If the user isn't logged in as an Org they can't create events.
+	console.log(req.session);
 	if(req.session.type == 'User'){
 		res.json({success:false,message:'Volunteers cannot create Events, please log into an Org Account to create one.'});
 	}else{
 		//check inputs
+		var createEvent = 'INSERT INTO Event (idOrg,titleEvent,locationEvent,addressEvent,cityEvent,stateCodeEvent,postCodeEvent,dateStartEvent,dateEndEvent,descriptionEvent,maxAttendeesEvent) VALUES ((SELECT idOrg FROM Org WHERE usernameOrg=?),?,?,?,?,?,?,?,?,?,?)';
 		var params = [req.session.username,req.body.title,req.body.location,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.dateStart,req.body.dateEnd,req.body.description,req.body.maxAttendees];
 		//Preform query
 		console.log(mysql.format(createEvent,params));
@@ -33,9 +35,11 @@ router.post('/event', function(req,res){
 			if (err) {
 				res.json({success:false,message:err});
 			} else {
-				//this is a nasty hack, should be paramaterized
-				var eventID = req.db.query('SELECT eventID FROM Event WHERE title = ' + req.body.title + 'AND description = ' + req.body.description);
-				res.json({success:true,message:rows,url:'http://localhost/org/'+ req.session.username + '/events/' + eventID});
+				//this is a nasty hack, should be paramaterized - AJ
+				// WHAT THE LITERAL FUCK IS THIS QUERY HOW YOU DOU THINK IT JUST MAGICALLY WOKS WITHOUT TESTING IT - ME
+				//var eventID = req.db.query('SELECT eventID FROM Event WHERE title = ' + req.body.title + 'AND description = ' + req.body.description);
+
+				res.json({success:true,message:rows,url:'http://localhost:8080/org/'+ req.session.username + '/events/' + rows.insertId});
 			}
 		});
 	}
@@ -64,8 +68,7 @@ router.get('/org/:username/events/:idEvent', function(req,res){
 				dateStart:rows[0].dateStartEvent,
 				dateEnd:rows[0].dateEndEvent,
 				description:rows[0].descriptionEvent,
-				maxAttendees:rows[0].maxAttendeesEvent,
-				condensedVolunteers:null
+				maxAttendees:rows[0].maxAttendeesEvent
 			};
 			res.json(toAdd);
 		}
@@ -88,7 +91,9 @@ router.patch('/org/:username/events/:idEvent', function(req,res){
         res.json({success:true,message:rows,url:'http://localhost/user/'+req.params.username});
       }
     });
-  }
+  } else {
+		res.json({success:false,message:"must add an attendee"});
+	}
 
 });
 
