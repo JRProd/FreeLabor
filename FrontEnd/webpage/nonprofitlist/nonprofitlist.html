@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="" *ngFor="let nonPro of nonProfitListService.nonProfitList">
+            <div class="col-md-6 nonProfitContainer">
+                <div class="row">
+                    <div class="nonProfitName">
+                        <p>{{nonPro.name}}</p>
+                    </div>
+                </div>
+                <div class="row nonProfitBody">
+                    <img class="nonProfitImage "src="{{nonPro.imageURL}}" alt="NonProfit Picture"> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
