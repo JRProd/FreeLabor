@@ -1,6 +1,7 @@
 var express    = require('express');
 var mysql      = require('mysql');
 var bodyParser = require('body-parser');
+var formidable = require('formidable');
 var cloudinary = require('cloudinary');
 var multer     = require('multer');
 var morgan     = require('morgan');
@@ -29,11 +30,19 @@ var sessionDBConf = {
     columnNames: {
       session_id: 'idSession',
       expires: 'expiresSession',
-      data: 'idUser'//Datatype is currently TEST, should be varchar?
+      data: 'username'//Datatype is currently TEXT, should be varchar?
     }
   }
 };
 var sessionStore = new SessionDB(sessionDBConf);
+app.use(session({
+    key: 'session',
+    secret: 'session_cookie_secret',
+    store: sessionStore,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {maxAge:6000000}
+}));
 
 /***********************MySQL Connection***********************/
 var connection = mysql.createConnection({
@@ -59,8 +68,9 @@ cloudinary.config({
 });
 
 /***********************Input Handlers***********************/
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false })); //TODO
 app.use(bodyParser.json());
+app.use(multer({ dest:__dirname+'/tmp/'}).any());
 
 /***************************Routes***************************/
 app.all('*', function(request, response, next){
