@@ -1,3 +1,5 @@
+import { VolunteerList } from '../volunteerlist/volunteerlist.component';
+import { VolunteerListService } from '../volunteerlist/volunteerlistservice.service';
 import { Injectable , OnInit } from '@angular/core';
 
 import { Http, Response } from '@angular/http';
@@ -18,11 +20,13 @@ export class EventService implements OnInit
     date: string;
     location: string;
     description: string;
-    attendees: number;
     maxAttendees: number;
-    volunteers: any[];
+    attendees: number;
+    volunteerList: VolunteerListService;
 
-    constructor(private http: Http) {}
+    constructor(private http: Http) {
+      this.volunteerList = new VolunteerListService;
+    }
 
     ngOnInit()
     {
@@ -42,11 +46,11 @@ export class EventService implements OnInit
                             this.imageURL = res.imageURL;
                             this.maxAttendees = res.maxAttendees;
                             this.orgName = res.orgName;
-                            console.log(res);
+                            this.volunteerList.importList(res.condensedVolunteers);
+                            console.log(VolunteerList);
                             },
                     //Set function to catch error
-                    error =>  console.log(error),
-                    () => {console.log(this.title);}
+                    error =>  console.log(error)
         );
         //Data will be updated after request is finished
     }

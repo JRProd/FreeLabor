@@ -31,6 +31,9 @@
     <div class="volunteers">
         <h3>Attending Volunteers (Max Volunteers {{eventService.maxAttendees}})</h3>
             
+        <div role="tabpanel" class="tab-pane" id="Volunteers">
+			<volunteer-list [volunteerListService]="eventService.voluteerList"></volunteer-list>
+		</div>
     </div>
 </div>
 

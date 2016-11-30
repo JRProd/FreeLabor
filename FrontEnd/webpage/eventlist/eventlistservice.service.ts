@@ -1,5 +1,5 @@
-import { EventList } from './eventlist.component';
 import { Injectable } from '@angular/core';
+import { EventList } from './eventlist.component';
 import { EventService } from '../eventpage/event.service';
 
 @Injectable()
@@ -24,8 +24,6 @@ export class EventListService {
             event.id = newEvent.id;
             event.imageURL = newEvent.imageURL || "http://placehold.it/100x100";
             event.description = newEvent.description || "Here is a description";
-            event.location = newEvent.location || "Undetermined";
-            event.date = newEvent.date || "Undetermined";
             event.attendees = newEvent.attendees || 0;
             event.maxAttendees = newEvent.maxAttendees || 9999;
 

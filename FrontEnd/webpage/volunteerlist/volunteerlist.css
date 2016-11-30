@@ -1,11 +1,11 @@
-.eventContainer {
+.volunteerContainer {
     border-color: burlywood;
     border-style: solid;
     border-radius: 5px;
     min-height: 150px;
 }
 
-.eventTitle {
+.volunteerName {
 	border: black;
     border-width: 2px;
     padding: 20px 15px;
@@ -17,49 +17,37 @@
     margin: 5px;
 }
 
-.eventBody {
+.volunteerBody {
     display: flex;
 }
 
-.eventImage {
+.volunteerImage {
     z-index: 1;
 }
 
-.eventData {
+.volunteerData {
     display: block;
     width: 100%;
 }
 
-.eventContainer > div > img {
+.volunteerContainer > div > img {
     max-height: 250px;
     max-width: 250px;
     padding: 10px;
 }
 
-.eventStatus {
+.volunteerStatus {
     display: flex;
 }
 
-.eventStatus > div {
+.volunteerStatus > div {
     margin-left: 10px;
     width: 100%;
 }
 
-.eventStatus > span {
+.volunteerStatus > span {
     margin: 5px;
     margin-right: 20px;
     float: right;
 }
 
-.eventInfo {
-    display: block;
-    margin: 10px;
-}
-
-.eventInfo > * {
-    margin: 5px;
-}
-
-.eventInfo > p {
-    margin: 10px;
-}

@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="" *ngFor="let volunteer of volunteerListService.volunteerList">
+            <div class="col-md-6 eventContainer">
+                <div class="row">
+                    <div class="volunteerName">
+                        <p>{{volunteer.name}}</p>
+                    </div>
+                </div>
+                <div class="row volunteerBody">
+                    <img class="volunteerImg "src="{{volunteer.imageURL}}" alt="Volunteer Picture"> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

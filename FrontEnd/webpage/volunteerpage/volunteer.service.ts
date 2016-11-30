@@ -10,8 +10,8 @@ export class VolunteerService {
 	private volunteerURL = "https:/private-3d0cf-artisanapi.apiary-mock.com/user";
 
 	imageURL: string;
-	firstName: string;
-	lastName: string;
+    firstName: string;
+    name: string;
 	username: string;
 
 	bio: string;
@@ -35,13 +35,12 @@ export class VolunteerService {
         .subscribe(
                     //Create a function to set local variables to
                     res => {this.firstName = res.firstName;
-							this.lastName = res.lastName;
-                            this.username = res.username;
+                            this.name = res.firstName + " " + res.lastName;
                             this.bio = res.bio;
                             this.organizations = res.organizations;
                             this.imageURL = res.imageURL;
                             this.eventList.importList(res.condensedEvents);
-							console.log(this.firstName + " " + this.lastName)
+							console.log(this.name)
                             },
                     //Set function to catch error
                     error =>  console.log(error)

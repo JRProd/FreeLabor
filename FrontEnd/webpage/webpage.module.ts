@@ -8,6 +8,7 @@ import { EventList } from './eventlist/eventlist.component';
 import { Event } from './eventpage/event.component';
 import { NonProfit } from './nonprofitpage/nonprofit.component';
 import { Volunteer } from './volunteerpage/volunteer.component';
+import { VolunteerList } from './volunteerlist/volunteerlist.component';
 import { HomeBar } from './homebar/homebar.component';
 import { Footer } from './footer/footer.component';
 
@@ -29,6 +30,7 @@ import { HttpModule } from '@angular/http';
         NonProfit,
         EventList,
         Volunteer,
+        VolunteerList,
         Event,
         EventList,
         HomeBar,

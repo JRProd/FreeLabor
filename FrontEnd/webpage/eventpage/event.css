@@ -4,7 +4,7 @@
     background-size: 100% auto
 }
 
-.orgName {
+.eventName{
     width: 155px;
     z-index: 10;
     position: absolute;
