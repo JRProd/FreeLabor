@@ -8,6 +8,9 @@
                 <div class="panel panel-default volunteer">
                     <div class="panel-heading">
                         <h2 class="panel-title">{{volunteerService.firstName}} {{volunteerService.lastName}}'s Profile</h2>
+                        <div *ngIf="volunteerService.usersPage===true">
+                            <span class="glpyhicon glyphicon-edit" aria-hidden="true"></span>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="media">

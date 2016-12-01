@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/Rx';
 export class VolunteerService {
 
 	private volunteerURL = "http://localhost:8080/user";
+    private usersPage: boolean
 
 	imageURL: string;
 	firstName: string;
@@ -32,6 +33,21 @@ export class VolunteerService {
             this.username = params['username'];
         })
 
+        if(globals.logIn=== true)
+        {
+            if(this.username === globals.usernameGlobal)
+            {
+                this.usersPage = true;
+                console.log("Users page");
+            }
+            else{
+                this.usersPage = false;
+            }
+        }
+        else{
+            this.usersPage = false;
+        }
+
 		//Request GET from URL
         this.http.get(`${this.volunteerURL}/${this.username}`)
                     //Map Response to JSON
@@ -45,7 +61,6 @@ export class VolunteerService {
 							this.lastName = res.lastName;
                             this.username = res.username;
                             this.bio = res.bio || "You need to create a bio!";
-							console.log(this.firstName + " " + this.lastName)
                             },
                     //Set function to catch error
                     error =>  console.log(error)

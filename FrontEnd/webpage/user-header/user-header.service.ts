@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Http, Response } from '@angular/http';
 import globals = require('../globals')
 
@@ -18,10 +19,26 @@ export class UserHeader{
 
     private name: string;
 
-    constructor(private http: Http)
+    constructor(private http: Http, private router: Router)
     {
         this.ngInit();
-    }   
+    }
+
+    public goToHomePage()
+    {
+        if(this.org === false)
+        {
+            this.router.navigate(['/user', this.username]);
+        }
+        else{
+            this.router.navigate(['/org', this.username]);
+        }
+    }
+
+    public logOut()
+    {
+        console.log("You have logged out!");
+    }
 
     ngInit()
     {
