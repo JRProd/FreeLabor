@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router'
 import globals = require('../globals')
 
 
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
@@ -67,6 +67,25 @@ export class VolunteerService {
         );
         //Data will be updated after request is finished
 	}
+
+    editProfile(firstName: string, lastName: string, email: string, bio: string)
+    {
+        let headers = new Headers({'Content-Type': 'application/json' });
+        let options = new RequestOptions({headers: headers});
+        console.log(options);
+
+
+        let editedProfile = { firstName, lastName, email, bio};
+        console.log("editProfile")
+        console.log(editedProfile)
+
+        this.http.patch(`${this.volunteerURL}/${this.username}`, editedProfile, options)
+                 .map(this.extractData)
+                 .catch(this.handleError)
+        .subscribe(r => {
+            console.log(r);
+        })
+    }
 
 	private extractData(res: Response)
     {

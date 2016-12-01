@@ -9,7 +9,50 @@
                     <div class="panel-heading">
                         <h2 class="panel-title">{{volunteerService.firstName}} {{volunteerService.lastName}}'s Profile</h2>
                         <div *ngIf="volunteerService.usersPage===true">
-                            <span class="glpyhicon glyphicon-edit" aria-hidden="true"></span>
+                            <span class="glpyhicon glyphicon-edit" aria-hidden="true" data-toggle="modal" data-target="#editModal">EDIT ME</span>
+                        
+                            <!-- Modal -->
+                            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="editModalLabel">Edit User Page</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="firstName">First Name</label>
+                                                <input #firstName type="text" class="form-control" id="firestName">
+
+                                                <label for="lastName">Last Name</label>
+                                                <input #lastName type="text" class="form-control" id="lastName">
+
+                                                <label for="email">Email</label>
+                                                <input #email type="email" class="form-control" id="email">
+
+                                                <label for="bio">Bio</label>
+                                                <input #bio type="text" class="form-control" id="bio">
+
+                                                <label for="imageProfile">Profile Image</label>
+                                                <input type="file" class="form-control" id="imageProfile">
+
+                                                <label for="imageBackground">Background Image</label>
+                                                <input type="file" class="form-control" id="imageBackground">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" 
+                                                (click)="volunteerService.editProfile(firstName.value, lastName.value, email.value, bio.value)">Save changes</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        
+                        
                         </div>
                     </div>
                     <div class="panel-body">
@@ -66,3 +109,4 @@
         </div>   
     </div>
 </div>
+
