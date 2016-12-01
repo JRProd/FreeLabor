@@ -1,16 +1,14 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="" *ngFor="let vol of volunteerListService.volunteerList">
-            <div class="col-md-6 volunteerContainer" routerLink ="/volunteer/{{vol.id}}">
-                <div class="row">
-                    <div class="volunteerName">
-                        <p>{{vol.name}}</p>
-                    </div>
-                </div>
-                <div class="row volunteerBody">
-                    <img class="volunteerImage "src="{{vol.imageURL}}" alt="Volunteer Picture"  > 
+<div class="nonprofit-container">
+    <div *ngFor="let vol of volunteerListService.volunteerList">
+        <div class="col-md-4">
+        <div class="panel panel-default volunteer-panel">
+            <div class="panel-heading volunteer-heading">
+                <h3 class="panel-title">{{vol.name}}</h3>
+            </div>
+                <div class="panel-body">
+                    <img class="img-responsive center-block"src="{{vol.imageURL}}" alt="Volunteer Picture">
                 </div>
             </div>
         </div>
-    </div>
+     </div>
 </div>

@@ -6,7 +6,7 @@ import { VolunteerListService } from './volunteerlistservice.service';
 @Component({
   selector: 'volunteer-list',
   templateUrl: './webpage/volunteerlist/volunteerlist.html',
-  styleUrls:[ './webpage/volunteerlist/volunteerlist.html'],
+  styleUrls:[ './webpage/volunteerlist/volunteerlist.css'],
   providers: [ VolunteerService, VolunteerListService]
 })
 

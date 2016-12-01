@@ -1,11 +1,9 @@
 <head><title>{{volunteerService.firstName}}'s Profile</title></head>
 <div class="container">
-    <div class="panel panel-default top">
-        <div class="panel-body">
             <div class="wrapper-volunteer">
                 <div class="panel panel-default volunteer">
                     <div class="panel-heading">
-                        <h2 class="panel-title">{{volunteerService.firstName}} {{volunteerService.lastName}}'s Profile</h2>
+                        <h3>{{volunteerService.firstName}} {{volunteerService.lastName}}'s Profile</h3>
                     </div>
                     <div class="panel-body">
                         <div class="media">
@@ -21,7 +19,7 @@
                         <div class="wrapper-events">
                             <div class="panel panel-default events-attending">
                                 <div class="panel-heading events-heading">
-                                    <h3 class="panel-title">Events Attending</h3>
+                                    <h4>Events Attending</h4>
                                 </div>
                             
                                 <div class="panel-body events-body">
@@ -29,20 +27,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="wrapper-orgs">
+                            <div class="panel panel-default orgs-panel">
+                                <div class="panel-heading orgs-heading">
+                                    <h4>Organizations Following</h4>
+                                </div>
+                                <div class="panel-body orgs-body">
+                                    <nonprofit-list [nonProfitListService]="volunteerService.nonProfitList"></nonprofit-list>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
                     </div>
                 </div>
             </div>
 
-            <div class="wrapper-orgs">
-                <div class="panel panel-default orgs-panel">
-                    <div class="panel-heading orgs-heading">
-                        <h3 class="panel-title orgs-title">Organizations Following</h3>
-                    </div>
-                    <div class="panel-body events-body">
-                        <nonprofit-list [nonProfitListService]="volunteerService.nonProfitList"></nonprofit-list>
-                    </div>
-                </div>
-            </div>
-        </div>   
-    </div>
-</div>
+               
