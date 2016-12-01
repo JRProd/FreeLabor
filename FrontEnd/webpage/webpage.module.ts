@@ -12,6 +12,10 @@ import { Volunteer } from './volunteerpage/volunteer.component';
 import { VolunteerList } from './volunteerlist/volunteerlist.component';
 import { HomeBar } from './homebar/homebar.component';
 import { Footer } from './footer/footer.component';
+import { UserHeaderComponet } from './user-header/user-header.component';
+import { LandingComponent } from './landing/landing.component'
+
+
 
 import { HttpModule } from '@angular/http';
 
@@ -20,10 +24,12 @@ import { HttpModule } from '@angular/http';
         BrowserModule , 
         HttpModule, 
         RouterModule.forRoot([
-            { path: 'nonprofit/:id', component: NonProfit },
-            { path: 'volunteer/:id', component: Volunteer },
-            { path: '', component: Login },
-            { path: 'event/:id', component: Event }
+            { path: 'org/:username', component: NonProfit },
+            {path: 'user/:username', component: Volunteer},
+            { path: 'login', component: Login },
+            { path: 'event/:eventId', component: Event },
+            { path: 'home', component: LandingComponent },
+            { path: '', component: LandingComponent },
             ]) 
     ],    
     declarations:  [
@@ -32,11 +38,13 @@ import { HttpModule } from '@angular/http';
         NonProfitList,
         Volunteer,
         VolunteerList,
+        LandingComponent,
         Event,
         EventList,
         HomeBar,
         Footer,
-        Login
+        Login,
+        UserHeaderComponet
     ],    
     bootstrap: [ WebPageComponent]
 })    

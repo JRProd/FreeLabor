@@ -27,6 +27,7 @@
     "express": "4.2.x",
     "express-mysql-session": "^1.2.0",
     "express-session": "^1.14.2",
+    "formidable": "^1.0.17",
     "jshint": "^2.9.4",
     "morgan": "^1.7.0",
     "multer": "^1.2.0",

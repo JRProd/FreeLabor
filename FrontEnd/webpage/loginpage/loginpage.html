@@ -1,4 +1,5 @@
 <div class="container">
+    <home-bar></home-bar>
     <div class="login-page col-md-10">
         <div class="row">
             <div class="title col-md-8 col-md-offset-2">
@@ -7,7 +8,7 @@
         </div>
         <div class="row">
             <div class="pageImg col-md-6 col-md-offset-3">
-                <img class="img-circle" src="http://placehold.it/350x350" alt="Main Page Image">
+                <img class="img-circle" src="/webpage/images/Default_Profile_Picture.png" alt="Main Page Image">
             </div>
         </div>
         <div class="row">
@@ -16,7 +17,7 @@
                     Log In
                 </button>
                 <button class="btn btn-success col-md-3 btn-signin" data-toggle="modal" data-target="#signinModal">
-                    Sign In
+                    Sign Up
                 </button>
             </div>
         </div>
@@ -32,35 +33,79 @@
                         <h4 class="modal-title">Login to Volunteer.IO</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="modalLoginImg">
-                                <img class="img-circle" src="http://placehold.it/350x350" alt="Logo">
+                        <div>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#VolunteerLogin" aria-controls="VolunteerLogin" role="tab" data-toggle="tab">
+                                        Volunteers
+                                    </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#OrgLogin" aria-controls="OrgLogin" role="tab" data-toggle="tab">
+                                        Organizations
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="VolunteerLogin">
+                                    <div class="row">
+                                        <div class="modalLoginImg">
+                                            <img class="img-circle" src="http://placehold.it/350x350" alt="Logo">
+                                        </div>
+                                        <h3>Volunteers</h3>
+                                        <div class="row">
+                                            <form class="modalForm">
+                                                <input #vUsernameLogin type="text" class="form-control" id="vUsernameLogin" placeholder="Username">
+                                                <input #vPasswordLogin type="password" class="form-control" id="vPasswordLogin" placeholder="Password">
+                                                <input type="checkbox" id="rememberMe">
+                                                <small>Remember me -</small>
+                                                <a href="#">Forgot password?</a>
+                                            </form>
+                                        </div>
+                                         <div class="row">
+                                            <button class="btn btn-primary loginButton" data-dismiss="modal"
+                                                    (click)="loginUser(vUsernameLogin.value,vPasswordLogin.value)">Log In</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="OrgLogin">
+                                      <div class="row">
+                                        <div class="modalLoginImg">
+                                            <img class="img-circle" src="http://placehold.it/350x350" alt="Logo">
+                                        </div>
+                                        <h3>Organizations</h3>
+                                        <div class="row">
+                                            <form class="modalForm">
+                                                <input #oUsernameLogin type="text" class="form-control" id="oUsernameLogin" placeholder="Username">
+                                                <input #oPasswordLogin type="password" class="form-control" id="oPasswordLogin" placeholder="Password">
+                                                <input type="checkbox" id="rememberMe">
+                                                <small>Remember me -</small>
+                                                <a href="#">Forgot password?</a>
+                                            </form>
+                                        </div>
+                                         <div class="row">
+                                            <button class="btn btn-primary loginButton" data-dismiss="modal"
+                                                    (click)="loginOrg(oUsernameLogin.value,oPasswordLogin.value)">Log In</button>
+                                        </div>
+                                    </div>  
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <form class="modalForm">
-                                <input type="text" class="form-control" id="usernameInput" placeholder="Username">
-                                <input type="password" class="form-control" id="passwordInput" placeholder="Password">
-                                <input type="checkbox" id="rememberMe">
-                                <small>Remember me -</small>
-                                <a href="#">Forgot password?</a>
-                            </form>
-                        </div>
-                        <div class="row">
-                            <button class="btn btn-primary loginButton" data-dismiss="modal">Log In</button>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="centerFooter">
                             <small>Don't have an account?</small>
-                            <a href="#">Sing up >></a>
+                            <a href="#">Sign up >></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Login Modal -->
+        <!-- SignIn Modal -->
         <div id="signinModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -68,18 +113,94 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Sign In</h4>
+
+                        <h4 class="modal-title">Sign Up</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Some text in the modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        
+                        
+                        <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#VolunteerSignin" aria-controls="VolunteerSignin" role="tab" data-toggle="tab">
+                                        Volunteers
+                                    </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#OrgSignin" aria-controls="OrgSignin" role="tab" data-toggle="tab">
+                                        Organizations
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="VolunteerSignin">
+                                    <div>
+                                        <h3>Volunteers</h3>
+                                        <form>
+                                            <div class="form-name">
+                                                <div class="form-group">
+                                                    <label for="vFirstName">First Name</label>
+                                                    <input #vFirstName type="text" class="form-control" id="vFirstName" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="vLastName">Last Name</label>
+                                                    <input #vLastName type="text" class="form-control" id="vLastName" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="vEmail">Email Address</label>
+                                                <input #vEmail type="email" class="form-control" id="vEmail" required>
+                                            </div>
+                                            <div>
+                                                <label for="vUsernameSignIn">Username</label>
+                                                <input #vUsernameSignIn type="text" class="form-control" id="vUsernameSignIn" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="vPasswordSignIn">Password</label>
+                                                <input #vPasswordSignIn type="password" class="form-control" id="vPasswordSignIn" required> 
+                                            </div>
+                                        </form>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                                (click)="createUser(vFirstName.value, vLastName.value, vEmail.value, vUsernameSignIn.value, vPasswordSignIn.value)">Create Account</button>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="OrgSignin">
+                                    <div>
+                                        <h3>Organizations</h3>
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="oName">First Name</label>
+                                                <input #oName type="text" class="form-control" id="oName" required>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="oEmail">Email Address</label>
+                                                <input #oEmail type="email" class="form-control" id="oEmail" required>
+                                            </div>
+                                            <div>
+                                                <label for="oUsernameSignIn">Username</label>
+                                                <input #oUsernameSignIn type="text" class="form-control" id="oUsernameSignIn" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="oPasswordSignIn">Password</label>
+                                                <input #oPasswordSignIn type="password" class="form-control" id="oPasswordSignIn" required> 
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="oPhone">Phone Number</label>
+                                                <input #oPhone type="tel" class="form-control" id="oPhone" required>
+                                            </div>
+                                        </form>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                                (click)="createOrg(oName.value, oEmail.value, oUsernameSignIn.value, oPasswordSignIn.value, oPhone.value)">Create Account</button>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="modal-footer">
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-

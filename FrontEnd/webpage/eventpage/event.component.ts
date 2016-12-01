@@ -1,4 +1,5 @@
 import { Component , OnInit} from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import { EventService } from './event.service';
 import { VolunteerList } from '../volunteerlist/volunteerlist.component';
@@ -15,8 +16,11 @@ import 'rxjs/add/operator/map'
 
 export class Event
 {
-    constructor(private eventService: EventService) 
+    constructor(private eventService: EventService, private route: ActivatedRoute) 
     { 
+        this.route.params.forEach((param: Params) => {
+            eventService.id = +param['eventId'];
+        })
         eventService.ngOnInit();
     }
 }

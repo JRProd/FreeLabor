@@ -1,50 +1,91 @@
 <head><title>{{volunteerService.firstName}}'s Profile</title></head>
+<home-bar></home-bar>
 <div class="container">
-    <div class="panel panel-default top">
-        <div class="panel-body">
-
-            <div class="wrapper-volunteer col-md-7">
-                <div class="panel panel-default volunteer">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">{{volunteerService.name}}'s Profile</h2>
+    <div class="wrapper-volunteer">
+        <div class="panel panel-default volunteer">
+            <div class="panel-heading">
+                <h3>{{volunteerService.firstName}} {{volunteerService.lastName}}'s Profile</h3>
+            </div>
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-left">
+                        <a>
+                            <img class="img-circle" src="/webpage/images/Default_Profile_Picture.png">
+                        </a>
                     </div>
-                    <div class="panel-body">
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="img-circle" src="http://placehold.it/150x150">
-                                </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Bio: {{volunteerService.bio}} </h4>
+                        <button (click)="volunteerService.printUsername()">Print Username</button>
+                    </div>
+
+                    <!--> EDIT BUTTON IS HERE IDK WHERE TO PUT IT RN<!-->
+                    <div *ngIf="volunteerService.usersPage===true">
+                            <span class="glpyhicon glyphicon-edit" aria-hidden="true" data-toggle="modal" data-target="#editModal">EDIT ME</span>
+                        
+                            <!-- Modal -->
+                            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="editModalLabel">Edit User Page</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="firstName">First Name</label>
+                                                <input #firstName type="text" class="form-control" id="firestName">
+
+                                                <label for="lastName">Last Name</label>
+                                                <input #lastName type="text" class="form-control" id="lastName">
+
+                                                <label for="email">Email</label>
+                                                <input #email type="email" class="form-control" id="email">
+
+                                                <label for="bio">Bio</label>
+                                                <input #bio type="text" class="form-control" id="bio">
+
+                                                <label for="imageProfile">Profile Image</label>
+                                                <input type="file" class="form-control" id="imageProfile">
+
+                                                <label for="imageBackground">Background Image</label>
+                                                <input type="file" class="form-control" id="imageBackground">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" 
+                                                (click)="volunteerService.editProfile(firstName.value, lastName.value, email.value, bio.value)">Save changes</button>
+                                    </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Bio: {{volunteerService.bio}} </h4>
-                            </div>
+                        </div>
+                        <!--> EDIT BUTTON IS HERE IDK WHERE TO PUT IT RN<!-->
+                </div>
+                <div class="wrapper-events">
+                    <div class="panel panel-default events-attending">
+                        <div class="panel-heading events-heading">
+                            <h4>Events Attending</h4>
+                        </div>
+                    
+                        <div class="panel-body events-body">
+                            <event-list [eventListService] ="volunteerService.eventList"></event-list>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="wrapper-events">
-                <div class="panel panel-default events-attending">
-                    <div class="panel-heading events-heading">
-                        <h3 class="panel-title">Events Attending</h3>
-                    </div>
-                    
-                    <div class="panel-body events-body">
-                        <event-list [eventListService]="volunteerService.eventList"></event-list>
+                <div class="wrapper-orgs">
+                    <div class="panel panel-default orgs-panel">
+                        <div class="panel-heading orgs-heading">
+                            <h4>Organizations Following</h4>
+                        </div>
+                        <div class="panel-body orgs-body">
+                            <nonprofit-list [nonProfitListService]="volunteerService.nonProfitList"></nonprofit-list>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="wrapper-orgs">
-                <div class="panel panel-default orgs-panel">
-                    <div class="panel-heading orgs-heading">
-                        <h3 class="panel-title orgs-title">Organizations Following</h3>
-                    </div>
-                    <div class="panel-body events-body">
-                        <nonprofit-list [nonProfitListService]="volunteerService.nonProfitList"></nonprofit-list>
-                    </div>
-                </div>
-            </div>
-        </div>   
+            </div>  
+        </div>
     </div>
 </div>

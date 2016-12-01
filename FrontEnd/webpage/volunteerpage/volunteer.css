@@ -1,27 +1,30 @@
 h1 {
-    color: forestgreen;
-}
-
-.container {
-    padding-top: 10%;
-}
-
-.panel-heading {
-    background-color: indianred;
     color: white;
 }
 
-.wrapper-events {
-    float: left;
+.events-heading {
+    width: 100%
+}
+.events-body {
+    width: 100%
+}
+.orgs-heading {
+    width: 100%
+}
+.orgs-body {
     width: 100%;
+}
+
+.wrapper-events {
+    margin: 5%;
 }
 
 .wrapper-orgs {
-    padding-top: 10%;
-    float: left;
-    width: 100%;
+    margin: 5%;
 }
 
-.events {
-    padding: 5%;
+.panel-heading {
+    background-color: seagreen;
+    color: white;
 }
+

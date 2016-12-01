@@ -1,16 +1,14 @@
 import { VolunteerList } from '../volunteerlist/volunteerlist.component';
 import { VolunteerListService } from '../volunteerlist/volunteerlistservice.service';
 import { Injectable , OnInit } from '@angular/core';
-
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-
 import { Event } from './event.component';
 
 @Injectable()
 export class EventService implements OnInit
 {
-    private eventUrl = 'https://private-73213-artisanapi.apiary-mock.com/event'
+    private eventUrl = 'http://localhost:8080/events'
     private obser : Observable<EventService>;
 
     orgName: string;    
@@ -32,7 +30,7 @@ export class EventService implements OnInit
     ngOnInit()
     {
         //Request GET from URL
-        this.http.get(this.eventUrl)
+        this.http.get(`${this.eventUrl}/${this.id}`)
                     //Map Response to JSON
                     .map(this.extractData)
                     //Catch error if ocurred

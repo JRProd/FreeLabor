@@ -3,6 +3,7 @@ import { EventListService } from '../eventlist/eventlistservice.service';
 import { VolunteerList } from '../volunteerlist/volunteerlist.component';
 import { VolunteerListService } from '../volunteerlist/volunteerlistservice.service';
 import { Injectable , OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
@@ -13,7 +14,8 @@ import { NonProfit } from './nonprofit.component';
 @Injectable()
 export class NonProfitService implements OnInit
 {
-    private nonProfitUrl = 'https://private-3d0cf-artisanapi.apiary-mock.com/org'
+
+    private nonProfitUrl = 'http://localhost:8080/org'
     private obser : Observable<NonProfitService>;
 
     name: string;
@@ -31,7 +33,7 @@ export class NonProfitService implements OnInit
 
     errorMessage: string;
 
-    constructor(private http: Http) 
+    constructor(private http: Http, private router: ActivatedRoute) 
     {
         this.eventList = new EventListService;
         this.volunteerList = new VolunteerListService;
@@ -39,8 +41,12 @@ export class NonProfitService implements OnInit
 
     ngOnInit()
     {
+        this.router.params.subscribe(params => {
+            this.username = params['username'];
+        })
+
         //Request GET from URL
-        this.http.get(this.nonProfitUrl)
+        this.http.get(`${this.nonProfitUrl}/${this.username}`)
                     //Map Response to JSON
                     .map(this.extractData)
                     //Catch error if ocurred
@@ -72,6 +78,7 @@ export class NonProfitService implements OnInit
     }
 
     private handleError (error: Response | any) {
+        console.log("ERROR")
         let errMsg: string;
         if (error instanceof Response) 
         {
