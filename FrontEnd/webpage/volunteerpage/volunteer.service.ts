@@ -1,4 +1,6 @@
 import { EventListService } from '../eventlist/eventlistservice.service';
+import { NonProfitList } from '../nonprofitlist/nonprofitlist.component';
+import { NonProfitListService } from '../nonprofitlist/nonprofitlistservice.service';
 import { Injectable , OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import globals = require('../globals')
@@ -8,23 +10,26 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
-export class VolunteerService {
+export class VolunteerService{
 
 	private volunteerURL = "http://localhost:8080/user";
     private usersPage: boolean
 
 	imageURL: string;
-	firstName: string;
-	lastName: string;
+    firstName: string;
+    lastName: string;
+    nameUser: string;
 	username: string;
+    id: number;
 
 	bio: string;
 
-	organizations: any[];
 	eventList: EventListService;
+    nonProfitList: NonProfitListService;
 
 	constructor(private http: Http, private router: ActivatedRoute) {
 		this.eventList = new EventListService;
+        this.nonProfitList = new NonProfitListService;
 	}
 
 	ngOnIinit()
@@ -59,8 +64,16 @@ export class VolunteerService {
                     //Create a function to set local variables to
                     res => {this.firstName = res.firstName;
 							this.lastName = res.lastName;
+                            this.nameUser = res.firstName + " " + res.lastName;
                             this.username = res.username;
                             this.bio = res.bio || "You need to create a bio!";
+
+                            /* Need to deal with null values
+                            this.imageURL = res.imageURL;
+                            this.eventList.importList(res.condensedEvents);
+                            this.nonProfitList.importList(res.organizations);
+							console.log(this.id )
+                            */
                             },
                     //Set function to catch error
                     error =>  console.log(error)

@@ -1,5 +1,5 @@
-import { EventList } from './eventlist.component';
 import { Injectable } from '@angular/core';
+import { EventList } from './eventlist.component';
 import { EventService } from '../eventpage/event.service';
 
 @Injectable()

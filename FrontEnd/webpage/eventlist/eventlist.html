@@ -1,30 +1,25 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="" *ngFor="let event of eventListService.eventList">
-            <div class="col-md-6 eventContainer">
-                <div class="row">
-                    <div class="eventTitle">
-                        <p>{{event.title}}</p>
+<div class="event-container">
+    <div *ngFor="let event of eventListService.eventList">
+        <div class="col-md-4">
+        <div class="panel panel-default events-panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{event.title}}</h3>
+            </div>
+                <div class="panel-body">
+                    <img class="img-responsive center-block" src="{{event.imageURL}}" alt="Event Picture">
+                </div>
+                <div class="panel-footer">
+                <div class="panel panel-default info-panel">
+                    <div class="panel-body">
+                        <strong>Date: </strong>{{event.date}}
+                        <br />
+                        <strong>Description: </strong>{{event.description}}
+                        <br />
+                        <strong>Attendees: </strong><span class="badge event-badge">{{event.attendees}}/{{event.maxAttendees}}</span>
                     </div>
                 </div>
-                <div class="row eventBody">
-                    <img class="eventImage "src="{{event.imageURL}}" alt="Event Picture"> 
-                    <div class="eventData">
-                        <div class="row eventStatus">
-                            <div>
-                                <p>{{event.date}}</p>
-                            </div>
-                            <span class="badge event-badge">{{event.attendees}}/{{event.maxAttendees}}</span>
-                        </div>
-                        <div class="row">
-                            <div class="eventInfo">
-                                <h3>Description</h3>
-                                <p>{{event.description}}</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
+            </div>
         </div>
-    </div>
 </div>

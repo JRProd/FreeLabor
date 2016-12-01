@@ -14,7 +14,6 @@ export class EventList{
   
     @Input()
     eventListService: EventListService;
+    constructor(){}
 
-    constructor()
-    { }
 }

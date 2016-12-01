@@ -1,0 +1,7 @@
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
+.carousel-caption {
+  margin-bottom: 50px;
+}

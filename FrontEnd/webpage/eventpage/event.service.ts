@@ -1,8 +1,8 @@
+import { VolunteerList } from '../volunteerlist/volunteerlist.component';
+import { VolunteerListService } from '../volunteerlist/volunteerlistservice.service';
 import { Injectable , OnInit } from '@angular/core';
-
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-
 import { Event } from './event.component';
 
 @Injectable()
@@ -18,11 +18,14 @@ export class EventService implements OnInit
     date: string;
     location: string;
     description: string;
-    attendees: number;
     maxAttendees: number;
-    volunteers: any[];
+    attendees: number;
 
-    constructor(private http: Http) {}
+    volunteerList: VolunteerListService;
+
+    constructor(private http: Http) {
+      this.volunteerList = new VolunteerListService;
+    }
 
     ngOnInit()
     {
@@ -36,17 +39,18 @@ export class EventService implements OnInit
         .subscribe(
                     //Create a function to set local variables to
                     res => {this.title = res.title;
+                            this.id = res.id;
                             this.date = res.dateStart + ' - ' + res.dateEnd;
                             this.location = res.address + ' ' + res.city + ', ' + res.state + ' ' + res.zip;
                             this.description = res.description;
                             this.imageURL = res.imageURL;
                             this.maxAttendees = res.maxAttendees;
                             this.orgName = res.orgName;
-                            console.log(res);
+                            this.volunteerList.importList(res.condensedVolunteers);
+                            console.log(this.title);
                             },
                     //Set function to catch error
-                    error =>  console.log(error),
-                    () => {console.log(this.title);}
+                    error =>  console.log(error)
         );
         //Data will be updated after request is finished
     }

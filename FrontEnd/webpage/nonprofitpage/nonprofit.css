@@ -1,31 +1,6 @@
-.container-fluid {
-	margin: 35px;
-    margin-top: 100px;
-    background: #fff;
-}
-
-.orgNameBox {
-	border: black;
-    border-width: 2px;
-    padding: 20px 15px;
-    border-style: solid;
-    z-index: 10;
-    position: absolute;
-    background: burlywood;
-    text-align: center;
-}
-
-.orgSplashScreenBoxImage {
-	z-index: 1;
-    margin: 25px;
-	width: 100%;
-    max-height: 300px;
-    min-height: 100px;
-    
-}
-
-.profileBody > .panel-default {
-    margin: 25px;
+.panel-heading {
+    background-color: seagreen;
+    color: white;
 }
 
 .nav-tabs {
@@ -33,18 +8,23 @@
 }
 
 .nav-tabs > li > * {
-    text-align: center;
-    background: burlywood;
-    border-radius: 15px;
+     color: white;
 }
 
-.tab-content {
-	border: burlywood;
-    border-width: 2px;
-    border-style: solid;
+.nav-tabs>li>a:hover, .nav>li>a:focus, .nav>li>a:hover {
+    border-color: transparent;
+    background-color: transparent;
 }
 
-.tab-pane {
-	margin: 25px;
+.navbar-default {
+	background-color: seagreen;
+    color: white;
 }
 
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.navbar .nav > li > a {
+    color: white;
+}

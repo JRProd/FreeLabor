@@ -1,5 +1,7 @@
 import { EventList } from '../eventlist/eventlist.component';
 import { EventListService } from '../eventlist/eventlistservice.service';
+import { VolunteerList } from '../volunteerlist/volunteerlist.component';
+import { VolunteerListService } from '../volunteerlist/volunteerlistservice.service';
 import { Injectable , OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,14 +10,17 @@ import { Observable } from 'rxjs/Rx';
 
 import { NonProfit } from './nonprofit.component';
 
+
 @Injectable()
 export class NonProfitService implements OnInit
 {
     private nonProfitUrl = 'http://localhost:8080/org'
+
     private obser : Observable<NonProfitService>;
 
     name: string;
     username: string;
+    id: number;
 
     missionStatement: string;
     otherInfo: string;
@@ -24,12 +29,14 @@ export class NonProfitService implements OnInit
     imageURL: string;
 
     eventList: EventListService;
+    volunteerList: VolunteerListService;
 
     errorMessage: string;
 
     constructor(private http: Http, private router: ActivatedRoute) 
     {
         this.eventList = new EventListService;
+        this.volunteerList = new VolunteerListService;
     }
 
     ngOnInit()
@@ -48,12 +55,14 @@ export class NonProfitService implements OnInit
         .subscribe(
                     //Create a function to set local variables to
                     res => {this.name = res.name;
+                            this.id = res.id;
                             this.username = res.username;
                             this.missionStatement = res.missionStatement;
                             this.otherInfo = res.otherInfo;
                             this.splashImageURL = res.splashImageURL;
                             this.imageURL = res.imageURL;
                             this.eventList.importList(res.condensedEvents);
+                            this.volunteerList.importList(res.condensedVolunteers);
                             console.log(EventList);
                             },
                     //Set function to catch error

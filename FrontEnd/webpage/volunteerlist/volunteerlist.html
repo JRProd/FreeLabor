@@ -1,0 +1,14 @@
+<div class="nonprofit-container">
+    <div *ngFor="let vol of volunteerListService.volunteerList">
+        <div class="col-md-4">
+        <div class="panel panel-default volunteer-panel">
+            <div class="panel-heading volunteer-heading">
+                <h3 class="panel-title">{{vol.name}}</h3>
+            </div>
+                <div class="panel-body">
+                    <img class="img-responsive center-block"src="{{vol.imageURL}}" alt="Volunteer Picture">
+                </div>
+            </div>
+        </div>
+     </div>
+</div>
