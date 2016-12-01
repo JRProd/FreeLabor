@@ -1,5 +1,50 @@
-.panel-default {
-    margin: 3%;
+
+/*.volunteerContainer {
+    border-color: burlywood;
+    border-style: solid;
+    border-radius: 5px;
+    min-height: 150px;
+>>>>>>> e2a12ed6dc1b7d79f320d0d722ca1f5e27b30118
+}
+
+.panel-heading {
+    background-color: indianred;
+    color: white;
+}
+
+.panel-body > img {
+    max-height: 6em;
+    max-width: 12em;
+}
+
+.volunteerImage {
+    z-index: 1;
+}
+
+
+.volunteerContainer > div > img {
+    max-height: 250px;
+    max-width: 250px;
+    padding: 10px;
+}
+
+.volunteerStatus {
+    display: flex;
+}
+
+.volunteerStatus > div {
+    margin-left: 10px;
+    width: 100%;
+}
+
+.volunteerStatus > span {
+    margin: 5px;
+    margin-right: 20px;
+    float: right;
+}*/
+
+.panel {
+    max-width: 70%;
 }
 
 .panel-heading {

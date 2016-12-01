@@ -1,0 +1,24 @@
+<div class="container">
+
+    <div *ngIf="userHeader.isLogged === false">
+        Log On?
+    </div>
+
+    <div class="dropdown">
+        <div *ngIf="userHeader.isLogged === true" class="userArea col-xs-4 col-md-4" data-toggle="dropdown">
+            <img class="img-circle userImage" src="http://placehold.it/350x150">
+            <div *ngIf="userHeader.org === false" class="volunteerProfile">
+                <p class="firstNameText">{{userHeader.firstName}}</p>
+            </div>
+            <div *ngIf="userHeader.org === true"class="orgProfile">
+                <p class="nameText">{{userHeader.name}}</p>
+                <p class="userName">{{userHeader.username}}</p>
+            </div>
+        </div>
+        <ul class="dropdown-menu">
+            <li (click)="userHeader.goToHomePage()">Home Page</li>
+            <li (click)="userHeader.logOut()">Log Out (BROKEN)</li>
+        </ul>
+    </div>
+
+</div>

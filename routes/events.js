@@ -2,140 +2,98 @@ var express = require('express');
 var router = express.Router();
 var responses = require('./responses.js');
 var bcrypt = require('bcrypt');
+var mysql = require('mysql');
 var saltRounds = 10;
-function checkInput(title,addr,city,state,zip,dateStart,dateEnd,desc,maxAtten){
-	var errorBuffer = "";
-	var errorThrown = false;
-	//Make sure each parameter is not undefined and not null, while being the correct data type
-	if((typeof(title) === 'string') && (title !== null)){
-		continue;
-	}else{
-		errorBuffer += "Invalid title object, ";
-		errorThrown = true;
-	}
-	if((typeof(addr) === 'string') && (addr != null)){
-		
-	}else{
-		errorBuffer += "Invalid address object, ";
-		errorThrown = true;
-	}
-	if((typeof(city) === 'string') && (city != null)){
-		continue;
-	}else{
-		errorBuffer += "Invalid city object, ";
-		errorThrown = true;
-	}
-	if((typeof(state) === 'string') && (state != null)){
-		continue;
-	}else{
-		errorBuffer += "Invalid state object, ";
-		errorThrown = true;
-	}
-	if((typeof(zip) === 'number') && (zip != null)){
-		continue;
-	}else{
-		errorBuffer  += "Invalid zip object, ";
-		errorThrown = true;
-	}
-	if((typeof(dateStart) === 'string') && (dateStart != null)){
-		//Check if it is ISO standard
-	}else{
-		errorBuffer += "Invalid dateStart object, ";
-		errorThrown = true;
-	}
-	if((typeof(dateEnd) === 'string') && (dateEnd != null)){
-		//Check if it is ISO standard
-	}else{
-		errorBuffer += "Invalid dateEnd object, ";
-		errorThrown = true;
-	}
-	if((typeof(desc) === 'string') && (desc != null)){
-		continue;
-	}else{
-		errorBuffer +="Invalid dateStart object, ";
-		errorThrown = true;
-	}
-	if((typeof(maxAtten) === 'number') && (maxAtten != null)){
-		continue;
-	}else{
-		errorBuffer += "Invalid dateStart object";
-		errorThrown = true;
-	}
-	if(errorThrown){
-		return errorBuffer;	
-	}else{
-		return "T";
-	}
+
+function performQuery(req,query,data,callback) {
+	req.db.query(query, data, function(err, rows, fields) {
+		if (err) {
+			callback(err, null,null);
+		} else {
+			callback(null, rows,fields);
+		}
+
+	});
 }
 
 //Copy and paste code from orgs.js for reference
 router.post('/event', function(req,res){
 	//Get paramaterized query ready
-	var createEvent = 'INSERT INTO Event (title,address,city,state,zip,dateStart,dateEnd,description,maxAttendees) VALUES(?,?,?,?,?,?,?,?,?)';
-	//check inputs
-	var errorMsg = checkInput(req.body.title,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.dateStart,req.body.dateEnd,req.body.description,req.body.maxAttendees);
-	if(errorMsg != "T"){
-		res.json({success:false,message:errorMsg});
+
+
+	//If the user isn't logged in as an Org they can't create events.
+	console.log(req.session);
+	if(req.session.type == 'User'){
+		res.json({success:false,message:'Volunteers cannot create Events, please log into an Org Account to create one.'});
 	}else{
-		var params = [req.body.title,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.dateStart,req.body.dateEnd,req.body.description,req.body.maxAttendees];
+		//check inputs
+		var createEvent = 'INSERT INTO Event (idOrg,titleEvent,locationEvent,addressEvent,cityEvent,stateCodeEvent,postCodeEvent,dateStartEvent,dateEndEvent,descriptionEvent,maxAttendeesEvent) VALUES ((SELECT idOrg FROM Org WHERE usernameOrg=?),?,?,?,?,?,?,?,?,?,?)';
+		var params = [req.session.username,req.body.title,req.body.location,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.dateStart,req.body.dateEnd,req.body.description,req.body.maxAttendees];
 		//Preform query
-		function performQuery(query,data,callback) {
-			req.db.query(query, data, function(err, rows, fields) {
-				if (err) {
-					callback(err, null);
-				} else {
-					callback(null, rows);
-	  			}
-		});
-		performQuery(createEvent,params, function(err, rows, fields) {
+		console.log(mysql.format(createEvent,params));
+		performQuery(req,createEvent,params, function(err, rows, fields) {
 			if (err) {
 				res.json({success:false,message:err});
 			} else {
-				//Right now I have no way to get the org's name
-				res.json({success:true,message:rows,url:'http://localhost/org/'+req.body.orgName + '/events/' + req.body.title});
+				//this is a nasty hack, should be paramaterized - AJ
+				// WHAT THE LITERAL FUCK IS THIS QUERY HOW YOU DOU THINK IT JUST MAGICALLY WOKS WITHOUT TESTING IT - ME
+				//var eventID = req.db.query('SELECT eventID FROM Event WHERE title = ' + req.body.title + 'AND description = ' + req.body.description);
+
+				res.json({success:true,message:rows,url:'http://localhost:8080/org/'+ req.session.username + '/events/' + rows.insertId});
 			}
 		});
 	}
+
+
 });
 
+
 //Copy and paste code from orgs.js for reference
-router.get('/event/:usernameOrg/:idEvent', function(req,res){
-	var sql = 'SELECT title,address,city,state,zip,dateStart,dateEnd,description,maxAttendees FROM Event WHERE eventID=?';
-	var params = [req.params.eventID];	
-	function performQuery(query,data,callback) {
-		req.db.query(query, data, function(err, rows, fields) {
-			if (err) {
-				callback(err, null);
-			} else
-				callback(null, rows, fields);
-	  });
-	}
-	performQuery(sql, params, function(err, rows, fields) {
+router.get('/org/:username/events/:idEvent', function(req,res){
+
+	var sql = 'SELECT * FROM Event WHERE idEvent=?';
+	var params = [req.params.idEvent];
+
+	performQuery(req,sql, params, function(err, rows, fields) {
 		if (err) {
 			res.json({success:false,message:err});
 		} else {
-			var responseObj = responses.getOrg;
 			var toAdd = {
 				success:true,
-				title:rows[0].title,
-				address:rows[0].address,
-				city:rows[0].city,
-				state:rows[0].state,
-				zip:rows[0].zip,
-				dateStart:rows[0].dateStart,
-				dateEnd:rows[0].dateEnd,
-				description:rows[0].description,
-				maxAttendees:rows[0].maxAttendees
+				title:rows[0].titleEvent,
+				address:rows[0].addressEvent,
+				city:rows[0].cityEvent,
+				state:rows[0].stateCodeEvent,
+				zip:rows[0].postCodeEvent,
+				dateStart:rows[0].dateStartEvent,
+				dateEnd:rows[0].dateEndEvent,
+				description:rows[0].descriptionEvent,
+				maxAttendees:rows[0].maxAttendeesEvent
 			};
-			responseObj = Object.assign(responseObj,toAdd);
-			res.json(responseObj);
+			res.json(toAdd);
 		}
 	});
 
 });
 //Modify live event
-router.put('/event/:usernameOrg/:idEvent', function(req,res){
+router.patch('/org/:username/events/:idEvent', function(req,res){
 
+  if(req.body.attendee){
+    //TODO: if it contains a username, we will need to add to the "membership"
+    var insert = 'INSERT INTO Attendance(idUser,idEvent,dateJoinedAttendance) VALUES ((SELECT idUser FROM User WHERE usernameUser=?),?,?)';
+    var date = new Date();
+    var qparams = [req.body.attendee,req.params.idEvent,date.toISOString()];
+    console.log(mysql.format(insert,qparams));
+    performQuery(req,insert,qparams, function(err, rows,fields) {
+      if (err) {
+        res.json({success:false,message:err});
+      } else {
+        res.json({success:true,message:rows,url:'http://localhost/user/'+req.params.username});
+      }
+    });
+  } else {
+		res.json({success:false,message:"must add an attendee"});
+	}
 
 });
 

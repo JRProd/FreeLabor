@@ -9,14 +9,3 @@
 .navbar .nav > li > a {
     color: white;
 }
-
-.right {
-	float: right;
-}
-
-li { cursor: pointer; cursor: hand; }
-
-img {
-	float: left;
-	float: top;
-}

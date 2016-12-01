@@ -1,13 +1,5 @@
-.panel-default {
-    margin: 3%;
-}
 
 .panel-heading {
     background-color: indianred;
     color: white;
-}
-
-.panel-body > img {
-    max-height: 6em;
-    max-width: 12em;
 }

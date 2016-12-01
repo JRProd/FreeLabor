@@ -12,11 +12,13 @@ import { Volunteer } from './volunteerpage/volunteer.component';
 import { VolunteerList } from './volunteerlist/volunteerlist.component';
 import { HomeBar } from './homebar/homebar.component';
 import { Footer } from './footer/footer.component';
+import { UserHeaderComponet } from './user-header/user-header.component';
 import { LandingComponent } from './landing/landing.component'
 import { Contact } from './contactpage/contactpage.component';
 import { Donate } from './donatepage/donatepage.component';
 import { Info } from './infopage/infopage.component';
 import { About } from './aboutpage/aboutpage.component';
+
 
 import { HttpModule } from '@angular/http';
 
@@ -25,18 +27,21 @@ import { HttpModule } from '@angular/http';
         BrowserModule , 
         HttpModule, 
         RouterModule.forRoot([
-
-            { path: 'nonprofit/:id', component: NonProfit },
-            { path: 'volunteer/:id', component: Volunteer },
-            { path: 'event/:id', component: Event },
+            { path: 'org/:username', component: NonProfit },
+            {path: 'user/:username', component: Volunteer},
+            { path: 'login', component: Login },
+            { path: 'event/:eventId', component: Event },
             { path: 'home', component: LandingComponent },
             { path: '', component: LandingComponent },
+<<<<<<< HEAD
             { path: 'login', component: Login },
             { path: 'contact', component: Contact},
             { path: 'donate', component: Donate},
             { path: 'info', component: Info},
             { path: "about", component: About}
 
+=======
+>>>>>>> e2a12ed6dc1b7d79f320d0d722ca1f5e27b30118
             ]) 
     ],    
     declarations:  [
@@ -51,10 +56,14 @@ import { HttpModule } from '@angular/http';
         HomeBar,
         Footer,
         Login,
+<<<<<<< HEAD
         Contact,
         Donate,
         Info,
         About
+=======
+        UserHeaderComponet
+>>>>>>> e2a12ed6dc1b7d79f320d0d722ca1f5e27b30118
     ],    
     bootstrap: [ WebPageComponent]
 })    

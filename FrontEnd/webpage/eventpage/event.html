@@ -1,37 +1,39 @@
-<div class="profilePage">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h1>{{eventService.orgName}}</h1>
-        </div>
-        <div class="panel-body eventImage">
-	        <img src = {{eventService.imageURL}} alt="placeholder 960" class="img-responsive"/>
-        </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading eventTitle">
-            <h2>{{eventService.title}}</h2>
-        </div>
-
-        <div class="panel-body">
-            <div class="eventDetails">
-                <div class="eventDescription">
-                    <h3><strong>Description</strong></h3>
-                    <p id = "eventInfo">{{eventService.description}}</p>
-                </div>
-
-                <div class="dateTimeBox">
-                    <h3>{{eventService.location}}</h3>
-                    <h4>{{eventService.date}}</h4>
-                    <button type="button" class="btn btn-primary btn-block" (click)="addVolunteers()">Attending</button>
-                </div>
+<div class="container">
+    <div class="profilePage">
+        <home-bar></home-bar>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>{{eventService.orgName}}</h3>
+            </div>
+            <div class="panel-body eventImage">
+                <img src = {{eventService.imageURL}} alt="placeholder 960" class="img-responsive"/>
             </div>
 
-            <br style="clear:both" />
+            <div class="panel panel-default">
+                <div class="panel-heading eventTitle">
+                    <h3>{{eventService.title}}</h3>
+                </div>
 
-            <div class="volunteers">
-                <h3>Attending Volunteers (Max Volunteers {{eventService.maxAttendees}})</h3>
-                <volunteer-list [volunteerListService]="eventService.volunteerList"></volunteer-list>
+                <div class="panel-body">
+                    <div class="eventDetails">
+                        <div class="eventDescription">
+                            <h3><strong>Description</strong></h3>
+                            <p id = "eventInfo">{{eventService.description}}</p>
+                        </div>
+                        <div class="dateTimeBox">
+                            <h3>{{eventService.location}}</h3>
+                            <h4>{{eventService.date}}</h4>
+                            <button type="button" class="btn btn-primary btn-block" (click)="addVolunteers()">Attending</button>
+                        </div>
+                    </div>
+
+                    <br style="clear:both" />
+
+                    <div class="volunteers">
+                        <h3>Attending Volunteers (Max Volunteers {{eventService.maxAttendees}})</h3>
+                        <volunteer-list [volunteerListService]="eventService.volunteerList"></volunteer-list>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

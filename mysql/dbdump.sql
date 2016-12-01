@@ -26,13 +26,14 @@ CREATE TABLE `Attendance` (
   `idAttendance` int(11) NOT NULL AUTO_INCREMENT,
   `idUser` int(11) NOT NULL,
   `idEvent` int(11) NOT NULL,
-  `dateJoinedAttendance` varchar(25) CHARACTER SET latin1 NOT NULL COMMENT 'Should be in Full UTC Format (25 Characters), business logic will handle this',
+  `dateJoinedAttendance` varchar(25) COLLATE latin1_general_ci DEFAULT NULL COMMENT 'Should be in Full UTC Format (25 Characters), business logic will handle this',
   PRIMARY KEY (`idAttendance`),
+  UNIQUE KEY `idAttendance_UNIQUE` (`idAttendance`),
   KEY `fk_idUser_idx` (`idUser`),
   KEY `fk_event_idx` (`idEvent`),
   CONSTRAINT `fk_event` FOREIGN KEY (`idEvent`) REFERENCES `Event` (`idEvent`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_user` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -56,7 +57,7 @@ CREATE TABLE `Event` (
   `descriptionEvent` text CHARACTER SET latin1,
   `maxAttendeesEvent` int(11) DEFAULT NULL,
   PRIMARY KEY (`idEvent`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,13 +71,13 @@ CREATE TABLE `Membership` (
   `idMembership` int(11) NOT NULL AUTO_INCREMENT,
   `idUser` int(11) NOT NULL,
   `idOrg` int(11) NOT NULL,
-  `dateJoinedMembership` varchar(25) COLLATE latin1_general_ci NOT NULL COMMENT 'Should be in Full UTC Format (25 Characters), business logic will handle this',
+  `dateJoinedMembership` varchar(25) CHARACTER SET latin1 DEFAULT NULL COMMENT 'Should be in Full UTC Format (25 Characters), business logic will handle this',
   PRIMARY KEY (`idMembership`),
-  KEY `fk_user_idx` (`idUser`),
-  KEY `fk_org_idx` (`idOrg`),
-  CONSTRAINT `fk_org-membership` FOREIGN KEY (`idOrg`) REFERENCES `Org` (`idOrg`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user-membership` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+  KEY `org_member_idx` (`idOrg`),
+  KEY `membership_user_idx` (`idUser`),
+  CONSTRAINT `membership_org` FOREIGN KEY (`idOrg`) REFERENCES `Org` (`idOrg`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `membership_user` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,12 +94,16 @@ CREATE TABLE `Org` (
   `emailOrg` varchar(254) COLLATE latin1_general_ci NOT NULL,
   `phoneOrg` varchar(13) COLLATE latin1_general_ci NOT NULL,
   `hashOrg` char(60) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
-  PRIMARY KEY (`idOrg`),
+  `splashImageURLOrg` varchar(254) COLLATE latin1_general_ci DEFAULT NULL,
+  `imageURLOrg` varchar(45) COLLATE latin1_general_ci DEFAULT NULL,
+  `missionStatementOrg` varchar(254) COLLATE latin1_general_ci DEFAULT NULL,
+  `otherInfo` text COLLATE latin1_general_ci,
+  PRIMARY KEY (`idOrg`,`usernameOrg`),
   UNIQUE KEY `idOrg_UNIQUE` (`idOrg`),
   UNIQUE KEY `usernameOrg_UNIQUE` (`usernameOrg`),
   UNIQUE KEY `emailOrg_UNIQUE` (`emailOrg`),
   UNIQUE KEY `phoneOrg_UNIQUE` (`phoneOrg`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +116,7 @@ DROP TABLE IF EXISTS `Session`;
 CREATE TABLE `Session` (
   `idSession` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `expiresSession` int(11) unsigned NOT NULL,
-  `idUser` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `username` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   PRIMARY KEY (`idSession`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -130,11 +135,13 @@ CREATE TABLE `User` (
   `emailUser` varchar(254) NOT NULL,
   `usernameUser` varchar(35) NOT NULL,
   `hashUser` char(60) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
-  PRIMARY KEY (`idUser`),
+  `bioUser` text,
+  `imageURLUser` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`idUser`,`usernameUser`),
   UNIQUE KEY `idUser_UNIQUE` (`idUser`),
   UNIQUE KEY `emailUser_UNIQUE` (`emailUser`),
   UNIQUE KEY `usernameUser_UNIQUE` (`usernameUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -146,4 +153,4 @@ CREATE TABLE `User` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-17 18:06:14
+-- Dump completed on 2016-11-29 16:59:05

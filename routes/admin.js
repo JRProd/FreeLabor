@@ -7,8 +7,8 @@ var mysql      = require('mysql');
 
 router.get('/admin/configuredb', function(req,res){
   //Check to make sure user is allowed access to
-  var file = fs.readFileSync("./routes/dbdump.sql", "utf8");
-  //console.log(file);
+  var file = fs.readFileSync("./mysql/dbdump.sql","utf8");
+  console.log(file);
 
   function performQuery(query,data,callback) {
     req.db.query(query, data, function(err, rows, fields) {
