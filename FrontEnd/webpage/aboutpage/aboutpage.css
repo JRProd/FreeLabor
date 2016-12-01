@@ -1,0 +1,18 @@
+.bodystuff{
+    text-align: center;
+    padding: 30px;
+    padding-bottom: 300px;
+}
+.panel-default {
+    margin: 3%;
+}
+
+.panel-heading {
+    background-color: indianred;
+    color: white;
+}
+
+.panel-body > img {
+    max-height: 20em;
+    max-width: 50em;
+}

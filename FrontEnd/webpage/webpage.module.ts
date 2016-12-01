@@ -13,7 +13,10 @@ import { VolunteerList } from './volunteerlist/volunteerlist.component';
 import { HomeBar } from './homebar/homebar.component';
 import { Footer } from './footer/footer.component';
 import { LandingComponent } from './landing/landing.component'
-
+import { Contact } from './contactpage/contactpage.component';
+import { Donate } from './donatepage/donatepage.component';
+import { Info } from './infopage/infopage.component';
+import { About } from './aboutpage/aboutpage.component';
 
 import { HttpModule } from '@angular/http';
 
@@ -29,6 +32,10 @@ import { HttpModule } from '@angular/http';
             { path: 'home', component: LandingComponent },
             { path: '', component: LandingComponent },
             { path: 'login', component: Login },
+            { path: 'contact', component: Contact},
+            { path: 'donate', component: Donate},
+            { path: 'info', component: Info},
+            { path: "about", component: About}
 
             ]) 
     ],    
@@ -43,7 +50,11 @@ import { HttpModule } from '@angular/http';
         EventList,
         HomeBar,
         Footer,
-        Login
+        Login,
+        Contact,
+        Donate,
+        Info,
+        About
     ],    
     bootstrap: [ WebPageComponent]
 })    
