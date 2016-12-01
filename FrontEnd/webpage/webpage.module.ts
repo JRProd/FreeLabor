@@ -33,15 +33,11 @@ import { HttpModule } from '@angular/http';
             { path: 'event/:eventId', component: Event },
             { path: 'home', component: LandingComponent },
             { path: '', component: LandingComponent },
-<<<<<<< HEAD
-            { path: 'login', component: Login },
             { path: 'contact', component: Contact},
             { path: 'donate', component: Donate},
             { path: 'info', component: Info},
             { path: "about", component: About}
 
-=======
->>>>>>> e2a12ed6dc1b7d79f320d0d722ca1f5e27b30118
             ]) 
     ],    
     declarations:  [
@@ -56,14 +52,11 @@ import { HttpModule } from '@angular/http';
         HomeBar,
         Footer,
         Login,
-<<<<<<< HEAD
         Contact,
         Donate,
         Info,
-        About
-=======
+        About,
         UserHeaderComponet
->>>>>>> e2a12ed6dc1b7d79f320d0d722ca1f5e27b30118
     ],    
     bootstrap: [ WebPageComponent]
 })    
