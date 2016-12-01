@@ -20,6 +20,7 @@ export class NonProfitListService{
             let newNonProfit = np as NonProfitService;
             let nonProfit = { } as NonProfitService;
 
+            nonProfit.username = newNonProfit.username;
             nonProfit.name = newNonProfit.name || "Name";
             nonProfit.id = newNonProfit.id;
             nonProfit.imageURL = newNonProfit.imageURL || "http://placehold.it/100x100";

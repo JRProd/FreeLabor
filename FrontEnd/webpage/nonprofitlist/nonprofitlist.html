@@ -1,17 +1,14 @@
 <div class="nonprofit-container">
     <div *ngFor="let nonPro of nonProfitListService.nonProfitList">
         <div class="col-md-4">
-        <div class="panel panel-default events-panel">
+        <div class="panel panel-default events-panel" routerLink = "/org/{{nonPro.username}}">
             <div class="panel-heading">
                 <h3 class="panel-title">{{nonPro.name}}</h3>
             </div>
-                <div class="panel-body">
-                    <img class="img-responsive center-block"src="{{nonPro.imageURL}}" alt="Non-Profit Picture">
-                </div>
-            </div>
-             <div class="panel-body">
-                <img class="img-responsive"src="{{nonPro.imageURL}}" alt="NonProfit Picture"> 
+            <div class="panel-body">
+                <img class="img-responsive center-block"src="{{nonPro.imageURL}}" alt="Non-Profit Picture">
             </div>
         </div>
         </div>
-     </div>
+    </div>
+</div>

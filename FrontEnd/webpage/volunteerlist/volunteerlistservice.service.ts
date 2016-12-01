@@ -20,7 +20,8 @@ export class VolunteerListService {
             let newvolunteer = vol as VolunteerService;
             let volunteer = { } as VolunteerService;
 
-            volunteer.name = newvolunteer.firstName + " "+newvolunteer.lastName || "NAME";
+            volunteer.username = newvolunteer.username;
+            volunteer.nameUser = newvolunteer.firstName + " "+newvolunteer.lastName || "NAME";
             volunteer.id = newvolunteer.id;
             volunteer.imageURL = newvolunteer.imageURL || "http://placehold.it/100x100";
 

@@ -28,7 +28,7 @@ import { HttpModule } from '@angular/http';
         HttpModule, 
         RouterModule.forRoot([
             { path: 'org/:username', component: NonProfit },
-            {path: 'user/:username', component: Volunteer},
+            { path: 'user/:username', component: Volunteer},
             { path: 'login', component: Login },
             { path: 'event/:eventId', component: Event },
             { path: 'home', component: LandingComponent },
