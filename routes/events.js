@@ -49,7 +49,7 @@ router.post('/event', function(req,res){
 
 
 //Copy and paste code from orgs.js for reference
-router.get('/event/:idEvent', function(req,res){
+router.get('/org/:username/events/:idEvent', function(req,res){
 
 	var sql = 'SELECT * FROM Event WHERE idEvent=?';
 	var params = [req.params.idEvent];
@@ -76,7 +76,7 @@ router.get('/event/:idEvent', function(req,res){
 
 });
 //Modify live event
-router.patch('/event/:idEvent', function(req,res){
+router.patch('/org/:username/events/:idEvent', function(req,res){
 
   if(req.body.attendee){
     //TODO: if it contains a username, we will need to add to the "membership"
