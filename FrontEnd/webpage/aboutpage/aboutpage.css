@@ -1,8 +1,7 @@
-.bodystuff{
+h1 {
     text-align: center;
-    padding: 30px;
-    padding-bottom: 300px;
 }
+
 .panel-default {
     margin: 3%;
 }
@@ -16,3 +15,4 @@
     max-height: 20em;
     max-width: 50em;
 }
+

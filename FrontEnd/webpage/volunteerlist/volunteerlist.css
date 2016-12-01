@@ -1,49 +1,13 @@
-.volunteerContainer {
-    border-color: burlywood;
-    border-style: solid;
-    border-radius: 5px;
-    min-height: 150px;
+.panel-default {
+    margin: 3%;
 }
 
-.volunteerName {
-	border: black;
-    border-width: 2px;
-    padding: 20px 15px;
-    border-style: solid;
-    z-index: 10;
-    position: absolute;
-    background: burlywood;
-    text-align: center;
-    margin: 5px;
+.panel-heading {
+    background-color: indianred;
+    color: white;
 }
 
-.volunteerBody {
-    display: flex;
+.panel-body > img {
+    max-height: 6em;
+    max-width: 12em;
 }
-
-.volunteerImage {
-    z-index: 1;
-}
-
-
-.volunteerContainer > div > img {
-    max-height: 250px;
-    max-width: 250px;
-    padding: 10px;
-}
-
-.volunteerStatus {
-    display: flex;
-}
-
-.volunteerStatus > div {
-    margin-left: 10px;
-    width: 100%;
-}
-
-.volunteerStatus > span {
-    margin: 5px;
-    margin-right: 20px;
-    float: right;
-}
-
