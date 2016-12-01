@@ -8,9 +8,9 @@ export class AboutService {
     constructor(){
         this.members = [
             {
-                name: "Denver Brittian",
+                name: "Denver Brittain",
                 imgURL: "/webpage/images/denver.jpg",
-                bio: "Devner's Bio"
+                bio: "Denver's Bio"
             },
             {
                 name: "AJ DeTorrice",
