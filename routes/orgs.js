@@ -16,7 +16,7 @@ function performQuery(req,query,data,callback) {
 }
 
 router.post('/org', function(req,res){
-  //TODO: INPUT SANITATION
+
   var createOrg = 'INSERT INTO Org(nameOrg,usernameOrg,emailOrg,phoneOrg,hashOrg) VALUES(?,?,?,?,?)';
   var hash = bcrypt.hashSync(req.body.password, saltRounds);
   var params = [req.body.name,req.body.username,req.body.email,req.body.phone,hash];

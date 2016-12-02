@@ -3,6 +3,7 @@ var router = express.Router();
 var responses = require('./responses.js');
 var bcrypt = require('bcrypt');
 var mysql = require('mysql');
+var validator = require('validator');
 var saltRounds = 10;
 
 function performQuery(req,query,data,callback) {
@@ -27,6 +28,10 @@ router.post('/event', function(req,res){
 		res.json({success:false,message:'Volunteers cannot create Events, please log into an Org Account to create one.'});
 	}else{
 		//check inputs
+		if(!(validator.isISO8601(req.body.dateStart) && validator.isISO8601(req.body.dateStart))){
+			res.json({success:false,message:"invalid time format"});
+			return;
+		}
 		var createEvent = 'INSERT INTO Event (idOrg,titleEvent,locationEvent,addressEvent,cityEvent,stateCodeEvent,postCodeEvent,dateStartEvent,dateEndEvent,descriptionEvent,maxAttendeesEvent) VALUES ((SELECT idOrg FROM Org WHERE usernameOrg=?),?,?,?,?,?,?,?,?,?,?)';
 		var params = [req.session.username,req.body.title,req.body.location,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.dateStart,req.body.dateEnd,req.body.description,req.body.maxAttendees];
 		//Preform query
@@ -82,7 +87,7 @@ router.patch('/org/:username/events/:idEvent', function(req,res){
     //TODO: if it contains a username, we will need to add to the "membership"
     var insert = 'INSERT INTO Attendance(idUser,idEvent,dateJoinedAttendance) VALUES ((SELECT idUser FROM User WHERE usernameUser=?),?,?)';
     var date = new Date();
-    var qparams = [req.body.attendee,req.params.idEvent,date.toISOString()];
+    var qparams = [req.session.username,req.params.idEvent,date.toISOString()];
     console.log(mysql.format(insert,qparams));
     performQuery(req,insert,qparams, function(err, rows,fields) {
       if (err) {
