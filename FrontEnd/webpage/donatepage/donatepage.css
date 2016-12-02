@@ -1,0 +1,9 @@
+.bodystuff{
+    padding: 30px;
+    padding-bottom: 300px;
+}
+
+.panel-heading {
+    background-color: seagreen;
+    color: white;
+}

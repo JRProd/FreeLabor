@@ -1,5 +1,5 @@
 <div class="nonprofit-container">
-    <div *ngFor="let nonPro of nonProfitListService.nonProfitList">
+    <div *ngFor="let nonPro of nonProfitListService.nonProfitList" routerLink="/nonprofit/{{nonPro.id}}">
         <div class="col-md-4">
         <div class="panel panel-default events-panel">
             <div class="panel-heading">

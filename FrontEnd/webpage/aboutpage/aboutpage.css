@@ -1,0 +1,18 @@
+h1 {
+    text-align: center;
+}
+
+.panel-default {
+    margin: 3%;
+}
+
+.panel-heading {
+    background-color: indianred;
+    color: white;
+}
+
+.panel-body > img {
+    max-height: 20em;
+    max-width: 50em;
+}
+

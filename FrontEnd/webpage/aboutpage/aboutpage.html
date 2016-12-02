@@ -1,0 +1,14 @@
+<div class="bodystuff">
+    <h1> All about the Free Labor Team </h1>
+    <li *ngFor="let member of members">
+        <div class="panel panel-default events-panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{member.name}}</h3>
+            </div>
+            <div class="panel-body">
+                <img class="img-responsive" src="{{member.imgURL}}" alt=" Picture">
+                <span><h4> {{member.bio}} </h4></span>
+            </div>
+        </div>
+    </li>
+</div>

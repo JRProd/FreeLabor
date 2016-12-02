@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <!-- Login Modal -->
+       <!-- SignIn Modal -->
         <div id="signinModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -72,15 +72,92 @@
                         <h4 class="modal-title">Sign Up</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Some text in the modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        
+                        
+                        <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#VolunteerSignin" aria-controls="VolunteerSignin" role="tab" data-toggle="tab">
+                                        Volunteers
+                                    </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#OrgSignin" aria-controls="OrgSignin" role="tab" data-toggle="tab">
+                                        Organizations
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="VolunteerSignin">
+                                    <div>
+                                        <h3>Volunteers</h3>
+                                        <form>
+                                            <div class="form-name">
+                                                <div class="form-group">
+                                                    <label for="vFirstName">First Name</label>
+                                                    <input #vFirstName type="text" class="form-control" id="vFirstName" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="vLastName">Last Name</label>
+                                                    <input #vLastName type="text" class="form-control" id="vLastName" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="vEmail">Email Address</label>
+                                                <input #vEmail type="email" class="form-control" id="vEmail" required>
+                                            </div>
+                                            <div>
+                                                <label for="vUsernameSignIn">Username</label>
+                                                <input #vUsernameSignIn type="text" class="form-control" id="vUsernameSignIn" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="vPasswordSignIn">Password</label>
+                                                <input #vPasswordSignIn type="password" class="form-control" id="vPasswordSignIn" required> 
+                                            </div>
+                                        </form>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                                (click)="createUser(vFirstName.value, vLastName.value, vEmail.value, vUsernameSignIn.value, vPasswordSignIn.value)">Create Account</button>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="OrgSignin">
+                                    <div>
+                                        <h3>Organizations</h3>
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="oName">First Name</label>
+                                                <input #oName type="text" class="form-control" id="oName" required>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="oEmail">Email Address</label>
+                                                <input #oEmail type="email" class="form-control" id="oEmail" required>
+                                            </div>
+                                            <div>
+                                                <label for="oUsernameSignIn">Username</label>
+                                                <input #oUsernameSignIn type="text" class="form-control" id="oUsernameSignIn" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="oPasswordSignIn">Password</label>
+                                                <input #oPasswordSignIn type="password" class="form-control" id="oPasswordSignIn" required> 
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="oPhone">Phone Number</label>
+                                                <input #oPhone type="tel" class="form-control" id="oPhone" required>
+                                            </div>
+                                        </form>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                                (click)="createOrg(oName.value, oEmail.value, oUsernameSignIn.value, oPasswordSignIn.value, oPhone.value)">Create Account</button>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="modal-footer">
                     </div>
                 </div>
             </div>
         </div>
-
+    </div>
     </div>
 </div>
 
