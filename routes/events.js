@@ -19,12 +19,10 @@ function performQuery(req,query,data,callback) {
 //Copy and paste code from orgs.js for reference
 router.post('/event', function(req,res){
 	//Get paramaterized query ready
-
-
 	//If the user isn't logged in as an Org they can't create events.
 	console.log(req.session);
-	if(req.session.type == 'User'){
-		res.json({success:false,message:'Volunteers cannot create Events, please log into an Org Account to create one.'});
+	if(req.session.type !== 'Org'){
+		res.json({success:false,message:'You cannot create Events, please log into an Org Account to create one.'});
 	}else{
 		//check inputs
 		var createEvent = 'INSERT INTO Event (idOrg,titleEvent,locationEvent,addressEvent,cityEvent,stateCodeEvent,postCodeEvent,dateStartEvent,dateEndEvent,descriptionEvent,maxAttendeesEvent) VALUES ((SELECT idOrg FROM Org WHERE usernameOrg=?),?,?,?,?,?,?,?,?,?,?)';
@@ -77,12 +75,14 @@ router.get('/org/:username/events/:idEvent', function(req,res){
 });
 //Modify live event
 router.patch('/org/:username/events/:idEvent', function(req,res){
-
   if(req.body.attendee){
-    //TODO: if it contains a username, we will need to add to the "membership"
+		if(req.session.type!=="User"){
+			res.status(401).send('You must be logged in as a User to perform this action');
+			return;
+		}
     var insert = 'INSERT INTO Attendance(idUser,idEvent,dateJoinedAttendance) VALUES ((SELECT idUser FROM User WHERE usernameUser=?),?,?)';
     var date = new Date();
-    var qparams = [req.body.attendee,req.params.idEvent,date.toISOString()];
+    var qparams = [req.session.username,req.params.idEvent,date.toISOString()];
     console.log(mysql.format(insert,qparams));
     performQuery(req,insert,qparams, function(err, rows,fields) {
       if (err) {

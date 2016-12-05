@@ -68,10 +68,14 @@ router.patch('/org/:username', function(req,res){
   }
 
   if(req.body.member){
+    if(req.session.type!="User"){
+      res.status(400).send('You must be logged in as a User to perform this action');
+      return;
+    }
     //TODO: if it contains a username, we will need to add to the "membership"
     var insert = 'INSERT INTO Membership(idUser,idOrg,dateJoinedMembership) VALUES ((SELECT idUser FROM User WHERE usernameUser=?),(SELECT idOrg FROM Org WHERE usernameOrg=?),?)';
     var date = new Date();
-    var qparams = [req.body.member,req.params.username,date.toISOString()];
+    var qparams = [req.session.username,req.params.username,date.toISOString()];
     console.log(mysql.format(insert,qparams));
     performQuery(req,insert,qparams, function(err, rows,fields) {
       if (err) {
